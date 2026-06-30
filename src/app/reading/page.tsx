@@ -57,6 +57,8 @@ export default function ReadingPage() {
           <input type="hidden" name="item_name" value="Unlimited Readings" />
           <input type="hidden" name="amount" value="19.00" />
           <input type="hidden" name="currency_code" value="USD" />
+          <input type="hidden" name="return" value="https://mysticsages.com/success" />
+          <input type="hidden" name="cancel_return" value="https://mysticsages.com" />
           
           <button type="submit" className="btn-primary" style={{fontSize:13,padding:"10px 18px"}}>Get Unlimited - $19/mo</button>
         </form>
@@ -66,6 +68,8 @@ export default function ReadingPage() {
           <input type="hidden" name="item_name" value="Detailed Report" />
           <input type="hidden" name="amount" value="4.99" />
           <input type="hidden" name="currency_code" value="USD" />
+          <input type="hidden" name="return" value="https://mysticsages.com/success" />
+          <input type="hidden" name="cancel_return" value="https://mysticsages.com" />
           
           <button type="submit" className="btn-secondary" style={{fontSize:13,padding:"10px 18px"}}>Detailed Report - $4.99</button>
         </form>
@@ -73,3 +77,4 @@ export default function ReadingPage() {
     </>)}
   </div></div></section></>);
 }
+
