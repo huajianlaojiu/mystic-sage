@@ -26,7 +26,7 @@ export default function ReadingPage() {
   return (<><section className="page-header"><h1>Free Daily Tarot</h1><p>Ask a question and pull three cards.</p></section>
     <section className="section"><div className="container" style={{maxWidth:680,margin:"0 auto"}}><div style={{textAlign:"center"}}>
 
-    {!result && !loading && (<><div style={{fontSize:48}}>馃敭</div>
+    {!result && !loading && (<><div style={{fontSize:48}}>🔮</div>
       <h3 style={{fontSize:20,fontWeight:600,color:"var(--text-primary)",margin:"12px 0 8px"}}>What would you like guidance on?</h3>
       <p style={{color:"var(--text-muted)",fontSize:14,marginBottom:20}}>Free AI tarot reading</p>
       <textarea value={question} onChange={e=>setQuestion(e.target.value)} placeholder="e.g. How can I grow in my career?" rows={3}
