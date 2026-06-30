@@ -70,11 +70,6 @@ export default function ReadingPage() {
           <button type="submit" className="btn-secondary" style={{fontSize:13,padding:"10px 18px"}}>Detailed Report - $4.99</button>
         </form>
       </div>
-      <div style={{display:"flex",gap:10,justifyContent:"center",flexWrap:"wrap",marginBottom:8,marginTop:16}}>
-  <a href="/success" className="btn-primary" style={{fontSize:13,padding:"10px 18px",textDecoration:"none"}}>Test: $4.99 Payment</a>
-  <a href="/success" className="btn-secondary" style={{fontSize:13,padding:"10px 18px",textDecoration:"none"}}>Test: $19/mo Payment</a>
-</div>
-              <button onClick={()=>{setResult(null);setQuestion("");setError("");}} className="btn-secondary" style={{fontSize:13}}>Draw Again (Free)</button>
     </>)}
   </div></div></section></>);
 }
