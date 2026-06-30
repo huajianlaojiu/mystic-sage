@@ -7,7 +7,7 @@ const SITE_URL = typeof window !== "undefined" ? window.location.origin : "http:
 
 function PayPalForm({ itemName, amount, label, className }: { itemName: string; amount: string; label: string; className: string }) {
   return (
-    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
       <input type="hidden" name="cmd" value="_xclick" />
       <input type="hidden" name="business" value={PAYPAL_EMAIL} />
       <input type="hidden" name="item_name" value={itemName} />

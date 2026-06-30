@@ -51,7 +51,7 @@ export default function ReadingPage() {
         <div style={{fontSize:14,color:"var(--text-secondary)",lineHeight:1.7,whiteSpace:"pre-wrap"}}>{result.reading}</div>
       </div>
       <div style={{display:"flex",gap:10,justifyContent:"center",flexWrap:"wrap",marginBottom:16}}>
-        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
           <input type="hidden" name="cmd" value="_xclick" />
           <input type="hidden" name="business" value="mountain0342@gmail.com" />
           <input type="hidden" name="item_name" value="Unlimited Readings" />
@@ -60,7 +60,7 @@ export default function ReadingPage() {
           
           <button type="submit" className="btn-primary" style={{fontSize:13,padding:"10px 18px"}}>Get Unlimited - $19/mo</button>
         </form>
-        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
           <input type="hidden" name="cmd" value="_xclick" />
           <input type="hidden" name="business" value="mountain0342@gmail.com" />
           <input type="hidden" name="item_name" value="Detailed Report" />
