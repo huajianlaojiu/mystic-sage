@@ -1,0 +1,197 @@
+export interface BlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  date: string;
+  readTime: string;
+  tags: string[];
+}
+
+export const blogPosts: BlogPost[] = [
+  {
+    slug: "free-tarot-reading-online",
+    title: "Free Tarot Reading Online: Your Guide to Clarity & Guidance",
+    excerpt: "Looking for a free tarot reading online? Discover how AI-powered tarot readings can provide insight into love, career, and life decisions.",
+    date: "July 4, 2026",
+    readTime: "5 min read",
+    tags: ["Tarot", "Free Reading", "Spirituality"],
+    content: `
+Have you ever felt stuck at a crossroads, unsure of which direction to take? You are not alone. Millions of people turn to tarot readings every year for clarity, guidance, and a fresh perspective on life challenges.
+
+What Is a Tarot Reading?
+
+A tarot reading uses a deck of 78 cards, each with its own symbolism and meaning, to provide insight into your past, present, and future. The reader interprets the cards based on your question or intention, offering guidance that helps you see your situation from a new angle.
+
+Contrary to popular belief, tarot is not about predicting a fixed future. It is a tool for self-reflection and personal growth. The cards reveal patterns, possibilities, and perspectives that you may not have considered.
+
+Why Choose an Online Tarot Reading?
+
+Online tarot readings have become increasingly popular for several reasons:
+
+- Convenience: Get a reading anytime, anywhere, without scheduling an appointment.
+- Privacy: Anonymous sessions let you explore personal topics without judgment.
+- AI Accuracy: Modern AI-powered readings combine traditional tarot wisdom with data-driven insights.
+- Affordability: Many platforms offer free daily readings to get started.
+
+How to Get a Free Tarot Reading
+
+Getting started is simple. Here is how you can receive a free tarot reading right now:
+
+1. Find a quiet space where you can focus.
+2. Think about a question or area of your life you would like guidance on.
+3. Visit a trusted tarot platform like MysticSage.
+4. Pull your cards and read the interpretation.
+
+What to Ask During a Tarot Reading
+
+The quality of your reading depends on the quality of your question. Instead of asking yes/no questions, try open-ended ones:
+
+- "What do I need to know about my current relationship?"
+- "How can I advance in my career?"
+- "What should I focus on this month?"
+- "What is blocking my personal growth?"
+
+Start Your Journey Today
+
+Whether you are a seasoned tarot enthusiast or a complete beginner, a free tarot reading can offer valuable insights into your life. The cards are waiting to speak to you. All you need to do is ask.
+`
+  },
+  {
+    slug: "love-tarot-reading",
+    title: "Love Tarot Reading: Understanding Your Relationship Path",
+    excerpt: "Wondering about your love life? A love tarot reading can reveal hidden dynamics and guide you toward deeper connection.",
+    date: "July 4, 2026",
+    readTime: "6 min read",
+    tags: ["Love", "Relationships", "Tarot"],
+    content: `
+Love is one of the most common reasons people seek tarot readings. Whether you are single, in a relationship, or healing from a breakup, love tarot readings can offer clarity and comfort.
+
+What Is a Love Tarot Reading?
+
+A love tarot reading focuses specifically on matters of the heart. The cards can reveal:
+
+- The current energy between you and another person
+- Hidden feelings or unspoken dynamics
+- Patterns you may be repeating in relationships
+- Timing and guidance for your love life
+
+Common Love Tarot Spreads
+
+Love readings often use specific card layouts called spreads. Some of the most popular include:
+
+1. The Two-Person Spread: Reveals the energy between you and your partner.
+2. The Soulmate Spread: Explores the potential for a soulmate connection.
+3. The Breakup Spread: Helps you understand the lessons from a past relationship.
+4. The Self-Love Spread: Guides you toward healing and self-acceptance.
+
+Key Cards in Love Readings
+
+Some tarot cards carry special significance in love readings:
+
+- The Lovers: A powerful card representing deep connection, choices, and alignment.
+- Two of Cups: Partnership, mutual attraction, and emotional bonding.
+- The Empress: Nurturing, abundance, and fertility in relationships.
+- The Tower: Sudden change or revelation that can clear the way for something new.
+
+How to Prepare for a Love Reading
+
+To get the most out of your love tarot reading:
+
+- Be honest with yourself about what you truly want.
+- Set aside any preconceived notions about what the cards should say.
+- Write down your question before the reading.
+- After the reading, reflect on how the message resonates with your situation.
+
+Love tarot readings are not about predicting "the one" or forcing outcomes. They are about understanding yourself, your patterns, and your heart's true desires. When you know yourself better, you attract relationships that align with your highest good.
+`
+  },
+  {
+    slug: "daily-horoscope",
+    title: "Daily Horoscope: What the Stars Have in Store for You Today",
+    excerpt: "Check your daily horoscope for insights on love, career, and personal growth. Updated daily for all 12 zodiac signs.",
+    date: "July 4, 2026",
+    readTime: "4 min read",
+    tags: ["Horoscope", "Astrology", "Daily"],
+    content: `
+Your daily horoscope is a snapshot of the cosmic energy surrounding you. By understanding the planetary influences at play, you can make more informed decisions and navigate your day with greater awareness.
+
+What Is a Daily Horoscope?
+
+A daily horoscope is an astrological forecast for each zodiac sign based on the current positions of the planets, Moon, and Sun. It offers guidance on:
+
+- Emotional energy and mood
+- Career and financial opportunities
+- Relationship dynamics
+- Personal growth areas
+
+How to Read Your Horoscope
+
+To get the most out of your daily horoscope:
+
+1. Find your Sun sign (the one most people know) and your Rising sign (for deeper insights).
+2. Read the general forecast with an open mind.
+3. Notice which parts resonate with your current situation.
+4. Use the guidance as a tool for reflection, not as a rigid prediction.
+
+Today's Astrological Highlights
+
+The Moon is currently moving through practical Virgo, encouraging organization and attention to detail. Mercury is in harmonious aspect with Jupiter, making it an excellent day for communication, negotiations, and creative brainstorming.
+
+Each Zodiac Sign Today
+
+Fire Signs (Aries, Leo, Sagittarius): Your energy is high today. Channel it into physical activity or creative projects. Avoid impulsive decisions in the afternoon.
+
+Earth Signs (Taurus, Virgo, Capricorn): Practical matters take center stage. Focus on finances, home organization, or career planning. Your patience will pay off.
+
+Air Signs (Gemini, Libra, Aquarius): Communication flows easily today. Reach out to someone you have been meaning to connect with. Social opportunities are favorable.
+
+Water Signs (Cancer, Scorpio, Pisces): Your intuition is sharp. Pay attention to dreams and gut feelings. Emotional conversations may arise, leading to deeper understanding.
+
+Make daily horoscopes a part of your morning routine. Even a few minutes of astrological reflection can set a positive tone for the day ahead.
+`
+  },
+  {
+    slug: "tarot-cards-for-beginners",
+    title: "Tarot Cards for Beginners: A Complete Guide to Getting Started",
+    excerpt: "New to tarot? Learn the meanings of the 22 Major Arcana cards and how to start your own tarot practice today.",
+    date: "July 4, 2026",
+    readTime: "8 min read",
+    tags: ["Tarot", "Beginners", "Guide"],
+    content: `
+If you are new to tarot, the deck of 78 cards can seem overwhelming. But do not worry. Tarot is a practice that anyone can learn with patience and curiosity. This guide will walk you through the essentials.
+
+The Structure of a Tarot Deck
+
+A standard tarot deck is divided into two main sections:
+
+- Major Arcana (22 cards): Represent major life themes, spiritual lessons, and significant events. Cards like The Fool, The Lovers, and Death belong here.
+- Minor Arcana (56 cards): Represent day-to-day events, emotions, and challenges. Divided into four suits: Wands, Cups, Swords, and Pentacles.
+
+Starting Your First Reading
+
+You do not need to memorize all 78 cards to do a meaningful reading. Begin with the following simple spread:
+
+Three-Card Spread:
+1. Card 1: Past — what energy is behind you.
+2. Card 2: Present — what is happening now.
+3. Card 3: Future — what is emerging.
+
+Tips for Beginners
+
+1. Start with the Major Arcana. These 22 cards tell a complete story and are easier to learn.
+2. Keep a tarot journal. Write down the cards you pull and how they relate to your day.
+3. Trust your intuition. The meaning of a card can shift depending on the question and context.
+4. Practice daily. Pull one card each morning and reflect on its message.
+
+Recommended Learning Path
+
+Week 1: Learn the 22 Major Arcana cards.
+Week 2: Learn the Minor Arcana suits and their themes.
+Week 3: Practice simple three-card spreads.
+Week 4: Start reading for friends or journaling daily pulls.
+
+Tarot is a journey, not a destination. Every reading deepens your connection to the cards and to yourself. The most important rule is: there are no wrong interpretations.
+`
+  }
+];
