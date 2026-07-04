@@ -194,4 +194,85 @@ Week 4: Start reading for friends or journaling daily pulls.
 Tarot is a journey, not a destination. Every reading deepens your connection to the cards and to yourself. The most important rule is: there are no wrong interpretations.
 `
   }
+,
+  {
+    slug: "zodiac-signs-compatibility",
+    title: "Zodiac Signs Compatibility: A Complete Guide",
+    excerpt: "Wondering which zodiac signs are most compatible? Discover how fire, earth, air, and water signs connect in love and friendship.",
+    date: "July 4, 2026",
+    readTime: "7 min read",
+    tags: ["Zodiac", "Compatibility", "Astrology"],
+    content: `
+Zodiac compatibility is one of the most popular topics in astrology. Understanding how different signs interact can help you navigate relationships, friendships, and even professional partnerships.
+
+The Four Elements
+
+Zodiac signs are grouped into four elements. Signs within the same element naturally understand each other.
+
+Fire Signs (Aries, Leo, Sagittarius): Passionate, energetic, and adventurous. They are most compatible with Air signs, who fuel their fire with ideas and inspiration.
+
+Earth Signs (Taurus, Virgo, Capricorn): Practical, grounded, and reliable. They connect best with Water signs, who bring emotional depth to their stability.
+
+Air Signs (Gemini, Libra, Aquarius): Intellectual, communicative, and social. They thrive with Fire signs, who bring excitement and action to their ideas.
+
+Water Signs (Cancer, Scorpio, Pisces): Emotional, intuitive, and deep. They harmonize with Earth signs, who provide stability and security.
+
+Most Compatible Pairs
+
+- Aries + Leo: A dynamic, passionate match full of adventure.
+- Taurus + Cancer: A nurturing, stable partnership built on trust.
+- Gemini + Aquarius: A stimulating, intellectual connection.
+- Cancer + Scorpio: An intense, deeply emotional bond.
+- Leo + Sagittarius: A fun, adventurous, and optimistic pair.
+- Virgo + Taurus: A practical, loyal, and grounded relationship.
+- Libra + Gemini: A social, harmonious, and balanced match.
+- Scorpio + Pisces: A deep, intuitive, and spiritual connection.
+- Sagittarius + Aries: An energetic, freedom-loving partnership.
+- Capricorn + Virgo: An ambitious, reliable, and focused pair.
+- Aquarius + Libra: An intellectual, forward-thinking duo.
+- Pisces + Cancer: A compassionate, nurturing, and creative bond.
+
+Compatibility is complex and involves more than just Sun signs. For a more accurate reading, a full birth chart comparison is recommended.
+`
+  },
+  {
+    slug: "what-is-numerology",
+    title: "What Is Numerology? A Beginner's Guide to Numbers",
+    excerpt: "Numerology reveals the hidden meaning behind numbers in your life. Learn how to calculate your Life Path Number and what it says about you.",
+    date: "July 4, 2026",
+    readTime: "6 min read",
+    tags: ["Numerology", "Life Path", "Spirituality"],
+    content: `
+Numerology is the study of numbers and their spiritual significance. It suggests that numbers carry specific vibrations and meanings that can reveal insights about your personality, life purpose, and future.
+
+What Is a Life Path Number?
+
+Your Life Path Number is the most important number in numerology. It is calculated from your birth date and represents the path you are meant to walk in this lifetime.
+
+How to Calculate Your Life Path Number
+
+1. Write your birth date as digits: e.g., July 15, 1990 becomes 07/15/1990.
+2. Add all digits together: 0+7+1+5+1+9+9+0 = 32.
+3. Reduce to a single digit: 3+2 = 5.
+
+Your Life Path Number is 5.
+
+Life Path Number Meanings
+
+- Life Path 1: The Leader. Independent, ambitious, and innovative.
+- Life Path 2: The Diplomat. Cooperative, intuitive, and peace-loving.
+- Life Path 3: The Creator. Expressive, social, and artistic.
+- Life Path 4: The Builder. Practical, disciplined, and reliable.
+- Life Path 5: The Adventurer. Free-spirited, curious, and versatile.
+- Life Path 6: The Nurturer. Responsible, compassionate, and family-oriented.
+- Life Path 7: The Seeker. Analytical, spiritual, and introspective.
+- Life Path 8: The Achiever. Ambitious, powerful, and goal-oriented.
+- Life Path 9: The Humanitarian. Generous, wise, and idealistic.
+- Life Path 11, 22, 33: Master numbers with heightened spiritual potential.
+
+Numerology and Your Daily Life
+
+You can use numerology to choose favorable dates, understand your career path, and gain insight into your relationships. It is a powerful tool for self-discovery and personal growth.
+`
+  },
 ];

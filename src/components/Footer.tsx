@@ -18,6 +18,7 @@ export default function Footer() {
           <Link href="/services">Numerology</Link>
           <Link href="/services">Relationship</Link>
           <Link href="/services">Career Reading</Link>
+          <Link href="/cards">Card Meanings</Link>
         </div>
         <div>
           <h4>Company</h4>
