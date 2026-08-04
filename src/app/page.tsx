@@ -112,6 +112,32 @@ export default function Home() {
         </div>
       </section>
 
+
+      {/* FAQ */}
+      <section className="section" id="faq">
+        <div className="container">
+          <div className="section-tag">FAQ</div>
+          <h2 className="section-title centered">Common questions</h2>
+          <p className="section-sub centered">Quick answers to the most common questions about our service.</p>
+          <div itemScope itemType="https://schema.org/FAQPage" style={{maxWidth:700,margin:"0 auto"}}>
+            {[
+              {q:"Is MysticSage really free?",a:"Yes! Our daily tarot card pull is completely free. You can ask a question and receive a three-card tarot reading with interpretation at no cost. Premium subscriptions and detailed reports are available for those who want deeper insights."},
+              {q:"How accurate are AI tarot readings?",a:"Our AI readings combine traditional tarot symbolism with modern interpretation techniques. While no reading can predict the future with certainty, many users find the insights remarkably relevant to their situations. Readings are for guidance and reflection purposes."},
+              {q:"What kind of questions can I ask?",a:"You can ask about love, career, personal growth, relationships, or any area where you seek clarity. Open-ended questions tend to yield the most insightful readings. Avoid yes/no questions for the best experience."},
+              {q:"Is my reading private?",a:"Absolutely. All readings are anonymous and we never share your reading history or personal information. Your data is encrypted and protected. See our privacy policy for details."},
+              {q:"Do I need to create an account?",a:"No account is needed for the free daily tarot reading. Creating an account lets you save your reading history and access premium features like detailed reports and subscriptions."},
+            ].map(function(faq,i){
+              return <div key={i} itemScope itemProp="mainEntity" itemType="https://schema.org/Question" style={{marginBottom:12,padding:"20px 24px",background:"var(--bg-card)",border:"1px solid var(--border)",borderRadius:12}}>
+                <h3 itemProp="name" style={{fontSize:15,fontWeight:600,color:"var(--text-primary)",marginBottom:6}}>{faq.q}</h3>
+                <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                  <div itemProp="text" style={{fontSize:14,color:"var(--text-muted)",lineHeight:1.6}}>{faq.a}</div>
+                </div>
+              </div>;
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="section cta-section">
         <h2 className="section-title centered" style={{textAlign:"center"}}>Ready to find your clarity?</h2>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1500" viewBox="0 0 1000 1500">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#0a0a0f"/><stop offset="50%" stop-color="#140824"/><stop offset="100%" stop-color="#0a0a0f"/>
+  </linearGradient></defs>
+  <rect width="1000" height="1500" fill="url(#g)"/>
+  <circle cx="613.7417736608611" cy="962.8222769733597" r="2.7842004093610973" fill="rgba(255,255,255,0.11141984067258434)"/>
+  <circle cx="197.7883071365972" cy="303.30127363682016" r="1.2832119641912254" fill="rgba(255,255,255,0.13926583927989838)"/>
+  <circle cx="265.0387223352657" cy="626.275745458257" r="2.2724916800365063" fill="rgba(255,255,255,0.16584997816379016)"/>
+  <circle cx="886.6514140725035" cy="848.807541975876" r="2.700997517870224" fill="rgba(255,255,255,0.12382864128664917)"/>
+  <circle cx="159.65848832489885" cy="1297.9292917414193" r="2.1545158431037086" fill="rgba(255,255,255,0.14150056334625818)"/>
+  <circle cx="697.3443686304912" cy="1265.6460052857383" r="1.1995878844777652" fill="rgba(255,255,255,0.19761073150940767)"/>
+  <circle cx="238.82358634018948" cy="225.08583628495433" r="1.8067730251131702" fill="rgba(255,255,255,0.16545630628255587)"/>
+  <circle cx="764.3035909531567" cy="213.047396210024" r="2.1520560548225545" fill="rgba(255,255,255,0.17049036884212382)"/>
+  <circle cx="476.99219630166294" cy="1385.0278157646358" r="1.3533817907659145" fill="rgba(255,255,255,0.09768876017304004)"/>
+  <circle cx="812.1758384200981" cy="591.9278080025798" r="1.0494817545965713" fill="rgba(255,255,255,0.08085167508702835)"/>
+  <circle cx="210.93818098928693" cy="163.206164156868" r="1.3237476409516358" fill="rgba(255,255,255,0.08478876854531096)"/>
+  <circle cx="739.0670715941279" cy="367.01827401990926" r="2.8106897173622087" fill="rgba(255,255,255,0.17567946132079026)"/>
+  <circle cx="735.8696820730307" cy="1141.5972028033173" r="2.7796313517531903" fill="rgba(255,255,255,0.18430401237659816)"/>
+  <circle cx="189.70471694712484" cy="974.362440002435" r="2.405476096540056" fill="rgba(255,255,255,0.184066416125168)"/>
+  <circle cx="763.8342594873176" cy="345.83115514280087" r="1.2576817916647443" fill="rgba(255,255,255,0.16711917392661713)"/>
+  <circle cx="799.4964863982483" cy="1147.1662586070938" r="2.873360393723898" fill="rgba(255,255,255,0.18247915242165924)"/>
+  <circle cx="428.09804590771233" cy="321.0153796123459" r="1.9706686132369704" fill="rgba(255,255,255,0.14271689637233392)"/>
+  <circle cx="412.23274250433064" cy="145.14629989241672" r="2.667620836281828" fill="rgba(255,255,255,0.1677716694021523)"/>
+  <circle cx="630.3665906133074" cy="574.1558677500357" r="1.6140758343484551" fill="rgba(255,255,255,0.1525559931089353)"/>
+  <circle cx="632.1295254329958" cy="702.4854488626726" r="2.011544553179286" fill="rgba(255,255,255,0.13754715277470456)"/>
+  <rect x="80" y="170" width="200" height="34" rx="17" fill="#a29bfe"/>
+  <text x="180" y="192" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="2">ASTROLOGY</text>
+  <text x="500" y="130" font-family="Georgia,serif" font-size="18" fill="#555" text-anchor="middle" letter-spacing="4">MYSTICSAGE</text>
+  <text x="500" y="432" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Free Birth Chart Reading</text>
+  <text x="500" y="480" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Online: Understand Your</text>
+  <text x="500" y="528" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Cosmic Blueprint</text>
+  <line x1="350" y1="601" x2="650" y2="601" stroke="rgba(180,100,255,0.15)" stroke-width="1"/>
+  <text x="500" y="631" font-family="Arial,sans-serif" font-size="12" fill="#666" text-anchor="middle">mysticsages.com/blog</text>
+  <text x="500" y="1430" font-family="Georgia,serif" font-size="13" fill="#444" text-anchor="middle" letter-spacing="3">✦ MysticSage ✦</text>
+</svg>

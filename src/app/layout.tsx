@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -7,8 +7,26 @@ import Footer from "@/components/Footer";
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "";
 
 export const metadata: Metadata = {
-  title: "MysticSage — Spiritual Guidance & Wellness",
+  title: "MysticSage â Spiritual Guidance & Wellness",
   description: "Find clarity through tarot, astrology, numerology and psychic readings. Your journey to self-discovery starts here.",
+  openGraph: {
+    title: "MysticSage â Free Tarot, Astrology & Numerology Readings",
+    description: "Find clarity through tarot, astrology, numerology and psychic readings. Get your free daily tarot pull at MysticSage.",
+    url: "https://mysticsages.com",
+    siteName: "MysticSage",
+    images: [{ url: "https://mysticsages.com/images/og-default.svg", width: 1200, height: 630 }],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MysticSage â Free Tarot, Astrology & Numerology Readings",
+    description: "Find clarity through tarot, astrology, numerology and psychic readings. Get your free daily tarot pull at MysticSage.",
+    images: ["https://mysticsages.com/images/og-default.svg"],
+  },
+  alternates: {
+    canonical: "https://mysticsages.com",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -33,6 +51,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Script>
           </>
         )}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Organization\",\n  \"name\": \"MysticSage\",\n  \"url\": \"https://mysticsages.com\",\n  \"logo\": \"https://mysticsages.com/images/og-default.svg\",\n  \"description\": \"Free tarot readings, astrology, numerology and spiritual guidance online.\",\n  \"sameAs\": [\n    \"https://twitter.com/mysticsage\"\n  ]\n}" }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: "{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"MysticSage\",\"url\":\"https://mysticsages.com\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://mysticsages.com/search?q={search_term_string}\"},\"query-input\":\"required name=search_term_string\"}}" }} />
         <Header />
         <main>{children}</main>
         <Footer />

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1500" viewBox="0 0 1000 1500">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#0a0a0f"/><stop offset="50%" stop-color="#140824"/><stop offset="100%" stop-color="#0a0a0f"/>
+  </linearGradient></defs>
+  <rect width="1000" height="1500" fill="url(#g)"/>
+  <circle cx="206.30379439930834" cy="110.57608116627893" r="2.676104775265399" fill="rgba(255,255,255,0.19)"/>
+  <circle cx="490.4422139825077" cy="1090.3108222698093" r="2.0066936604337915" fill="rgba(255,255,255,0.17)"/>
+  <circle cx="635.7471403180549" cy="1082.5292691435434" r="1.108095027381942" fill="rgba(255,255,255,0.16)"/>
+  <circle cx="316.37534969498313" cy="166.6731693047655" r="1.4766043323221665" fill="rgba(255,255,255,0.17)"/>
+  <circle cx="553.6727989096344" cy="1079.8445696460371" r="1.4608171984036735" fill="rgba(255,255,255,0.10)"/>
+  <circle cx="296.2226080152165" cy="615.6904206995903" r="1.0695966069435716" fill="rgba(255,255,255,0.13)"/>
+  <circle cx="451.5754738898838" cy="357.48845911702875" r="2.4122712527784325" fill="rgba(255,255,255,0.18)"/>
+  <circle cx="373.4168250718666" cy="673.0005651708547" r="2.026480828221381" fill="rgba(255,255,255,0.15)"/>
+  <circle cx="518.5604648477461" cy="447.30558643497125" r="1.834099929167355" fill="rgba(255,255,255,0.16)"/>
+  <circle cx="867.7754586559357" cy="1248.2424667670693" r="2.0597125441164206" fill="rgba(255,255,255,0.13)"/>
+  <circle cx="495.1955352481927" cy="861.6091238944158" r="1.2115847920988776" fill="rgba(255,255,255,0.13)"/>
+  <circle cx="395.7628419299313" cy="360.20943244472585" r="2.191500892026077" fill="rgba(255,255,255,0.19)"/>
+  <circle cx="789.6446824192274" cy="297.10171868255793" r="2.5045373988513155" fill="rgba(255,255,255,0.09)"/>
+  <circle cx="727.5006365291133" cy="760.4144828357655" r="1.3507696149463162" fill="rgba(255,255,255,0.15)"/>
+  <circle cx="623.923884138826" cy="363.5495451400014" r="1.354486876277937" fill="rgba(255,255,255,0.19)"/>
+  <circle cx="301.20082956425273" cy="543.1336485752031" r="2.4609529190991872" fill="rgba(255,255,255,0.08)"/>
+  <circle cx="574.2254407309424" cy="577.835600693688" r="2.24507649850616" fill="rgba(255,255,255,0.18)"/>
+  <circle cx="875.5673145338131" cy="1306.281379901606" r="1.0605931453341406" fill="rgba(255,255,255,0.19)"/>
+  <circle cx="231.39131245526858" cy="1235.1345237490932" r="2.8559782729266123" fill="rgba(255,255,255,0.19)"/>
+  <circle cx="488.26431867165894" cy="753.6652611699399" r="2.166272977186202" fill="rgba(255,255,255,0.15)"/>
+  <rect x="80" y="170" width="200" height="34" rx="17" fill="#fd79a8"/>
+  <text x="180" y="192" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="2">SPIRITUALITY</text>
+  <text x="500" y="130" font-family="Georgia,serif" font-size="18" fill="#555" text-anchor="middle" letter-spacing="4">MYSTICSAGE</text>
+  <text x="500" y="432" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Crystal Healing for</text>
+  <text x="500" y="480" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Beginners: A Guide to</text>
+  <text x="500" y="528" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Crystals</text>
+  <line x1="350" y1="601" x2="650" y2="601" stroke="rgba(180,100,255,0.15)" stroke-width="1"/>
+  <text x="500" y="631" font-family="Arial,sans-serif" font-size="12" fill="#666" text-anchor="middle">mysticsages.com/blog</text>
+  <text x="500" y="1430" font-family="Georgia,serif" font-size="13" fill="#444" text-anchor="middle" letter-spacing="3">✦ MysticSage ✦</text>
+</svg>

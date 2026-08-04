@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1500" viewBox="0 0 1000 1500">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#0a0a0f"/><stop offset="50%" stop-color="#140824"/><stop offset="100%" stop-color="#0a0a0f"/>
+  </linearGradient></defs>
+  <rect width="1000" height="1500" fill="url(#g)"/>
+  <circle cx="803.8811235459846" cy="205.93228802547935" r="2.60351377061376" fill="rgba(255,255,255,0.1737206189733405)"/>
+  <circle cx="733.8124036816713" cy="621.6763670440521" r="1.6563053060475643" fill="rgba(255,255,255,0.16478005683414157)"/>
+  <circle cx="771.2104998835958" cy="672.943090840893" r="1.789046230630772" fill="rgba(255,255,255,0.08307291135006113)"/>
+  <circle cx="265.88967717953096" cy="1093.4453868754817" r="2.7385092156016873" fill="rgba(255,255,255,0.18551248052301922)"/>
+  <circle cx="300.32153112524975" cy="200.16042083394325" r="2.3378508022201423" fill="rgba(255,255,255,0.17946149479550524)"/>
+  <circle cx="507.3448171025883" cy="187.25288656896106" r="2.0647242323015433" fill="rgba(255,255,255,0.16425800084969508)"/>
+  <circle cx="442.5836884075644" cy="905.4233944396977" r="2.9858799102152824" fill="rgba(255,255,255,0.12195113982062125)"/>
+  <circle cx="428.36101590180687" cy="890.3336730562412" r="1.676461611088328" fill="rgba(255,255,255,0.08090370846064818)"/>
+  <circle cx="240.04826384359373" cy="1366.8233964482426" r="1.9761160997096692" fill="rgba(255,255,255,0.19838394364583123)"/>
+  <circle cx="755.0866431975408" cy="1326.4448071291545" r="2.7500337959584256" fill="rgba(255,255,255,0.1078926729791913)"/>
+  <circle cx="452.89274879697416" cy="620.5873409691408" r="2.7970859859418873" fill="rgba(255,255,255,0.0940402929546232)"/>
+  <circle cx="886.7685318711616" cy="1009.3531051132908" r="1.3318708861919526" fill="rgba(255,255,255,0.12721181380786206)"/>
+  <circle cx="854.6589819869238" cy="1088.7050882973122" r="2.272822276821908" fill="rgba(255,255,255,0.11820131099681272)"/>
+  <circle cx="462.75830548478075" cy="487.2103493258635" r="2.4768129637129013" fill="rgba(255,255,255,0.14348413173953395)"/>
+  <circle cx="642.2363847070633" cy="1340.5491269255597" r="1.0383640203208548" fill="rgba(255,255,255,0.14288307375386444)"/>
+  <circle cx="213.6702204356559" cy="713.8144624638362" r="2.266859053315121" fill="rgba(255,255,255,0.19788626381421295)"/>
+  <circle cx="422.96011375325025" cy="499.23392178119195" r="1.424018650783226" fill="rgba(255,255,255,0.12366708013816921)"/>
+  <circle cx="511.96230975613173" cy="984.7176757600847" r="2.248296665156467" fill="rgba(255,255,255,0.1341133202522626)"/>
+  <circle cx="779.0152750700246" cy="307.9930620453508" r="1.8604079779330294" fill="rgba(255,255,255,0.10937624651002897)"/>
+  <circle cx="216.20554538262365" cy="617.7693774805613" r="1.0039964321500872" fill="rgba(255,255,255,0.11946033276712453)"/>
+  <rect x="80" y="170" width="200" height="34" rx="17" fill="#00d2d3"/>
+  <text x="180" y="192" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="2">NUMEROLOGY</text>
+  <text x="500" y="130" font-family="Georgia,serif" font-size="18" fill="#555" text-anchor="middle" letter-spacing="4">MYSTICSAGE</text>
+  <text x="500" y="456" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">What Is Numerology? A</text>
+  <text x="500" y="504" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Beginner's Guide to Numbers</text>
+  <line x1="350" y1="577" x2="650" y2="577" stroke="rgba(180,100,255,0.15)" stroke-width="1"/>
+  <text x="500" y="607" font-family="Arial,sans-serif" font-size="12" fill="#666" text-anchor="middle">mysticsages.com/blog</text>
+  <text x="500" y="1430" font-family="Georgia,serif" font-size="13" fill="#444" text-anchor="middle" letter-spacing="3">✦ MysticSage ✦</text>
+</svg>

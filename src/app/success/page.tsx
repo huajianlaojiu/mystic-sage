@@ -4,19 +4,34 @@ export default function SuccessPage() {
   return (
     <>
       <section className="page-header">
-        <h1>Thank you for your purchase!</h1>
-        <p>Your order is being processed. You will receive a confirmation email shortly.</p>
+        <h1>Payment Successful!</h1>
+        <p>Thank you for your purchase. Your transaction has been completed.</p>
       </section>
       <section className="section">
-        <div className="container" style={{maxWidth:500,margin:"0 auto",textAlign:"center"}}>
+        <div className="container" style={{maxWidth:600,margin:"0 auto",textAlign:"center"}}>
           <div style={{fontSize:72,marginBottom:24}}>✨</div>
           <h3 style={{fontSize:22,fontWeight:600,color:"var(--text-primary)",marginBottom:12}}>Welcome to the MysticSage community</h3>
-          <p style={{color:"var(--text-muted)",fontSize:15,lineHeight:1.7,marginBottom:32}}>
-            Your reading or subscription has been confirmed. If you purchased a premium report, it will arrive in your inbox within 48 hours. For subscriptions, your member benefits are now active.
+
+          <div style={{padding:"20px 24px",background:"var(--bg-card)",border:"1px solid var(--border)",borderRadius:12,marginBottom:24,textAlign:"left"}}>
+            <p style={{fontSize:14,color:"var(--text-secondary)",lineHeight:1.7,marginBottom:16}}>
+              Here is what happens next:
+            </p>
+            <div style={{fontSize:13,color:"var(--text-muted)",lineHeight:2}}>
+              <p>🔮 <strong style={{color:"var(--text-secondary)"}}>Subscriptions:</strong> Your membership is now active. Start your unlimited readings right away.</p>
+              <p>📜 <strong style={{color:"var(--text-secondary)"}}>Premium Reports:</strong> Your report will be delivered to your inbox within 48 hours.</p>
+              <p>💬 <strong style={{color:"var(--text-secondary)"}}>Questions?</strong> Email us at mountain0342@gmail.com and we will respond within 24 hours.</p>
+              <p>📧 <strong style={{color:"var(--text-secondary)"}}>Confirmation:</strong> A receipt has been sent to your PayPal email address.</p>
+            </div>
+          </div>
+
+          <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap",marginBottom:32}}>
+            <Link href="/reading" className="btn-primary" style={{display:"inline-flex"}}>✦ Get a Free Reading</Link>
+            <Link href="/" className="btn-secondary" style={{display:"inline-flex"}}>Back to Home</Link>
+          </div>
+
+          <p style={{fontSize:12,color:"var(--text-muted)"}}>
+            Need help with your purchase? <a href="mailto:mountain0342@gmail.com" style={{color:"var(--accent)"}}>Contact support</a>
           </p>
-          <Link href="/reading" className="btn-primary" style={{display:"inline-flex",marginBottom:12}}>✦ Get a Free Reading</Link>
-          <br />
-          <Link href="/" className="btn-secondary" style={{display:"inline-flex"}}>Back to Home</Link>
         </div>
       </section>
     </>

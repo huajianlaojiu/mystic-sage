@@ -1,10 +1,14 @@
 ﻿import { lemonSqueezySetup } from "@lemonsqueezy/lemonsqueezy.js";
 
+export function isLemonConfigured() {
+  return !!(process.env.LEMONSQUEEZY_API_KEY && process.env.LEMONSQUEEZY_STORE_ID);
+}
+
 export function ensureLemonSetup() {
   const apiKey = process.env.LEMONSQUEEZY_API_KEY;
   const storeId = process.env.LEMONSQUEEZY_STORE_ID;
   if (!apiKey || !storeId) {
-    throw new Error("Missing LEMONSQUEEZY_API_KEY or LEMONSQUEEZY_STORE_ID in .env.local");
+    throw new Error("Lemon Squeezy not configured. Set LEMONSQUEEZY_API_KEY and LEMONSQUEEZY_STORE_ID in .env.local");
   }
   lemonSqueezySetup({ apiKey });
   return storeId;

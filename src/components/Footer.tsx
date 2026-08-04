@@ -12,7 +12,17 @@ export default function Footer() {
           <p>Spiritual guidance and wellness for the modern seeker. <strong>For entertainment and spiritual wellness purposes only.</strong></p>
         </div>
         <div>
-          <h4>Services</h4>
+                  <div>
+          <h4>Newsletter</h4>
+          <p style={{fontSize:13,color:"var(--text-muted)",marginBottom:12,lineHeight:1.5}}>Get daily tarot pulls, horoscopes and spiritual insights.</p>
+          <form action="https://mysticsages.com/api/subscribe" method="POST" style={{display:"flex",gap:6}}>
+            <input type="email" name="email" placeholder="your@email.com" required
+              style={{flex:1,minWidth:0,padding:"8px 10px",borderRadius:6,background:"rgba(255,255,255,0.04)",border:"1px solid var(--border)",color:"var(--text-primary)",fontSize:12,fontFamily:"inherit",outline:"none"}} />
+            <button type="submit"
+              style={{padding:"8px 12px",borderRadius:6,fontSize:12,fontWeight:600,background:"linear-gradient(135deg,var(--accent),var(--accent-dark))",color:"#fff",border:"none",cursor:"pointer",fontFamily:"inherit",whiteSpace:"nowrap"}}>Join</button>
+          </form>
+        </div>
+<h4>Services</h4>
           <Link href="/services">Tarot Reading</Link>
           <Link href="/services">Astrology</Link>
           <Link href="/services">Numerology</Link>

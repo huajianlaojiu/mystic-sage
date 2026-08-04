@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1500" viewBox="0 0 1000 1500">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#0a0a0f"/><stop offset="50%" stop-color="#140824"/><stop offset="100%" stop-color="#0a0a0f"/>
+  </linearGradient></defs>
+  <rect width="1000" height="1500" fill="url(#g)"/>
+  <circle cx="389.38211796940215" cy="532.5656652000678" r="2.6310736774014103" fill="rgba(255,255,255,0.11021681936215105)"/>
+  <circle cx="674.4257119976296" cy="1000.6861281935735" r="1.0598180304705758" fill="rgba(255,255,255,0.16541571144779194)"/>
+  <circle cx="723.6095868487612" cy="1299.0336180456964" r="2.971564732303641" fill="rgba(255,255,255,0.19070662478538233)"/>
+  <circle cx="883.6113850379746" cy="748.4951299410285" r="1.41123669020622" fill="rgba(255,255,255,0.13118390296491877)"/>
+  <circle cx="537.6070818320973" cy="214.4495079267764" r="2.6915214676515617" fill="rgba(255,255,255,0.09271142242916477)"/>
+  <circle cx="364.09860518681273" cy="455.8530865372595" r="2.865815397594213" fill="rgba(255,255,255,0.14049431557602576)"/>
+  <circle cx="501.25970234217743" cy="823.0096013994926" r="1.6623423944693247" fill="rgba(255,255,255,0.14745656013352937)"/>
+  <circle cx="529.9525569109337" cy="341.94258600580287" r="2.773637359232615" fill="rgba(255,255,255,0.11401904367977952)"/>
+  <circle cx="233.44289731815317" cy="1127.3638431684576" r="2.189629905601903" fill="rgba(255,255,255,0.13138203022580078)"/>
+  <circle cx="388.98913026967625" cy="722.779355319872" r="1.8110614428680407" fill="rgba(255,255,255,0.1559031496542563)"/>
+  <circle cx="280.61275480764147" cy="638.8216293009245" r="1.8750319814492353" fill="rgba(255,255,255,0.16600444808919226)"/>
+  <circle cx="425.39212083296326" cy="1035.802510219774" r="2.053334555312789" fill="rgba(255,255,255,0.09793698449671799)"/>
+  <circle cx="634.6997304042633" cy="873.7737306083992" r="1.9940078970925743" fill="rgba(255,255,255,0.10514652953043996)"/>
+  <circle cx="843.1461003847243" cy="967.3564651267498" r="2.5551267862818037" fill="rgba(255,255,255,0.14370802757319856)"/>
+  <circle cx="142.4112608496336" cy="822.7431203256587" r="1.6173674583145439" fill="rgba(255,255,255,0.1387423477338271)"/>
+  <circle cx="465.12568239670225" cy="1342.2925812599947" r="2.436619571958248" fill="rgba(255,255,255,0.1701509835055155)"/>
+  <circle cx="358.4141869099925" cy="1309.5174591269317" r="1.3058589955104472" fill="rgba(255,255,255,0.15806297448471718)"/>
+  <circle cx="318.16480327237633" cy="1023.1020736542657" r="1.4825233945905523" fill="rgba(255,255,255,0.10490937813115032)"/>
+  <circle cx="701.1318954584171" cy="655.9424247717141" r="2.5628512847951423" fill="rgba(255,255,255,0.19644788785552048)"/>
+  <circle cx="119.04270292790251" cy="195.1743843999768" r="1.3927023773361449" fill="rgba(255,255,255,0.16834650914207844)"/>
+  <rect x="80" y="170" width="200" height="34" rx="17" fill="#5b9aff"/>
+  <text x="180" y="192" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="2">HOROSCOPE</text>
+  <text x="500" y="130" font-family="Georgia,serif" font-size="18" fill="#555" text-anchor="middle" letter-spacing="4">MYSTICSAGE</text>
+  <text x="500" y="432" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Daily Horoscope: What the</text>
+  <text x="500" y="480" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Stars Have in Store for You</text>
+  <text x="500" y="528" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Today</text>
+  <line x1="350" y1="601" x2="650" y2="601" stroke="rgba(180,100,255,0.15)" stroke-width="1"/>
+  <text x="500" y="631" font-family="Arial,sans-serif" font-size="12" fill="#666" text-anchor="middle">mysticsages.com/blog</text>
+  <text x="500" y="1430" font-family="Georgia,serif" font-size="13" fill="#444" text-anchor="middle" letter-spacing="3">✦ MysticSage ✦</text>
+</svg>

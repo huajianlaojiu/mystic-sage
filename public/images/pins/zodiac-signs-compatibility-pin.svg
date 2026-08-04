@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1500" viewBox="0 0 1000 1500">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#0a0a0f"/><stop offset="50%" stop-color="#140824"/><stop offset="100%" stop-color="#0a0a0f"/>
+  </linearGradient></defs>
+  <rect width="1000" height="1500" fill="url(#g)"/>
+  <circle cx="798.0748719290397" cy="213.50599305295268" r="2.090723099786919" fill="rgba(255,255,255,0.19675172892381437)"/>
+  <circle cx="623.9260513902002" cy="466.4933222071517" r="1.7658416158689831" fill="rgba(255,255,255,0.08232844614556915)"/>
+  <circle cx="353.1367510331183" cy="1330.1168384627958" r="1.3963974877279899" fill="rgba(255,255,255,0.1664300509290656)"/>
+  <circle cx="389.9053417528036" cy="178.2773134025322" r="2.4957310975118565" fill="rgba(255,255,255,0.19948270285395212)"/>
+  <circle cx="376.2758351771794" cy="558.7095956797273" r="1.53388316036703" fill="rgba(255,255,255,0.09656585559262633)"/>
+  <circle cx="572.4676073322973" cy="200.3156961628177" r="2.894499889164141" fill="rgba(255,255,255,0.14864882162585244)"/>
+  <circle cx="247.3460492375506" cy="313.6227450558574" r="1.9231163143379002" fill="rgba(255,255,255,0.11873694978296029)"/>
+  <circle cx="596.6476181149793" cy="962.4449272123749" r="1.701450928062383" fill="rgba(255,255,255,0.1840226628238534)"/>
+  <circle cx="432.812016592183" cy="1019.5449486653715" r="1.8201364796323556" fill="rgba(255,255,255,0.19539192444295833)"/>
+  <circle cx="422.1004462850238" cy="694.4268416055975" r="2.9144599205504687" fill="rgba(255,255,255,0.14986367820044455)"/>
+  <circle cx="537.3371049608072" cy="531.5275401856188" r="1.4719333382119413" fill="rgba(255,255,255,0.0910888027703384)"/>
+  <circle cx="114.6170792675691" cy="477.17403810902573" r="1.0559614391631995" fill="rgba(255,255,255,0.11409396680984112)"/>
+  <circle cx="827.555718743122" cy="1192.2782905780873" r="2.452457314484853" fill="rgba(255,255,255,0.09020041200462764)"/>
+  <circle cx="235.42323391501947" cy="1364.287579940155" r="1.658624537230457" fill="rgba(255,255,255,0.19272937339428134)"/>
+  <circle cx="433.6663063457766" cy="1205.2419830338633" r="2.8831604145634926" fill="rgba(255,255,255,0.10474943796465622)"/>
+  <circle cx="476.6496409667136" cy="428.5625059455099" r="1.069906757002443" fill="rgba(255,255,255,0.11738687557237909)"/>
+  <circle cx="278.9753359638663" cy="605.1800832947495" r="1.4345267839975724" fill="rgba(255,255,255,0.11382375878115994)"/>
+  <circle cx="769.3512594438542" cy="405.2706030295269" r="1.5931769923823864" fill="rgba(255,255,255,0.08755894287380368)"/>
+  <circle cx="102.43867451046552" cy="1140.6822582915167" r="2.691942234265312" fill="rgba(255,255,255,0.14073552015800034)"/>
+  <circle cx="184.17093900391785" cy="662.1054110837831" r="2.639502202645418" fill="rgba(255,255,255,0.16593998001354282)"/>
+  <rect x="80" y="170" width="200" height="34" rx="17" fill="#ff9f43"/>
+  <text x="180" y="192" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="2">ZODIAC</text>
+  <text x="500" y="130" font-family="Georgia,serif" font-size="18" fill="#555" text-anchor="middle" letter-spacing="4">MYSTICSAGE</text>
+  <text x="500" y="456" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Zodiac Signs Compatibility:</text>
+  <text x="500" y="504" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">A Complete Guide</text>
+  <line x1="350" y1="577" x2="650" y2="577" stroke="rgba(180,100,255,0.15)" stroke-width="1"/>
+  <text x="500" y="607" font-family="Arial,sans-serif" font-size="12" fill="#666" text-anchor="middle">mysticsages.com/blog</text>
+  <text x="500" y="1430" font-family="Georgia,serif" font-size="13" fill="#444" text-anchor="middle" letter-spacing="3">✦ MysticSage ✦</text>
+</svg>

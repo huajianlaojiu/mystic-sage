@@ -1,11 +1,23 @@
 ﻿import { NextRequest, NextResponse } from "next/server";
 import { createCheckout } from "@lemonsqueezy/lemonsqueezy.js";
-import { ensureLemonSetup } from "@/lib/lemon";
+import { ensureLemonSetup, isLemonConfigured } from "@/lib/lemon";
 
 export async function POST(req: NextRequest) {
   try {
+    if (!isLemonConfigured()) {
+      return NextResponse.json({
+        error: "Lemon Squeezy is not configured yet.",
+        fallback: "paypal",
+        message: "Checkout is available via PayPal on the pricing page."
+      }, { status: 503 });
+    }
+
     const storeId = ensureLemonSetup();
     const { variantId, email } = await req.json();
+
+    if (!variantId) {
+      return NextResponse.json({ error: "Missing variantId" }, { status: 400 });
+    }
 
     const { data, error } = await createCheckout(storeId, variantId, {
       checkoutData: { email: email || "" },

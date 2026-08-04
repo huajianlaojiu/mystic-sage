@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0f"/>
+      <stop offset="50%" style="stop-color:#140a24"/>
+      <stop offset="100%" style="stop-color:#0a0a0f"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#b466ff"/>
+      <stop offset="100%" style="stop-color:#8a4fcf"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(180,100,255,0.08)"/>
+      <stop offset="100%" style="stop-color:rgba(180,100,255,0)"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- Glow circles -->
+  <circle cx="600" cy="315" r="400" fill="url(#glow)"/>
+  <circle cx="200" cy="200" r="250" fill="rgba(180,100,255,0.03)"/>
+  <circle cx="1000" cy="450" r="300" fill="rgba(180,100,255,0.04)"/>
+  <!-- Star icon -->
+  <text x="600" y="220" font-family="serif" font-size="64" fill="url(#accent)" text-anchor="middle">?</text>
+  <!-- Brand name -->
+  <text x="600" y="310" font-family="Georgia, serif" font-size="72" font-weight="700" fill="#f0ede8" text-anchor="middle" letter-spacing="2">MysticSage</text>
+  <!-- Tagline -->
+  <text x="600" y="370" font-family="Arial, sans-serif" font-size="22" fill="#a8a6a0" text-anchor="middle" letter-spacing="4">SPIRITUAL GUIDANCE &amp; WELLNESS</text>
+  <!-- URL -->
+  <text x="600" y="430" font-family="Arial, sans-serif" font-size="16" fill="#777" text-anchor="middle">mysticsages.com</text>
+  <!-- Divider -->
+  <line x1="450" y1="455" x2="750" y2="455" stroke="rgba(180,100,255,0.2)" stroke-width="1"/>
+  <!-- Decorative stars -->
+  <text x="170" y="160" font-family="serif" font-size="14" fill="rgba(180,100,255,0.2)">?</text>
+  <text x="980" y="520" font-family="serif" font-size="10" fill="rgba(180,100,255,0.15)">?</text>
+  <text x="900" y="180" font-family="serif" font-size="8" fill="rgba(180,100,255,0.1)">?</text>
+  <text x="280" y="500" font-family="serif" font-size="12" fill="rgba(180,100,255,0.12)">?</text>
+</svg>

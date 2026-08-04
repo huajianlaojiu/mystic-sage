@@ -3,9 +3,10 @@ import { useState } from "react";
 import Link from "next/link";
 
 const PAYPAL_EMAIL = "mountain0342@gmail.com";
-const SITE_URL = typeof window !== "undefined" ? window.location.origin : "http://localhost:3000";
+const SITE_URL = typeof window !== "undefined" ? window.location.origin : "https://mysticsages.com";
 
-function PayPalForm({ itemName, amount, label, className }: { itemName: string; amount: string; label: string; className: string }) {
+/* One-time purchase (reports) */
+function PayPalBuyForm({ itemName, amount, label, className }: { itemName: string; amount: string; label: string; className: string }) {
   return (
     <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
       <input type="hidden" name="cmd" value="_xclick" />
@@ -13,8 +14,32 @@ function PayPalForm({ itemName, amount, label, className }: { itemName: string; 
       <input type="hidden" name="item_name" value={itemName} />
       <input type="hidden" name="amount" value={amount} />
       <input type="hidden" name="currency_code" value="USD" />
+      <input type="hidden" name="no_note" value="1" />
       <input type="hidden" name="return" value={SITE_URL + "/success"} />
       <input type="hidden" name="cancel_return" value={SITE_URL + "/pricing"} />
+      <input type="hidden" name="notify_url" value={SITE_URL + "/api/paypal-webhook"} />
+      <button type="submit" className={className}>{label}</button>
+    </form>
+  );
+}
+
+/* Recurring subscription */
+function PayPalSubForm({ itemName, amount, period, label, className }: { itemName: string; amount: string; period: string; label: string; className: string }) {
+  return (
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+      <input type="hidden" name="cmd" value="_xclick-subscriptions" />
+      <input type="hidden" name="business" value={PAYPAL_EMAIL} />
+      <input type="hidden" name="item_name" value={itemName} />
+      <input type="hidden" name="currency_code" value="USD" />
+      <input type="hidden" name="a3" value={amount} />
+      <input type="hidden" name="p3" value="1" />
+      <input type="hidden" name="t3" value={period} />
+      <input type="hidden" name="src" value="1" />
+      <input type="hidden" name="sra" value="1" />
+      <input type="hidden" name="no_note" value="1" />
+      <input type="hidden" name="return" value={SITE_URL + "/success"} />
+      <input type="hidden" name="cancel_return" value={SITE_URL + "/pricing"} />
+      <input type="hidden" name="notify_url" value={SITE_URL + "/api/paypal-webhook"} />
       <button type="submit" className={className}>{label}</button>
     </form>
   );
@@ -69,7 +94,14 @@ export default function Pricing() {
                 <li>10% off 1-on-1 sessions</li>
                 <li>Ad-free experience</li>
               </ul>
-              <PayPalForm itemName={annual?"Mystic Plus - Annual":"Mystic Plus - Monthly"} amount={annual?"169.00":"19.00"} label={annual?"Subscribe Annual ($169)":"Subscribe Monthly ($19)"} className="btn-pricing primary" />
+              <PayPalSubForm
+                itemName={annual ? "Mystic Plus - Annual" : "Mystic Plus - Monthly"}
+                amount={annual ? "169.00" : "19.00"}
+                period={annual ? "Y" : "M"}
+                label={annual ? "Subscribe Annual ($169/yr)" : "Subscribe Monthly ($19/mo)"}
+                className="btn-pricing primary"
+              />
+              <p style={{fontSize:11,color:"var(--text-muted)",marginTop:8}}>Auto-renews. Cancel anytime by emailing mountain0342@gmail.com</p>
             </div>
 
             <div className="pricing-card" style={{textAlign:"center"}}>
@@ -85,7 +117,14 @@ export default function Pricing() {
                 <li>25% off 1-on-1 sessions</li>
                 <li>Exclusive member events</li>
               </ul>
-              <PayPalForm itemName={annual?"Sage Premium - Annual":"Sage Premium - Monthly"} amount={annual?"349.00":"39.00"} label={annual?"Subscribe Annual ($349)":"Subscribe Monthly ($39)"} className="btn-pricing secondary" />
+              <PayPalSubForm
+                itemName={annual ? "Sage Premium - Annual" : "Sage Premium - Monthly"}
+                amount={annual ? "349.00" : "39.00"}
+                period={annual ? "Y" : "M"}
+                label={annual ? "Subscribe Annual ($349/yr)" : "Subscribe Monthly ($39/mo)"}
+                className="btn-pricing secondary"
+              />
+              <p style={{fontSize:11,color:"var(--text-muted)",marginTop:8}}>Auto-renews. Cancel anytime by emailing mountain0342@gmail.com</p>
             </div>
           </div>
         </div>
@@ -101,19 +140,35 @@ export default function Pricing() {
               <h3>Birth Chart Report</h3>
               <div className="price">$29</div>
               <div className="desc">A comprehensive 20+ page report of your complete natal chart.</div>
-              <PayPalForm itemName="Birth Chart Report" amount="29.00" label="Order Now ($29)" className="btn-pricing secondary" />
+              <PayPalBuyForm itemName="Birth Chart Report" amount="29.00" label="Order Now ($29)" className="btn-pricing secondary" />
             </div>
             <div className="pricing-card" style={{textAlign:"center"}}>
               <h3>Annual Forecast</h3>
               <div className="price">$49</div>
               <div className="desc">Your complete year ahead with monthly transits.</div>
-              <PayPalForm itemName="Annual Forecast Report" amount="49.00" label="Order Now ($49)" className="btn-pricing secondary" />
+              <PayPalBuyForm itemName="Annual Forecast Report" amount="49.00" label="Order Now ($49)" className="btn-pricing secondary" />
             </div>
             <div className="pricing-card" style={{textAlign:"center"}}>
               <h3>Couples Compatibility</h3>
               <div className="price">$59</div>
               <div className="desc">Full synastry analysis for two people.</div>
-              <PayPalForm itemName="Couples Compatibility Report" amount="59.00" label="Order Now ($59)" className="btn-pricing secondary" />
+              <PayPalBuyForm itemName="Couples Compatibility Report" amount="59.00" label="Order Now ($59)" className="btn-pricing secondary" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" style={{border:"none",paddingTop:0}}>
+        <div className="container" style={{maxWidth:700,margin:"0 auto",textAlign:"center"}}>
+          <div style={{padding:"32px 24px",border:"1px solid var(--border)",borderRadius:16,background:"var(--bg-card)"}}>
+            <h3 style={{fontSize:16,fontWeight:600,color:"var(--text-primary)",marginBottom:8}}>Need help choosing?</h3>
+            <p style={{fontSize:14,color:"var(--text-muted)",marginBottom:16}}>
+              Not sure which plan is right for you? Start with a free reading and upgrade anytime.
+              Questions about billing? Contact us at <a href="mailto:mountain0342@gmail.com" style={{color:"var(--accent)"}}>mountain0342@gmail.com</a>
+            </p>
+            <div style={{display:"flex",gap:8,justifyContent:"center",flexWrap:"wrap"}}>
+              <Link href="/reading" className="btn-primary" style={{display:"inline-flex",fontSize:13}}>Try Free Reading</Link>
+              <Link href="/faq" className="btn-secondary" style={{display:"inline-flex",fontSize:13}}>View FAQ</Link>
             </div>
           </div>
         </div>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1500" viewBox="0 0 1000 1500">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#0a0a0f"/><stop offset="50%" stop-color="#140824"/><stop offset="100%" stop-color="#0a0a0f"/>
+  </linearGradient></defs>
+  <rect width="1000" height="1500" fill="url(#g)"/>
+  <circle cx="744.719669335692" cy="570.0915622264695" r="2.2774329645314557" fill="rgba(255,255,255,0.1842398280708969)"/>
+  <circle cx="622.9390005423018" cy="1221.089642372171" r="1.34679945552602" fill="rgba(255,255,255,0.15740008833219382)"/>
+  <circle cx="681.5212441307549" cy="347.67996582705496" r="2.1122758430990034" fill="rgba(255,255,255,0.1713813088323193)"/>
+  <circle cx="676.106448832317" cy="446.30342935079386" r="2.7429383131228056" fill="rgba(255,255,255,0.08900363252179136)"/>
+  <circle cx="697.4255036574256" cy="1267.9179638918642" r="1.2583533485958158" fill="rgba(255,255,255,0.11334252617158863)"/>
+  <circle cx="275.6964080180311" cy="347.330988001683" r="1.1251895656304263" fill="rgba(255,255,255,0.09823936497927291)"/>
+  <circle cx="674.8840812965468" cy="881.1657362778224" r="2.4186307449980555" fill="rgba(255,255,255,0.14839958773926554)"/>
+  <circle cx="897.016893125646" cy="1145.6366810673273" r="1.8309212557244763" fill="rgba(255,255,255,0.18299907900572815)"/>
+  <circle cx="311.8458696330629" cy="1119.4739353421387" r="1.7955443699475093" fill="rgba(255,255,255,0.14592776963677495)"/>
+  <circle cx="212.50007653331187" cy="959.6366178733358" r="1.285394588310002" fill="rgba(255,255,255,0.15003026146428644)"/>
+  <circle cx="583.975235834145" cy="637.0079062073878" r="2.6484713855967845" fill="rgba(255,255,255,0.13481476506072265)"/>
+  <circle cx="692.1341041259668" cy="368.82665004977565" r="1.0625242009228375" fill="rgba(255,255,255,0.18508107942690333)"/>
+  <circle cx="656.427854700038" cy="405.6129415937515" r="2.7537706926086605" fill="rgba(255,255,255,0.12314486267269666)"/>
+  <circle cx="362.201684559876" cy="827.1977131869229" r="1.0153319510944125" fill="rgba(255,255,255,0.1515937388591237)"/>
+  <circle cx="171.95725973459747" cy="1020.235073241841" r="2.0385799768916977" fill="rgba(255,255,255,0.11514778825841294)"/>
+  <circle cx="506.9567010546234" cy="1352.3950954440381" r="1.410523951133457" fill="rgba(255,255,255,0.09867040488711568)"/>
+  <circle cx="731.1409811250277" cy="445.49701978298543" r="1.1777133003391387" fill="rgba(255,255,255,0.09976020533044885)"/>
+  <circle cx="806.4968938195093" cy="1017.3744836623162" r="2.937536879165484" fill="rgba(255,255,255,0.16578124968395477)"/>
+  <circle cx="524.7119699001496" cy="834.1745758313053" r="2.284770178638982" fill="rgba(255,255,255,0.17675188510837092)"/>
+  <circle cx="809.8433051991192" cy="1060.1263323899684" r="1.32240449585086" fill="rgba(255,255,255,0.09226551375274335)"/>
+  <rect x="80" y="170" width="200" height="34" rx="17" fill="#ff6b8a"/>
+  <text x="180" y="192" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="2">LOVE</text>
+  <text x="500" y="130" font-family="Georgia,serif" font-size="18" fill="#555" text-anchor="middle" letter-spacing="4">MYSTICSAGE</text>
+  <text x="500" y="432" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Love Tarot Reading:</text>
+  <text x="500" y="480" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Understanding Your</text>
+  <text x="500" y="528" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Relationship Path</text>
+  <line x1="350" y1="601" x2="650" y2="601" stroke="rgba(180,100,255,0.15)" stroke-width="1"/>
+  <text x="500" y="631" font-family="Arial,sans-serif" font-size="12" fill="#666" text-anchor="middle">mysticsages.com/blog</text>
+  <text x="500" y="1430" font-family="Georgia,serif" font-size="13" fill="#444" text-anchor="middle" letter-spacing="3">✦ MysticSage ✦</text>
+</svg>

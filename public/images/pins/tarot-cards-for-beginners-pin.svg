@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1500" viewBox="0 0 1000 1500">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#0a0a0f"/><stop offset="50%" stop-color="#140824"/><stop offset="100%" stop-color="#0a0a0f"/>
+  </linearGradient></defs>
+  <rect width="1000" height="1500" fill="url(#g)"/>
+  <circle cx="274.0323757928718" cy="619.9103840453433" r="2.832638914939184" fill="rgba(255,255,255,0.08643562085656975)"/>
+  <circle cx="383.7998144238474" cy="480.76269032351206" r="2.9833962749258465" fill="rgba(255,255,255,0.11583056423802224)"/>
+  <circle cx="391.70789009551294" cy="1170.2165120666798" r="2.6792188523404983" fill="rgba(255,255,255,0.17010352276445237)"/>
+  <circle cx="603.0192100434931" cy="1228.9930782263125" r="1.809167408582699" fill="rgba(255,255,255,0.09713737889985954)"/>
+  <circle cx="294.7473024499975" cy="847.9206385632763" r="2.053279917484869" fill="rgba(255,255,255,0.12434648932945541)"/>
+  <circle cx="373.23289481815846" cy="878.2997649783038" r="1.5886055282165332" fill="rgba(255,255,255,0.18380535211809884)"/>
+  <circle cx="289.3514315410209" cy="740.7755388549169" r="2.0877849548341305" fill="rgba(255,255,255,0.1535449039544649)"/>
+  <circle cx="246.28879766411825" cy="411.77554461378503" r="2.0164469645253513" fill="rgba(255,255,255,0.12089428769010094)"/>
+  <circle cx="173.64823919268667" cy="702.4586289557428" r="2.7916382592166027" fill="rgba(255,255,255,0.1327958567816484)"/>
+  <circle cx="243.27618784237384" cy="830.0411904010625" r="2.3067362358318055" fill="rgba(255,255,255,0.08043420540687826)"/>
+  <circle cx="776.9361969793831" cy="239.0283573412751" r="1.5508526614724976" fill="rgba(255,255,255,0.17692033636187143)"/>
+  <circle cx="762.1598585121122" cy="781.1925634352605" r="1.9796231171503544" fill="rgba(255,255,255,0.16856896324248424)"/>
+  <circle cx="352.72365260354434" cy="788.1585296183979" r="1.2456516699653535" fill="rgba(255,255,255,0.11422322492699202)"/>
+  <circle cx="483.1920791137307" cy="152.04694183842838" r="1.3395603558395919" fill="rgba(255,255,255,0.1269569578802477)"/>
+  <circle cx="588.1788087743653" cy="705.2432211893242" r="1.2456588637210864" fill="rgba(255,255,255,0.12236701769205813)"/>
+  <circle cx="226.54127382823947" cy="648.1838264107196" r="1.3773170595767654" fill="rgba(255,255,255,0.16874016145048026)"/>
+  <circle cx="488.2017080630498" cy="188.02953445286977" r="2.8572849043086412" fill="rgba(255,255,255,0.1270934905446676)"/>
+  <circle cx="258.61728007072156" cy="269.3335663123405" r="1.712144919431165" fill="rgba(255,255,255,0.16299591247596829)"/>
+  <circle cx="309.20912357301756" cy="205.30397585908105" r="1.4862788696218192" fill="rgba(255,255,255,0.19713044870926577)"/>
+  <circle cx="315.63897239968594" cy="1369.877655535508" r="2.7959218872157483" fill="rgba(255,255,255,0.19940131492637098)"/>
+  <rect x="80" y="170" width="200" height="34" rx="17" fill="#b466ff"/>
+  <text x="180" y="192" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="2">TAROT</text>
+  <text x="500" y="130" font-family="Georgia,serif" font-size="18" fill="#555" text-anchor="middle" letter-spacing="4">MYSTICSAGE</text>
+  <text x="500" y="432" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Tarot Cards for Beginners: A</text>
+  <text x="500" y="480" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Complete Guide to Getting</text>
+  <text x="500" y="528" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Started</text>
+  <line x1="350" y1="601" x2="650" y2="601" stroke="rgba(180,100,255,0.15)" stroke-width="1"/>
+  <text x="500" y="631" font-family="Arial,sans-serif" font-size="12" fill="#666" text-anchor="middle">mysticsages.com/blog</text>
+  <text x="500" y="1430" font-family="Georgia,serif" font-size="13" fill="#444" text-anchor="middle" letter-spacing="3">✦ MysticSage ✦</text>
+</svg>

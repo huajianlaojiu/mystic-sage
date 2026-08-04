@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1500" viewBox="0 0 1000 1500">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#0a0a0f"/><stop offset="50%" stop-color="#140824"/><stop offset="100%" stop-color="#0a0a0f"/>
+  </linearGradient></defs>
+  <rect width="1000" height="1500" fill="url(#g)"/>
+  <circle cx="791.8490918656356" cy="529.886679469468" r="1.9352035508169403" fill="rgba(255,255,255,0.16918776437683652)"/>
+  <circle cx="718.847662199835" cy="419.6435879744645" r="2.8020282074043177" fill="rgba(255,255,255,0.1261207160114894)"/>
+  <circle cx="647.7387590484078" cy="431.1146630516138" r="2.97901489132585" fill="rgba(255,255,255,0.18730259913320438)"/>
+  <circle cx="885.0719342019244" cy="726.728214205283" r="2.1466326886706373" fill="rgba(255,255,255,0.12694081143771513)"/>
+  <circle cx="358.0680506125254" cy="1214.3446812005407" r="1.5376538757330394" fill="rgba(255,255,255,0.15971373858033408)"/>
+  <circle cx="427.3149037302103" cy="456.98368255929665" r="2.323963768337512" fill="rgba(255,255,255,0.19112454903327464)"/>
+  <circle cx="476.1397586117452" cy="1303.7791503257215" r="2.52604564094933" fill="rgba(255,255,255,0.1606427599295281)"/>
+  <circle cx="531.2683006247305" cy="1247.1874254942343" r="2.05098555743334" fill="rgba(255,255,255,0.19770498196338193)"/>
+  <circle cx="638.5300464119819" cy="765.2876589392929" r="2.0505875732614927" fill="rgba(255,255,255,0.16163735393403883)"/>
+  <circle cx="265.0891410263753" cy="304.10329198725856" r="2.4732677046606053" fill="rgba(255,255,255,0.16656573064832286)"/>
+  <circle cx="187.4642490488843" cy="1159.8595247893409" r="1.1982042361860425" fill="rgba(255,255,255,0.18960507572956425)"/>
+  <circle cx="473.6215140719115" cy="810.5485332211119" r="2.051570291612105" fill="rgba(255,255,255,0.19611591786688026)"/>
+  <circle cx="377.5069587414633" cy="1035.6167340722477" r="2.1537262083692683" fill="rgba(255,255,255,0.1008907035930738)"/>
+  <circle cx="869.2758832463137" cy="319.1627415092309" r="1.8617312193898756" fill="rgba(255,255,255,0.18082232816792984)"/>
+  <circle cx="636.862666370581" cy="388.68388478810044" r="1.7472373961636931" fill="rgba(255,255,255,0.08516965995436326)"/>
+  <circle cx="758.2525752572798" cy="871.0185168351854" r="2.24022790399324" fill="rgba(255,255,255,0.19221273753966878)"/>
+  <circle cx="380.5886417936505" cy="555.7795304993739" r="2.86467788987267" fill="rgba(255,255,255,0.10844568556692019)"/>
+  <circle cx="879.0583771871727" cy="385.8227477280493" r="1.3155224112848165" fill="rgba(255,255,255,0.09264799655309969)"/>
+  <circle cx="304.7364663746316" cy="695.3046482780245" r="1.0974519781592638" fill="rgba(255,255,255,0.18680737405625483)"/>
+  <circle cx="575.6601779084817" cy="897.5688901496645" r="2.4368244882808057" fill="rgba(255,255,255,0.11083671215073064)"/>
+  <rect x="80" y="170" width="200" height="34" rx="17" fill="#a29bfe"/>
+  <text x="180" y="192" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="2">ASTROLOGY</text>
+  <text x="500" y="130" font-family="Georgia,serif" font-size="18" fill="#555" text-anchor="middle" letter-spacing="4">MYSTICSAGE</text>
+  <text x="500" y="432" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Moon Sign vs Sun Sign: Key</text>
+  <text x="500" y="480" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Differences &amp; How to Find</text>
+  <text x="500" y="528" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Yours</text>
+  <line x1="350" y1="601" x2="650" y2="601" stroke="rgba(180,100,255,0.15)" stroke-width="1"/>
+  <text x="500" y="631" font-family="Arial,sans-serif" font-size="12" fill="#666" text-anchor="middle">mysticsages.com/blog</text>
+  <text x="500" y="1430" font-family="Georgia,serif" font-size="13" fill="#444" text-anchor="middle" letter-spacing="3">✦ MysticSage ✦</text>
+</svg>

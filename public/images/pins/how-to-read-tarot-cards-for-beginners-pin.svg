@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1500" viewBox="0 0 1000 1500">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#0a0a0f"/><stop offset="50%" stop-color="#140824"/><stop offset="100%" stop-color="#0a0a0f"/>
+  </linearGradient></defs>
+  <rect width="1000" height="1500" fill="url(#g)"/>
+  <circle cx="863.0903750293493" cy="1013.9138704033261" r="1.6341059421051396" fill="rgba(255,255,255,0.09384662147681477)"/>
+  <circle cx="662.9536600862847" cy="651.9587398771828" r="1.4923915635532963" fill="rgba(255,255,255,0.08074611645901246)"/>
+  <circle cx="554.9924548849133" cy="1194.2006901389955" r="1.584545146861594" fill="rgba(255,255,255,0.13178252628957043)"/>
+  <circle cx="756.030937011146" cy="282.4003690090451" r="2.507096338019519" fill="rgba(255,255,255,0.1062416291034628)"/>
+  <circle cx="470.6425195684874" cy="391.78630230528483" r="1.470162976303938" fill="rgba(255,255,255,0.10522290978102561)"/>
+  <circle cx="401.45382046213547" cy="244.966968505322" r="2.6348048874440533" fill="rgba(255,255,255,0.1312980360147688)"/>
+  <circle cx="884.4833639077854" cy="1176.7274305065068" r="1.87207204161918" fill="rgba(255,255,255,0.11201865195670069)"/>
+  <circle cx="726.8536461425433" cy="644.5061537615057" r="1.7329442487074718" fill="rgba(255,255,255,0.14607457724108214)"/>
+  <circle cx="668.2381534152769" cy="130.88015995380823" r="1.7094957614979835" fill="rgba(255,255,255,0.12578179225878044)"/>
+  <circle cx="886.9312050451159" cy="222.69627592532672" r="2.8438019901287444" fill="rgba(255,255,255,0.1857414353118518)"/>
+  <circle cx="386.1016594225271" cy="494.5492932446354" r="2.9368135648214144" fill="rgba(255,255,255,0.12166928127852285)"/>
+  <circle cx="641.1197670351928" cy="1121.079589022404" r="2.588603659929917" fill="rgba(255,255,255,0.09358950309747117)"/>
+  <circle cx="764.4357693207706" cy="399.84306526890805" r="2.3265839278197498" fill="rgba(255,255,255,0.11822289127669619)"/>
+  <circle cx="806.4575293424641" cy="313.39664221912705" r="2.1210320660950335" fill="rgba(255,255,255,0.1567642358728294)"/>
+  <circle cx="629.5878908738472" cy="1375.4318031007476" r="2.7578133823064466" fill="rgba(255,255,255,0.08888882686595342)"/>
+  <circle cx="859.0347294028251" cy="976.9138800734294" r="1.4809356664919067" fill="rgba(255,255,255,0.19878133901996142)"/>
+  <circle cx="890.4503092532547" cy="1048.4286011779664" r="1.1357954361749958" fill="rgba(255,255,255,0.11681205122801297)"/>
+  <circle cx="391.8578157392774" cy="817.7134401818121" r="2.2445979858748277" fill="rgba(255,255,255,0.18772927238356607)"/>
+  <circle cx="491.6724234026562" cy="810.0140331029754" r="2.100197429155795" fill="rgba(255,255,255,0.18795985527270376)"/>
+  <circle cx="565.9101484639205" cy="1360.8826525306276" r="2.2202982766678985" fill="rgba(255,255,255,0.15836989540465884)"/>
+  <rect x="80" y="170" width="200" height="34" rx="17" fill="#b466ff"/>
+  <text x="180" y="192" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="2">TAROT</text>
+  <text x="500" y="130" font-family="Georgia,serif" font-size="18" fill="#555" text-anchor="middle" letter-spacing="4">MYSTICSAGE</text>
+  <text x="500" y="432" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">How to Read Tarot Cards for</text>
+  <text x="500" y="480" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Beginners: A Step-by-Step</text>
+  <text x="500" y="528" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Guide</text>
+  <line x1="350" y1="601" x2="650" y2="601" stroke="rgba(180,100,255,0.15)" stroke-width="1"/>
+  <text x="500" y="631" font-family="Arial,sans-serif" font-size="12" fill="#666" text-anchor="middle">mysticsages.com/blog</text>
+  <text x="500" y="1430" font-family="Georgia,serif" font-size="13" fill="#444" text-anchor="middle" letter-spacing="3">✦ MysticSage ✦</text>
+</svg>

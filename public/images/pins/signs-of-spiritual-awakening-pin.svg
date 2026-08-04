@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1500" viewBox="0 0 1000 1500">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#0a0a0f"/><stop offset="50%" stop-color="#140824"/><stop offset="100%" stop-color="#0a0a0f"/>
+  </linearGradient></defs>
+  <rect width="1000" height="1500" fill="url(#g)"/>
+  <circle cx="126.67244191634728" cy="1127.4464443584166" r="2.4983378621513204" fill="rgba(255,255,255,0.15369005072953046)"/>
+  <circle cx="767.9236379470444" cy="598.3592291694032" r="2.7082098547615585" fill="rgba(255,255,255,0.0896325588991257)"/>
+  <circle cx="766.1042314213014" cy="702.1503127113458" r="2.348749651657478" fill="rgba(255,255,255,0.18640778384302012)"/>
+  <circle cx="156.0328834880421" cy="719.8936576415156" r="1.862238173960865" fill="rgba(255,255,255,0.08690975816619846)"/>
+  <circle cx="233.3135881596311" cy="632.4991333376522" r="1.3868340141722482" fill="rgba(255,255,255,0.09030829857864456)"/>
+  <circle cx="163.03951156197706" cy="875.5951975651747" r="2.66448577642634" fill="rgba(255,255,255,0.1658677670321702)"/>
+  <circle cx="498.7367740749747" cy="640.2095111512468" r="2.698586177615624" fill="rgba(255,255,255,0.17122874417804002)"/>
+  <circle cx="482.1877843592372" cy="922.1154127179155" r="1.449592562524185" fill="rgba(255,255,255,0.11762631104361307)"/>
+  <circle cx="323.3008558807283" cy="254.4857797054407" r="1.6816306245771506" fill="rgba(255,255,255,0.16559973238690756)"/>
+  <circle cx="518.2193176697629" cy="177.80469718035488" r="2.901777381004237" fill="rgba(255,255,255,0.11818008914390754)"/>
+  <circle cx="452.02778083088947" cy="931.9995951895235" r="1.3873188224491877" fill="rgba(255,255,255,0.1999328293068628)"/>
+  <circle cx="528.7243155668336" cy="1358.1379361089716" r="1.6027093416380562" fill="rgba(255,255,255,0.10709154862094494)"/>
+  <circle cx="777.536477812655" cy="845.4457746418773" r="1.4505270604807698" fill="rgba(255,255,255,0.17762506219443241)"/>
+  <circle cx="762.0413997043706" cy="1082.4159967705134" r="1.0883887056258834" fill="rgba(255,255,255,0.12112337993207825)"/>
+  <circle cx="827.0782188521139" cy="499.8312028951773" r="2.23461609340262" fill="rgba(255,255,255,0.14882490052327746)"/>
+  <circle cx="453.75637930088857" cy="567.7521794943971" r="1.16942410962806" fill="rgba(255,255,255,0.09848292970282874)"/>
+  <circle cx="162.65975490184434" cy="184.3913057759095" r="1.83330522312813" fill="rgba(255,255,255,0.19984675677163571)"/>
+  <circle cx="585.0287490294559" cy="609.8798280711586" r="2.7545044718365768" fill="rgba(255,255,255,0.09270446717077897)"/>
+  <circle cx="829.9582548899531" cy="105.49902165216132" r="2.46282990625126" fill="rgba(255,255,255,0.15181245046266117)"/>
+  <circle cx="680.6488617381488" cy="1246.9538784910428" r="2.69662821406893" fill="rgba(255,255,255,0.16015175204944904)"/>
+  <rect x="80" y="170" width="200" height="34" rx="17" fill="#fd79a8"/>
+  <text x="180" y="192" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="2">SPIRITUALITY</text>
+  <text x="500" y="130" font-family="Georgia,serif" font-size="18" fill="#555" text-anchor="middle" letter-spacing="4">MYSTICSAGE</text>
+  <text x="500" y="432" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Signs of Spiritual</text>
+  <text x="500" y="480" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Awakening: How to Know You</text>
+  <text x="500" y="528" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#f0ede8" text-anchor="middle">Are Awakening</text>
+  <line x1="350" y1="601" x2="650" y2="601" stroke="rgba(180,100,255,0.15)" stroke-width="1"/>
+  <text x="500" y="631" font-family="Arial,sans-serif" font-size="12" fill="#666" text-anchor="middle">mysticsages.com/blog</text>
+  <text x="500" y="1430" font-family="Georgia,serif" font-size="13" fill="#444" text-anchor="middle" letter-spacing="3">✦ MysticSage ✦</text>
+</svg>
