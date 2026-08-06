@@ -1,6 +1,10 @@
 ﻿import Link from "next/link";
+import { blogPosts } from "@/content/blog";
 
 export default function Home() {
+  const latestPosts = [...blogPosts]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 3);
   return (
     <>
       {/* Hero */}
@@ -112,6 +116,28 @@ export default function Home() {
         </div>
       </section>
 
+
+      {/* Latest from the Blog */}
+      <section className="section">
+        <div className="container">
+          <div className="section-tag">From the Journal</div>
+          <h2 className="section-title centered">Latest guides &amp; insights</h2>
+          <p className="section-sub centered">Tarot tips, astrology cycles, and spiritual practices to support your journey.</p>
+          <div className="services-grid">
+            {latestPosts.map((p) => (
+              <Link href={`/blog/${p.slug}`} className="service-card blog-teaser" key={p.slug}>
+                <span className="icon">📖</span>
+                <h3>{p.title}</h3>
+                <p>{p.excerpt}</p>
+                <span className="read-more" style={{ display: "inline-block", marginTop: 8, color: "var(--primary)", fontWeight: 600, fontSize: 14 }}>Read article →</span>
+              </Link>
+            ))}
+          </div>
+          <div style={{ textAlign: "center", marginTop: 32 }}>
+            <Link href="/blog" className="btn-secondary">View all articles</Link>
+          </div>
+        </div>
+      </section>
 
       {/* FAQ */}
       <section className="section" id="faq">
