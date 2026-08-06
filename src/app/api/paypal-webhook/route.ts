@@ -5,12 +5,25 @@ const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 const ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
 
-// The PayPal account that should receive payments (the "business" in the buttons)
-const EXPECTED_RECEIVER = "mountain0342@gmail.com";
+// The PayPal account that should receive payments (the "business" in the buttons).
+// Override with PAYPAL_BUSINESS_EMAIL (e.g. the sandbox facilitator email when testing).
+const EXPECTED_RECEIVER =
+  process.env.PAYPAL_BUSINESS_EMAIL || "mountain0342@gmail.com";
 
-// PayPal IPN verification endpoint. Live by default; use the sandbox host for tests.
-const IPN_VERIFY_URL =
-  process.env.PAYPAL_IPN_VERIFY_URL || "https://ipnpb.paypal.com/cgi-bin/webscr";
+// PayPal IPN verification endpoint.
+// - PAYPAL_MODE=sandbox  -> PayPal's sandbox verifier (for IPN 联调 tests)
+// - otherwise            -> live verifier, or override fully with PAYPAL_IPN_VERIFY_URL
+const IPN_VERIFY_URL = (() => {
+  if (process.env.PAYPAL_IPN_VERIFY_URL) return process.env.PAYPAL_IPN_VERIFY_URL;
+  if (process.env.PAYPAL_MODE === "sandbox") {
+    return "https://ipnpb.sandbox.paypal.com/cgi-bin/webscr";
+  }
+  return "https://ipnpb.paypal.com/cgi-bin/webscr";
+})();
+
+console.log(
+  `[paypal-ipn] mode=${process.env.PAYPAL_MODE || "live"} verify=${IPN_VERIFY_URL} skipVerify=${process.env.PAYPAL_IPN_SKIP_VERIFY === "true"}`
+);
 
 function getDb() {
   // Use service role when available (bypasses RLS), otherwise anon
@@ -182,5 +195,10 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
-  return NextResponse.json({ message: "PayPal IPN endpoint active" });
+  return NextResponse.json({
+    message: "PayPal IPN endpoint active",
+    mode: process.env.PAYPAL_MODE || "live",
+    verify: IPN_VERIFY_URL,
+    skipVerify: process.env.PAYPAL_IPN_SKIP_VERIFY === "true",
+  });
 }
