@@ -376,3 +376,26 @@ You can use numerology to choose favorable dates, understand your career path, a
   },
 
 ];
+
+/**
+ * Return up to `limit` posts related to `current`, scored by number of shared
+ * tags (most similar first). Ties are broken by date (newest first). When fewer
+ * than `limit` posts share a tag, the remaining slots are filled with the most
+ * recent other posts so the section is never empty.
+ */
+export function getRelatedPosts(current: BlogPost, limit = 3): BlogPost[] {
+  const scored = blogPosts
+    .filter((p) => p.slug !== current.slug)
+    .map((p) => ({
+      post: p,
+      shared: p.tags.filter((t) => current.tags.includes(t)).length,
+    }))
+    .sort((a, b) => {
+      if (b.shared !== a.shared) return b.shared - a.shared;
+      return new Date(b.post.date).getTime() - new Date(a.post.date).getTime();
+    });
+
+  const top = scored.filter((s) => s.shared > 0).map((s) => s.post);
+  const rest = scored.filter((s) => s.shared === 0).map((s) => s.post);
+  return [...top, ...rest].slice(0, limit);
+}

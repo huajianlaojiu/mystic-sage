@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { blogPosts } from "@/content/blog";
+import { blogPosts, getRelatedPosts } from "@/content/blog";
 
 export function generateStaticParams() {
   return blogPosts.map(function(post) { return { slug: post.slug }; });
@@ -45,6 +45,8 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   var post = blogPosts.find(function(p) { return p.slug === params.slug; });
   if (!post) return <section className="page-header"><h1>Post not found</h1></section>;
 
+  var related = getRelatedPosts(post, 3);
+
   var shareUrl = encodeURIComponent("https://mysticsages.com/blog/" + post.slug);
   var shareText = encodeURIComponent(post.title + "\n\n");
 
@@ -82,6 +84,30 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           <p style={{color:"var(--text-muted)",fontSize:14,marginBottom:12}}>Try a free tarot reading</p>
           <Link href="/reading" className="btn-primary" style={{display:"inline-flex"}}>Get Your Free Reading</Link>
         </div>
+
+        {/* Related articles */}
+        {related.length > 0 && (
+          <div style={{marginTop:48}}>
+            <h2 style={{fontSize:20,fontWeight:600,color:"var(--text-primary)",marginBottom:20,textAlign:"center"}}>Related Articles</h2>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(220px,1fr))",gap:20}}>
+              {related.map(function(r) {
+                return (
+                  <Link key={r.slug} href={"/blog/" + r.slug} style={{textDecoration:"none",color:"inherit"}}>
+                    <div className="service-card" style={{padding:20,cursor:"pointer",height:"100%"}}>
+                      <div style={{display:"flex",gap:6,marginBottom:10,flexWrap:"wrap"}}>
+                        {r.tags.slice(0,2).map(function(tag) {
+                          return <span key={tag} style={{fontSize:10,padding:"2px 7px",borderRadius:4,background:"rgba(180,100,255,0.12)",color:"var(--accent)"}}>{tag}</span>;
+                        })}
+                      </div>
+                      <h3 style={{fontSize:15,fontWeight:600,color:"var(--text-primary)",marginBottom:8,lineHeight:1.4}}>{r.title}</h3>
+                      <p style={{fontSize:13,color:"var(--text-muted)",lineHeight:1.6}}>{r.excerpt}</p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   </>);
