@@ -1,15 +1,49 @@
-﻿import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 const ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
 
+// The PayPal account that should receive payments (the "business" in the buttons)
+const EXPECTED_RECEIVER = "mountain0342@gmail.com";
+
+// PayPal IPN verification endpoint. Live by default; use the sandbox host for tests.
+const IPN_VERIFY_URL =
+  process.env.PAYPAL_IPN_VERIFY_URL || "https://ipnpb.paypal.com/cgi-bin/webscr";
+
 function getDb() {
   // Use service role when available (bypasses RLS), otherwise anon
   return createClient(SUPABASE_URL, SERVICE_KEY || ANON_KEY, {
     auth: { persistSession: false },
   });
+}
+
+/**
+ * PayPal IPN verification: echo the raw POST body back to PayPal with
+ * cmd=_notify-validate. PayPal responds "VERIFIED" or "INVALID".
+ * Set PAYPAL_IPN_SKIP_VERIFY=true ONLY in local dev to simulate IPNs.
+ */
+async function verifyIpn(rawBody: string): Promise<"verified" | "invalid" | "error"> {
+  if (process.env.PAYPAL_IPN_SKIP_VERIFY === "true") {
+    console.log("[paypal-ipn] Verification skipped (PAYPAL_IPN_SKIP_VERIFY=true)");
+    return "verified";
+  }
+  try {
+    const res = await fetch(IPN_VERIFY_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: "cmd=_notify-validate&" + rawBody,
+    });
+    const text = (await res.text()).trim();
+    console.log("[paypal-ipn] Verification response:", text);
+    if (text === "VERIFIED") return "verified";
+    if (text === "INVALID") return "invalid";
+    return "error";
+  } catch (err: any) {
+    console.error("[paypal-ipn] Verification request failed:", err?.message || err);
+    return "error";
+  }
 }
 
 async function upsertSubscription(db: any, params: URLSearchParams) {
@@ -89,8 +123,19 @@ export async function POST(req: NextRequest) {
     const receiverEmail = params.get("receiver_email") || "";
     const paymentStatus = params.get("payment_status") || "";
 
-    const expectedEmail = "mountain0342@gmail.com";
-    if (receiverEmail && receiverEmail !== expectedEmail) {
+    // Verify authenticity with PayPal BEFORE doing anything.
+    const verification = await verifyIpn(rawBody);
+    if (verification !== "verified") {
+      if (verification === "error") {
+        // Transient failure — return 500 so PayPal retries the IPN later.
+        console.warn("[paypal-ipn] Verification error — 500 to trigger retry");
+        return NextResponse.json({ error: "Verification error" }, { status: 500 });
+      }
+      console.warn("[paypal-ipn] IPN INVALID — dropping", { txnType, payerEmail });
+      return NextResponse.json({ success: true });
+    }
+
+    if (receiverEmail && receiverEmail !== EXPECTED_RECEIVER) {
       console.warn("[paypal-ipn] Receiver email mismatch:", receiverEmail);
       return NextResponse.json({ error: "Invalid receiver" }, { status: 400 });
     }

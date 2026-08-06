@@ -334,7 +334,7 @@ export default function ReadingPage() {
                       <input type="hidden" name="src" value="1" />
                       <input type="hidden" name="sra" value="1" />
                       <input type="hidden" name="no_note" value="1" />
-                      <input type="hidden" name="return" value={SITE + "/success"} />
+                      <input type="hidden" name="return" value={SITE + "/success?type=subscription"} />
                       <input type="hidden" name="cancel_return" value={SITE + "/reading"} />
                       <input type="hidden" name="notify_url" value={SITE + "/api/paypal-webhook"} />
                       <button type="submit" className="btn-primary" style={{ fontSize: 13, padding: "10px 18px" }}>Get Unlimited - $19/mo</button>
@@ -346,7 +346,7 @@ export default function ReadingPage() {
                     <input type="hidden" name="item_name" value="Detailed Report" />
                     <input type="hidden" name="amount" value="4.99" />
                     <input type="hidden" name="currency_code" value="USD" />
-                    <input type="hidden" name="return" value={SITE + "/success"} />
+                    <input type="hidden" name="return" value={SITE + "/success?type=report"} />
                     <input type="hidden" name="cancel_return" value={SITE + "/reading"} />
                     <input type="hidden" name="notify_url" value={SITE + "/api/paypal-webhook"} />
                     <button type="submit" className="btn-secondary" style={{ fontSize: 13, padding: "10px 18px" }}>Detailed Report - $4.99</button>

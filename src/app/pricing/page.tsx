@@ -15,7 +15,7 @@ function PayPalBuyForm({ itemName, amount, label, className }: { itemName: strin
       <input type="hidden" name="amount" value={amount} />
       <input type="hidden" name="currency_code" value="USD" />
       <input type="hidden" name="no_note" value="1" />
-      <input type="hidden" name="return" value={SITE_URL + "/success"} />
+      <input type="hidden" name="return" value={SITE_URL + "/success?type=report"} />
       <input type="hidden" name="cancel_return" value={SITE_URL + "/pricing"} />
       <input type="hidden" name="notify_url" value={SITE_URL + "/api/paypal-webhook"} />
       <button type="submit" className={className}>{label}</button>
@@ -37,7 +37,7 @@ function PayPalSubForm({ itemName, amount, period, label, className }: { itemNam
       <input type="hidden" name="src" value="1" />
       <input type="hidden" name="sra" value="1" />
       <input type="hidden" name="no_note" value="1" />
-      <input type="hidden" name="return" value={SITE_URL + "/success"} />
+      <input type="hidden" name="return" value={SITE_URL + "/success?type=subscription"} />
       <input type="hidden" name="cancel_return" value={SITE_URL + "/pricing"} />
       <input type="hidden" name="notify_url" value={SITE_URL + "/api/paypal-webhook"} />
       <button type="submit" className={className}>{label}</button>
