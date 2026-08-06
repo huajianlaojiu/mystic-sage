@@ -1,18 +1,22 @@
-﻿import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getOpenAIClient } from "@/lib/openai";
 import { pickRandomCards, buildTarotPrompt, MAJOR_ARCANA } from "@/lib/tarot";
+import { getMembership } from "@/lib/membership";
 
 const EMOJIS: Record<number, string> = {
-  0:"😊",1:"🪄",2:"🌙",3:"🌿",4:"👑",5:"📿",6:"💞",7:"🏆",8:"🦁",9:"🏮",
-  10:"🎡",11:"⚖️",12:"🪢",13:"🦋",14:"⚗️",15:"😈",16:"⚡",17:"⭐",18:"🌘",
-  19:"☀️",20:"📯",21:"🌍",
+  0: "😊", 1: "🪄", 2: "🌙", 3: "🌿", 4: "👑", 5: "📿", 6: "💞", 7: "🏆", 8: "🦁", 9: "🏮",
+  10: "🎡", 11: "⚖️", 12: "🪢", 13: "🦋", 14: "⚗️", 15: "😈", 16: "⚡", 17: "⭐", 18: "🌘",
+  19: "☀️", 20: "📯", 21: "🌍",
 };
 
-function formatCards(cards: typeof MAJOR_ARCANA) {
+const POSITIONS_FREE = ["Past", "Present", "Future"];
+const POSITIONS_PREMIUM = ["Past", "Present", "Challenge", "Guidance", "Future"];
+
+function formatCards(cards: typeof MAJOR_ARCANA, positions: string[]) {
   return cards.map((c, i) => ({
     name: c.name,
     keywords: c.keywords,
-    position: i === 0 ? "Past" : i === 1 ? "Present" : "Future",
+    position: positions[i] || `Card ${i + 1}`,
     emoji: EMOJIS[c.id] || "🃏",
   }));
 }
@@ -21,15 +25,31 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const question = body.question || "";
-    let cards: typeof MAJOR_ARCANA;
 
-    if (body.cardNames?.length === 3) {
+    // Server-side membership check — only verified members get the premium spread.
+    let premium = false;
+    let cardCount = 3;
+    let positions = POSITIONS_FREE;
+    let maxTokens = 800;
+
+    if (body.email && typeof body.email === "string" && body.email.includes("@")) {
+      const status = await getMembership(body.email);
+      if (status?.member) {
+        premium = true;
+        cardCount = 5;
+        positions = POSITIONS_PREMIUM;
+        maxTokens = 1200;
+      }
+    }
+
+    let cards: typeof MAJOR_ARCANA;
+    if (body.cardNames?.length === cardCount) {
       cards = body.cardNames
         .map((name: string) => MAJOR_ARCANA.find((c) => c.name === name))
         .filter(Boolean) as typeof MAJOR_ARCANA;
-      if (cards.length !== 3) cards = pickRandomCards(3);
+      if (cards.length !== cardCount) cards = pickRandomCards(cardCount);
     } else {
-      cards = pickRandomCards(3);
+      cards = pickRandomCards(cardCount);
     }
 
     const openai = getOpenAIClient();
@@ -37,14 +57,19 @@ export async function POST(req: NextRequest) {
       model: "gpt-4o-mini",
       messages: [
         { role: "system", content: "You are a compassionate, insightful tarot reader. Write readings in natural, warm English. Never claim to predict the future with certainty. Frame everything as guidance and reflection." },
-        { role: "user", content: buildTarotPrompt(cards, question) },
+        { role: "user", content: buildTarotPrompt(cards, question, positions) },
       ],
       temperature: 0.95,
-      max_tokens: 800,
+      max_tokens: maxTokens,
     });
 
     const reading = completion.choices[0]?.message?.content || "The energies are unclear. Please try again.";
-    return NextResponse.json({ reading, cards: formatCards(cards) });
+    const response: { reading: string; cards: ReturnType<typeof formatCards>; premium?: boolean } = {
+      reading,
+      cards: formatCards(cards, positions),
+    };
+    if (premium) response.premium = true;
+    return NextResponse.json(response);
   } catch (err: any) {
     console.error("Reading API error:", err);
     const msg = err.message || "";

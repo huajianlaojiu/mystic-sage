@@ -41,9 +41,10 @@ export function pickRandomCards(count: number) {
   return shuffle(MAJOR_ARCANA).slice(0, count);
 }
 
-export function buildTarotPrompt(cards: any[], question: string) {
+export function buildTarotPrompt(cards: any[], question: string, positions?: string[]) {
   const style = STYLES[Math.floor(Math.random() * STYLES.length)];
   const paraCount = PARAS[Math.floor(Math.random() * PARAS.length)];
-  const cardText = cards.map((c: any, i: number) => "Card " + (i + 1) + " (" + style.p[i] + "): " + c.name + " \u2014 " + c.keywords).join("\n");
+  const pos = positions && positions.length === cards.length ? positions : style.p;
+  const cardText = cards.map((c: any, i: number) => "Card " + (i + 1) + " (" + pos[i] + "): " + c.name + " \u2014 " + c.keywords).join("\n");
   return "You are a tarot reader. The user asks: \u0022" + (question || "What do I need to know?") + "\u0022\n\nThese cards:\n" + cardText + "\n\nWrite " + paraCount + ". " + style.t + " End with actionable takeaway. Never predict doom. Focus on guidance and growth. Sign off as \u201c\u2014 MysticSage\u201d.";
 }
