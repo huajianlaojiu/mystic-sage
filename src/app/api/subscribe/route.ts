@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
 
     const normalizedEmail = email.trim().toLowerCase();
 
-    // Try storing in Supabase â gracefully handle if table doesn't exist yet
+    // Store in Supabase. Surface write failures instead of silently reporting success.
     try {
       const supabase = getServerClient();
       const { error } = await supabase.from("subscribers").insert({
@@ -20,12 +20,18 @@ export async function POST(req: NextRequest) {
         created_at: new Date().toISOString(),
       });
       if (error) {
-        // Table likely doesn't exist â log and fall through gracefully
-        console.warn("[subscribe] Supabase insert failed:", error.message);
-        console.warn("[subscribe] Create a 'subscribers' table in Supabase dashboard with columns: id (uuid pk), email (text), source (text), created_at (timestamptz)");
+        console.error("[subscribe] Supabase insert failed:", error.message);
+        return NextResponse.json(
+          { success: false, error: "Could not save your subscription. Please try again later." },
+          { status: 500 }
+        );
       }
     } catch (supaErr: any) {
-      console.warn("[subscribe] Supabase error (non-blocking):", supaErr?.message || supaErr);
+      console.error("[subscribe] Supabase error:", supaErr?.message || supaErr);
+      return NextResponse.json(
+        { success: false, error: "Could not save your subscription. Please try again later." },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({
