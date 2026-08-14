@@ -1,28 +1,28 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-grid">
         <div className="footer-brand">
-          <Link href="/" className="logo" style={{marginBottom:8,display:"inline-flex",alignItems:"center",gap:8}}>
+          <Link href="/" className="logo" style={{ marginBottom: 8, display: "inline-flex", alignItems: "center", gap: 8 }}>
             <div className="logo-icon">✦</div>
             <span className="logo-text">MysticSage</span>
           </Link>
           <p>Spiritual guidance and wellness for the modern seeker. <strong>For entertainment and spiritual wellness purposes only.</strong></p>
-        </div>
-        <div>
-                  <div>
-          <h4>Newsletter</h4>
-          <p style={{fontSize:13,color:"var(--text-muted)",marginBottom:12,lineHeight:1.5}}>Get daily tarot pulls, horoscopes and spiritual insights.</p>
-          <form action="https://mysticsages.com/api/subscribe" method="POST" style={{display:"flex",gap:6}}>
+
+          <h4 style={{ marginTop: 24 }}>Newsletter</h4>
+          <p style={{ fontSize: 13, color: "var(--text-muted)", marginBottom: 12, lineHeight: 1.5 }}>Get daily tarot pulls, horoscopes and spiritual insights.</p>
+          <form action="https://mysticsages.com/api/subscribe" method="POST" style={{ display: "flex", gap: 6 }}>
             <input type="email" name="email" placeholder="your@email.com" required
-              style={{flex:1,minWidth:0,padding:"8px 10px",borderRadius:6,background:"rgba(255,255,255,0.04)",border:"1px solid var(--border)",color:"var(--text-primary)",fontSize:12,fontFamily:"inherit",outline:"none"}} />
+              style={{ flex: 1, minWidth: 0, padding: "8px 10px", borderRadius: 6, background: "rgba(255,255,255,0.04)", border: "1px solid var(--border)", color: "var(--text-primary)", fontSize: 12, fontFamily: "inherit", outline: "none" }} />
             <button type="submit"
-              style={{padding:"8px 12px",borderRadius:6,fontSize:12,fontWeight:600,background:"linear-gradient(135deg,var(--accent),var(--accent-dark))",color:"#fff",border:"none",cursor:"pointer",fontFamily:"inherit",whiteSpace:"nowrap"}}>Join</button>
+              style={{ padding: "8px 12px", borderRadius: 6, fontSize: 12, fontWeight: 600, background: "linear-gradient(135deg,var(--accent),var(--accent-dark))", color: "#fff", border: "none", cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap" }}>Join</button>
           </form>
         </div>
-<h4>Services</h4>
+
+        <div>
+          <h4>Services</h4>
           <Link href="/services">Tarot Reading</Link>
           <Link href="/services">Astrology</Link>
           <Link href="/services">Numerology</Link>
@@ -30,13 +30,16 @@ export default function Footer() {
           <Link href="/services">Career Reading</Link>
           <Link href="/cards">Card Meanings</Link>
         </div>
+
         <div>
           <h4>Company</h4>
-          <Link href="/about">About Us</Link>`n          <Link href="/blog">Blog</Link>
+          <Link href="/about">About Us</Link>
+          <Link href="/blog">Blog</Link>
           <Link href="/privacy">Privacy Policy</Link>
           <Link href="/terms">Terms of Service</Link>
           <Link href="/contact">Contact</Link>
         </div>
+
         <div>
           <h4>Support</h4>
           <Link href="/help">Help Center</Link>
@@ -44,6 +47,7 @@ export default function Footer() {
           <Link href="/safety">Safety</Link>
         </div>
       </div>
+
       <div className="footer-bottom">
         <strong>&copy; 2026 MysticSage.</strong> All rights reserved.
         <div className="disclaimer">All readings are for entertainment and spiritual wellness purposes only. They are not a substitute for professional medical, legal, or financial advice. Must be 18+.</div>

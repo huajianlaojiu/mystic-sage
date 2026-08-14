@@ -1,9 +1,20 @@
-﻿"use client";
+"use client";
 import Link from "next/link";
 import { useState } from "react";
+import { getBrowserClient } from "@/lib/supabase";
 
-export default function Header() {
+type User = { email: string | null } | null;
+
+export default function Header({ user }: { user?: User }) {
   const [open, setOpen] = useState(false);
+  const [signingOut, setSigningOut] = useState(false);
+
+  async function handleLogout() {
+    setSigningOut(true);
+    const supabase = getBrowserClient();
+    await supabase.auth.signOut();
+    window.location.href = "/";
+  }
 
   return (
     <header className="header">
@@ -20,7 +31,22 @@ export default function Header() {
           <Link href="/blog" onClick={() => setOpen(false)}>Blog</Link>
           <Link href="/cards" onClick={() => setOpen(false)}>Card Meanings</Link>
           <Link href="/reading" onClick={() => setOpen(false)}>Free Reading</Link>
-          <Link href="/auth/login" className="btn-header" onClick={() => setOpen(false)}>Sign In</Link>
+
+          {user?.email ? (
+            <>
+              <span className="header-email" style={{ color: "var(--text-secondary)", fontSize: 13 }}>{user.email}</span>
+              <button
+                className="btn-header"
+                onClick={() => { setOpen(false); handleLogout(); }}
+                disabled={signingOut}
+                style={{ opacity: signingOut ? 0.6 : 1 }}
+              >
+                {signingOut ? "..." : "Logout"}
+              </button>
+            </>
+          ) : (
+            <Link href="/auth/login" className="btn-header" onClick={() => setOpen(false)}>Sign In</Link>
+          )}
         </nav>
         <button className="hamburger" aria-label="Menu" onClick={() => setOpen(!open)}>
           <span></span><span></span><span></span>

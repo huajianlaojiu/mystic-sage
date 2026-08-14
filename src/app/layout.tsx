@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { getSessionUser } from "@/lib/supabase/server";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "";
 
@@ -29,7 +30,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const user = await getSessionUser();
   return (
     <html lang="en">
       <head>
@@ -53,7 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Organization\",\n  \"name\": \"MysticSage\",\n  \"url\": \"https://mysticsages.com\",\n  \"logo\": \"https://mysticsages.com/images/og-default.svg\",\n  \"description\": \"Free tarot readings, astrology, numerology and spiritual guidance online.\",\n  \"sameAs\": [\n    \"https://twitter.com/mysticsage\"\n  ]\n}" }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: "{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"MysticSage\",\"url\":\"https://mysticsages.com\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://mysticsages.com/search?q={search_term_string}\"},\"query-input\":\"required name=search_term_string\"}}" }} />
-        <Header />
+        <Header user={user} />
         <main>{children}</main>
         <Footer />
       </body>
