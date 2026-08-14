@@ -13,9 +13,16 @@ export default function RegisterPage() {
     setLoading(true); setMsg("");
     try {
       const m = await import("@/lib/supabase");
-      const { error } = await m.getBrowserClient().auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin + "/auth/callback" } });
-      if (error) setMsg(error.message);
-      else setMsg("Check your email for the confirmation link!");
+      const { data, error } = await m.getBrowserClient().auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin + "/auth/callback" } });
+      if (error) {
+        setMsg(error.message);
+      } else if (data.session) {
+        // 注册即自动确认（mailer_autoconfirm=true）：已拿到会话，直接登录跳转，不依赖邮件
+        window.location.href = "/reading";
+      } else {
+        // 未自动确认时才需要查收确认邮件
+        setMsg("Check your email for the confirmation link!");
+      }
     } catch { setMsg("Configure Supabase in .env.local first"); }
     finally { setLoading(false); }
   }
