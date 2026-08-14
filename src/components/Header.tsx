@@ -16,7 +16,8 @@ export default function Header() {
           <Link href="/" onClick={() => setOpen(false)}>Home</Link>
           <Link href="/services" onClick={() => setOpen(false)}>Services</Link>
           <Link href="/pricing" onClick={() => setOpen(false)}>Pricing</Link>
-          <Link href="/about" onClick={() => setOpen(false)}>About</Link>`n          <Link href="/blog" onClick={() => setOpen(false)}>Blog</Link>
+          <Link href="/about" onClick={() => setOpen(false)}>About</Link>
+          <Link href="/blog" onClick={() => setOpen(false)}>Blog</Link>
           <Link href="/cards" onClick={() => setOpen(false)}>Card Meanings</Link>
           <Link href="/reading" onClick={() => setOpen(false)}>Free Reading</Link>
           <Link href="/auth/login" className="btn-header" onClick={() => setOpen(false)}>Sign In</Link>
