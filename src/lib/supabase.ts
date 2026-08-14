@@ -1,23 +1,17 @@
-﻿import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { createBrowserClient } from "@supabase/ssr";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-// Browser client — use in "use client" components
-let browserClient: ReturnType<typeof createClient> | null = null;
-export function getBrowserClient() {
+// Browser client — uses @supabase/ssr so the auth session is stored in cookies
+// and is readable by the server (route handlers / middleware). Use in "use client" pages.
+// NOTE: this module must stay free of server-only imports (e.g. next/headers) so it
+// can be safely bundled into client components.
+let browserClient: SupabaseClient | null = null;
+export function getBrowserClient(): SupabaseClient {
   if (!browserClient) {
-    browserClient = createClient(supabaseUrl, supabaseAnonKey);
+    browserClient = createBrowserClient(supabaseUrl, supabaseAnonKey);
   }
   return browserClient;
-}
-
-// Server client — use in Server Components and Route Handlers.
-// Uses the service_role key so server-side writes bypass RLS. Falls back to
-// the anon key only if the service role key is missing (e.g. local misconfig).
-export function getServerClient() {
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || supabaseAnonKey;
-  return createClient(supabaseUrl, serviceKey, {
-    auth: { persistSession: false },
-  });
 }

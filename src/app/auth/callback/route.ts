@@ -1,12 +1,19 @@
-﻿import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import { getSessionClient } from "@/lib/supabase/server";
 
 export async function GET(req: Request) {
-  // Supabase redirects here after email confirmation
   const url = new URL(req.url);
   const code = url.searchParams.get("code");
+  const next = url.searchParams.get("next") ?? "/reading";
+
   if (code) {
-    // Exchange code for session (handled client-side)
-    return NextResponse.redirect(new URL("/reading?verified=true", req.url));
+    const supabase = await getSessionClient();
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    if (error) {
+      console.error("[auth/callback] exchange error:", error.message);
+      return NextResponse.redirect(new URL("/auth/login?error=session", req.url));
+    }
   }
-  return NextResponse.redirect(new URL("/auth/login", req.url));
+
+  return NextResponse.redirect(new URL(next, req.url));
 }

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getOpenAIClient } from "@/lib/openai";
 import { pickRandomCards, buildTarotPrompt, MAJOR_ARCANA } from "@/lib/tarot";
 import { getMembership } from "@/lib/membership";
+import { getSessionUser } from "@/lib/supabase/server";
 
 const EMOJIS: Record<number, string> = {
   0: "😊", 1: "🪄", 2: "🌙", 3: "🌿", 4: "👑", 5: "📿", 6: "💞", 7: "🏆", 8: "🦁", 9: "🏮",
@@ -26,14 +27,19 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const question = body.question || "";
 
-    // Server-side membership check — only verified members get the premium spread.
+    // Membership is derived ONLY from the authenticated session. We never trust
+    // an email supplied in the request body — that would let anyone forge a
+    // member's email and grab the premium spread. Anonymous callers always get
+    // the free 3-card reading; a logged-in user whose verified email matches an
+    // active subscription gets the premium 5-card spread.
     let premium = false;
     let cardCount = 3;
     let positions = POSITIONS_FREE;
     let maxTokens = 800;
 
-    if (body.email && typeof body.email === "string" && body.email.includes("@")) {
-      const status = await getMembership(body.email);
+    const sessionUser = await getSessionUser();
+    if (sessionUser?.email) {
+      const status = await getMembership(sessionUser.email);
       if (status?.member) {
         premium = true;
         cardCount = 5;
