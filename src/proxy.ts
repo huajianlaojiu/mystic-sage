@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
+import { withTimeout } from "@/lib/supabase/server";
 
 export async function proxy(request: NextRequest) {
   let response = NextResponse.next({ request });
@@ -26,13 +27,22 @@ export async function proxy(request: NextRequest) {
   );
 
   // Refreshes the auth token and writes the updated session cookies.
-  await supabase.auth.getUser();
+  // Capped by a timeout so a stalled Supabase round-trip (e.g. a paused
+  // free-tier project cold-starting) cannot hang the request.
+  try {
+    await withTimeout(supabase.auth.getUser(), 5000);
+  } catch {
+    // Session refresh skipped this request — next request will retry.
+  }
 
   return response;
 }
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    // Refresh sessions on page navigations, but skip /api routes — those
+    // validate the session themselves via getSessionUser() and we don't want
+    // to double the (cold-start-prone) server-side Supabase calls.
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };

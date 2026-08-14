@@ -41,12 +41,38 @@ export async function getSessionClient() {
 // the JWT with Supabase (unlike getSession, which trusts the cookie blindly),
 // so a forged/expired session cannot impersonate a member.
 // Returns null when there is no valid session.
+//
+// Wrapped in a timeout: the server-side Supabase round-trip can stall when the
+// (free-tier) project is paused/cold-starting. Without a cap the whole request
+// hangs until the serverless function times out — surfacing as an endless
+// spinner to the user. Failing fast degrades gracefully to an anonymous
+// experience instead.
 export async function getSessionUser(): Promise<{ email: string | null } | null> {
   const supabase = await getSessionClient();
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
-  if (error || !user) return null;
+  let user = null;
+  try {
+    const res = await withTimeout(supabase.auth.getUser(), 5000);
+    if (!res.error && res.data.user) user = res.data.user;
+  } catch {
+    // Timed out / network error — treat as no session, degrade gracefully.
+  }
+  if (!user) return null;
   return { email: user.email ?? null };
+}
+
+// Reject after `ms` so a stalled upstream call cannot hang the request forever.
+export function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error("timeout")), ms);
+    promise.then(
+      (v) => {
+        clearTimeout(timer);
+        resolve(v);
+      },
+      (e) => {
+        clearTimeout(timer);
+        reject(e);
+      }
+    );
+  });
 }
