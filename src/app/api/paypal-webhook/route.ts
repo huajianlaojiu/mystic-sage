@@ -61,7 +61,10 @@ async function verifyIpn(rawBody: string): Promise<"verified" | "invalid" | "err
 
 async function upsertSubscription(db: any, params: URLSearchParams) {
   const subscrId = params.get("subscr_id") || "";
-  const email = params.get("payer_email") || "";
+  // Prefer the logged-in email we tagged on the button (custom field) so the
+  // membership is tied to the user's account even when their PayPal email
+  // differs. Fall back to payer_email.
+  const email = (params.get("custom") || "").trim() || params.get("payer_email") || "";
   if (!subscrId || !email) return;
 
   const planName = params.get("item_name") || "Mystic Plus";
@@ -103,7 +106,7 @@ async function updateSubscriptionStatus(db: any, subscrId: string, status: strin
 
 async function recordOrder(db: any, params: URLSearchParams) {
   const txnId = params.get("txn_id") || "";
-  const email = params.get("payer_email") || "";
+  const email = (params.get("custom") || "").trim() || params.get("payer_email") || "";
   if (!txnId || !email) return;
 
   const { error } = await db.from("orders").upsert(

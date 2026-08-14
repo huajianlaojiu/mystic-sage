@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { getBrowserClient } from "@/lib/supabase";
 
 type Card = { name: string; keywords: string; position: string; emoji: string };
 type Reading = { reading: string; cards: Card[]; premium?: boolean };
@@ -146,6 +147,7 @@ export default function ReadingPage() {
   const [membership, setMembership] = useState<MembershipStatus | null>(null);
   const [checking, setChecking] = useState(false);
   const [guest, setGuest] = useState(false);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -161,6 +163,18 @@ export default function ReadingPage() {
       .then((d) => { if (active && d) setMembership(d); })
       .catch(() => {})
       .finally(() => { if (active) setChecking(false); });
+    return () => { active = false; };
+  }, []);
+
+  // Resolve the signed-in user's email so the PayPal button can tag the
+  // purchase with it (custom field). This keeps membership tied to the
+  // logged-in account even when the payer's PayPal email differs.
+  useEffect(() => {
+    let active = true;
+    getBrowserClient()
+      .auth.getUser()
+      .then(({ data }) => { if (active && data.user) setUserEmail(data.user.email ?? null); })
+      .catch(() => {});
     return () => { active = false; };
   }, []);
 
@@ -275,7 +289,13 @@ export default function ReadingPage() {
               </div>
 
               {!membership?.member && (
-                <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginBottom: 16 }}>
+                <div style={{ marginBottom: 16 }}>
+                  {!userEmail && (
+                    <p style={{ fontSize: 12.5, color: "var(--text-muted)", textAlign: "center", marginBottom: 10 }}>
+                      Tip: sign in so your plan links to your account.
+                    </p>
+                  )}
+                  <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
                   <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
                     <input type="hidden" name="cmd" value="_xclick-subscriptions" />
                     <input type="hidden" name="business" value="mountain0342@gmail.com" />
@@ -290,6 +310,7 @@ export default function ReadingPage() {
                     <input type="hidden" name="return" value={SITE + "/success?type=subscription"} />
                     <input type="hidden" name="cancel_return" value={SITE + "/reading"} />
                     <input type="hidden" name="notify_url" value={SITE + "/api/paypal-webhook"} />
+                    <input type="hidden" name="custom" value={userEmail || ""} />
                     <button type="submit" className="btn-primary" style={{ fontSize: 13, padding: "10px 18px" }}>Get Unlimited - $19/mo</button>
                   </form>
                   <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
@@ -301,9 +322,11 @@ export default function ReadingPage() {
                     <input type="hidden" name="return" value={SITE + "/success?type=report"} />
                     <input type="hidden" name="cancel_return" value={SITE + "/reading"} />
                     <input type="hidden" name="notify_url" value={SITE + "/api/paypal-webhook"} />
+                    <input type="hidden" name="custom" value={userEmail || ""} />
                     <button type="submit" className="btn-secondary" style={{ fontSize: 13, padding: "10px 18px" }}>Detailed Report - $4.99</button>
                   </form>
                 </div>
+              </div>
               )}
 
               <MemberUnlock membership={membership} checking={checking} guest={guest} />
