@@ -13,6 +13,14 @@ type MembershipStatus = {
 };
 const SITE = typeof window !== "undefined" ? window.location.origin : "https://mysticsages.com";
 
+// PayPal mode/endpoint can be switched to sandbox for testing via env vars.
+const PAYPAL_MODE = process.env.NEXT_PUBLIC_PAYPAL_MODE === "sandbox" ? "sandbox" : "live";
+const PAYPAL_ACTION =
+  PAYPAL_MODE === "sandbox"
+    ? "https://www.sandbox.paypal.com/cgi-bin/webscr"
+    : "https://www.paypal.com/cgi-bin/webscr";
+const PAYPAL_BUSINESS = process.env.NEXT_PUBLIC_PAYPAL_BUSINESS_EMAIL || "mountain0342@gmail.com";
+
 function ShareButtons({ reading, cards }: { reading: string; cards: Card[] }) {
   const url = encodeURIComponent(SITE + "/reading");
   const cardText = cards.map((c) => c.name + " (" + c.position + ")").join(" | ");
@@ -296,9 +304,9 @@ export default function ReadingPage() {
                     </p>
                   )}
                   <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
-                  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                  <form action={PAYPAL_ACTION} method="post" target="_blank">
                     <input type="hidden" name="cmd" value="_xclick-subscriptions" />
-                    <input type="hidden" name="business" value="mountain0342@gmail.com" />
+                    <input type="hidden" name="business" value={PAYPAL_BUSINESS} />
                     <input type="hidden" name="item_name" value="Unlimited Readings" />
                     <input type="hidden" name="currency_code" value="USD" />
                     <input type="hidden" name="a3" value="19.00" />
@@ -313,9 +321,9 @@ export default function ReadingPage() {
                     <input type="hidden" name="custom" value={userEmail || ""} />
                     <button type="submit" className="btn-primary" style={{ fontSize: 13, padding: "10px 18px" }}>Get Unlimited - $19/mo</button>
                   </form>
-                  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                  <form action={PAYPAL_ACTION} method="post" target="_blank">
                     <input type="hidden" name="cmd" value="_xclick" />
-                    <input type="hidden" name="business" value="mountain0342@gmail.com" />
+                    <input type="hidden" name="business" value={PAYPAL_BUSINESS} />
                     <input type="hidden" name="item_name" value="Detailed Report" />
                     <input type="hidden" name="amount" value="4.99" />
                     <input type="hidden" name="currency_code" value="USD" />
