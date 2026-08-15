@@ -37,13 +37,13 @@ export default function Footer() {
           <Link href="/blog">Blog</Link>
           <Link href="/privacy">Privacy Policy</Link>
           <Link href="/terms">Terms of Service</Link>
+          <Link href="/refund">Refund Policy</Link>
           <Link href="/contact">Contact</Link>
         </div>
 
         <div>
           <h4>Support</h4>
           <Link href="/help">Help Center</Link>
-          <Link href="/refund">Refund Policy</Link>
           <Link href="/safety">Safety</Link>
         </div>
       </div>
