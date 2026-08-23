@@ -332,7 +332,11 @@ export default function ReadingPage() {
                     <input type="hidden" name="return" value={SITE + "/success?type=report"} />
                     <input type="hidden" name="cancel_return" value={SITE + "/reading"} />
                     <input type="hidden" name="notify_url" value={SITE + "/api/paypal-webhook"} />
-                    <input type="hidden" name="custom" value={userEmail || ""} />
+                    <input
+                      type="hidden"
+                      name="custom"
+                      value={JSON.stringify({ e: userEmail || "", q: (question || "").slice(0, 200) })}
+                    />
                     <button type="submit" className="btn-secondary" style={{ fontSize: 13, padding: "10px 18px" }}>Detailed Report - $4.99</button>
                   </form>
                 </div>

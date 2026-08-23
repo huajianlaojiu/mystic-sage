@@ -1,26 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getOpenAIClient } from "@/lib/openai";
-import { pickRandomCards, buildTarotPrompt, MAJOR_ARCANA } from "@/lib/tarot";
+import { generateReading, type GenCard } from "@/lib/reading";
 import { getMembership } from "@/lib/membership";
 import { getSessionUser } from "@/lib/supabase/server";
-
-const EMOJIS: Record<number, string> = {
-  0: "😊", 1: "🪄", 2: "🌙", 3: "🌿", 4: "👑", 5: "📿", 6: "💞", 7: "🏆", 8: "🦁", 9: "🏮",
-  10: "🎡", 11: "⚖️", 12: "🪢", 13: "🦋", 14: "⚗️", 15: "😈", 16: "⚡", 17: "⭐", 18: "🌘",
-  19: "☀️", 20: "📯", 21: "🌍",
-};
-
-const POSITIONS_FREE = ["Past", "Present", "Future"];
-const POSITIONS_PREMIUM = ["Past", "Present", "Challenge", "Guidance", "Future"];
-
-function formatCards(cards: typeof MAJOR_ARCANA, positions: string[]) {
-  return cards.map((c, i) => ({
-    name: c.name,
-    keywords: c.keywords,
-    position: positions[i] || `Card ${i + 1}`,
-    emoji: EMOJIS[c.id] || "🃏",
-  }));
-}
 
 export async function POST(req: NextRequest) {
   try {
@@ -33,46 +14,23 @@ export async function POST(req: NextRequest) {
     // the free 3-card reading; a logged-in user whose verified email matches an
     // active subscription gets the premium 5-card spread.
     let premium = false;
-    let cardCount = 3;
-    let positions = POSITIONS_FREE;
-    let maxTokens = 800;
 
     const sessionUser = await getSessionUser();
     if (sessionUser?.email) {
       const status = await getMembership(sessionUser.email);
       if (status?.member) {
         premium = true;
-        cardCount = 5;
-        positions = POSITIONS_PREMIUM;
-        maxTokens = 1200;
       }
     }
 
-    let cards: typeof MAJOR_ARCANA;
-    if (body.cardNames?.length === cardCount) {
-      cards = body.cardNames
-        .map((name: string) => MAJOR_ARCANA.find((c) => c.name === name))
-        .filter(Boolean) as typeof MAJOR_ARCANA;
-      if (cards.length !== cardCount) cards = pickRandomCards(cardCount);
-    } else {
-      cards = pickRandomCards(cardCount);
-    }
-
-    const openai = getOpenAIClient();
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        { role: "system", content: "You are a compassionate, insightful tarot reader. Write readings in natural, warm English. Never claim to predict the future with certainty. Frame everything as guidance and reflection." },
-        { role: "user", content: buildTarotPrompt(cards, question, positions) },
-      ],
-      temperature: 0.95,
-      max_tokens: maxTokens,
+    const result = await generateReading(question || "What do I need to know right now?", {
+      premium,
+      cardNames: body.cardNames,
     });
 
-    const reading = completion.choices[0]?.message?.content || "The energies are unclear. Please try again.";
-    const response: { reading: string; cards: ReturnType<typeof formatCards>; premium?: boolean } = {
-      reading,
-      cards: formatCards(cards, positions),
+    const response: { reading: string; cards: GenCard[]; premium?: boolean } = {
+      reading: result.reading,
+      cards: result.cards,
     };
     if (premium) response.premium = true;
     return NextResponse.json(response);

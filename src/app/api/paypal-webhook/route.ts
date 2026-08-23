@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { generateReading } from "@/lib/reading";
+import { sendEmail, isEmailConfigured, detailedReportEmailHtml } from "@/lib/email";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
@@ -24,6 +26,25 @@ const IPN_VERIFY_URL = (() => {
 console.log(
   `[paypal-ipn] mode=${process.env.PAYPAL_MODE || "live"} verify=${IPN_VERIFY_URL} skipVerify=${process.env.PAYPAL_IPN_SKIP_VERIFY === "true"}`
 );
+
+/**
+ * The `custom` field carries either a plain email (legacy subscription button)
+ * or a JSON object `{ e: email, q: question }` (Detailed Report button, so the
+ * purchased report can be personalized). This helper accepts both shapes.
+ */
+function parseCustom(raw: string | null): { email: string; question: string } {
+  const s = (raw || "").trim();
+  if (!s) return { email: "", question: "" };
+  if (s.startsWith("{")) {
+    try {
+      const o = JSON.parse(s);
+      return { email: (o.e || "").trim(), question: (o.q || "").trim() };
+    } catch {
+      // fall through to plain-email handling
+    }
+  }
+  return { email: s, question: "" };
+}
 
 function getDb() {
   // Use service role when available (bypasses RLS), otherwise anon
@@ -64,8 +85,9 @@ async function upsertSubscription(db: any, params: URLSearchParams) {
   // Prefer the logged-in email we tagged on the button (custom field) so the
   // membership is tied to the user's account even when their PayPal email
   // differs. Fall back to payer_email.
-  const email = (params.get("custom") || "").trim() || params.get("payer_email") || "";
-  if (!subscrId || !email) return;
+  const { email } = parseCustom(params.get("custom"));
+  const emailFinal = email || params.get("payer_email") || "";
+  if (!subscrId || !emailFinal) return;
 
   const planName = params.get("item_name") || "Mystic Plus";
   const amount = params.get("mc_gross") || "0";
@@ -73,7 +95,7 @@ async function upsertSubscription(db: any, params: URLSearchParams) {
   const { error } = await db.from("subscriptions").upsert(
     {
       paypal_subscr_id: subscrId,
-      email,
+      email: emailFinal,
       plan_name: planName,
       amount: parseFloat(amount) || 0,
       currency: params.get("mc_currency") || "USD",
@@ -86,7 +108,7 @@ async function upsertSubscription(db: any, params: URLSearchParams) {
   if (error) {
     console.warn("[paypal-ipn] Upsert subscription failed:", error.message);
   } else {
-    console.log("[paypal-ipn] Subscription upserted:", subscrId, email, planName);
+    console.log("[paypal-ipn] Subscription upserted:", subscrId, emailFinal, planName);
   }
 }
 
@@ -106,13 +128,14 @@ async function updateSubscriptionStatus(db: any, subscrId: string, status: strin
 
 async function recordOrder(db: any, params: URLSearchParams) {
   const txnId = params.get("txn_id") || "";
-  const email = (params.get("custom") || "").trim() || params.get("payer_email") || "";
-  if (!txnId || !email) return;
+  const { email } = parseCustom(params.get("custom"));
+  const emailFinal = email || params.get("payer_email") || "";
+  if (!txnId || !emailFinal) return;
 
   const { error } = await db.from("orders").upsert(
     {
       paypal_txn_id: txnId,
-      email,
+      email: emailFinal,
       item_name: params.get("item_name") || "",
       amount: parseFloat(params.get("mc_gross") || "0") || 0,
       currency: params.get("mc_currency") || "USD",
@@ -124,7 +147,45 @@ async function recordOrder(db: any, params: URLSearchParams) {
   if (error) {
     console.warn("[paypal-ipn] Record order failed:", error.message);
   } else {
-    console.log("[paypal-ipn] Order recorded:", txnId, email);
+    console.log("[paypal-ipn] Order recorded:", txnId, emailFinal);
+  }
+}
+
+/**
+ * Scheme B: when a Detailed Report is purchased, generate a premium 5-card
+ * reading and email it to the buyer. Best-effort — a failure here must never
+ * break the webhook response or the order record.
+ */
+async function emailDetailedReport(params: URLSearchParams) {
+  const { email, question } = parseCustom(params.get("custom"));
+  const buyerEmail = email || params.get("payer_email") || "";
+  if (!buyerEmail) {
+    console.warn("[paypal-ipn] No buyer email for Detailed Report — skipping email");
+    return;
+  }
+  if (!isEmailConfigured()) {
+    console.warn("[paypal-ipn] RESEND_API_KEY not set — Detailed Report email not sent to", buyerEmail);
+    return;
+  }
+
+  try {
+    const generated = await generateReading(question || "What do I need to know right now?", {
+      premium: true,
+    });
+    const html = detailedReportEmailHtml(question, generated.reading, generated.cards);
+    const result = await sendEmail({
+      to: buyerEmail,
+      subject: "Your MysticSage Detailed Tarot Report ✦",
+      html,
+      replyTo: process.env.EMAIL_REPLY_TO || "mountain0342@gmail.com",
+    });
+    if (result.ok) {
+      console.log("[paypal-ipn] Detailed Report emailed to", buyerEmail);
+    } else {
+      console.warn("[paypal-ipn] Detailed Report email failed:", result.error);
+    }
+  } catch (err: any) {
+    console.warn("[paypal-ipn] Detailed Report generation/email error:", err?.message || err);
   }
 }
 
@@ -138,6 +199,7 @@ export async function POST(req: NextRequest) {
     const subscrId = params.get("subscr_id") || "";
     const receiverEmail = params.get("receiver_email") || "";
     const paymentStatus = params.get("payment_status") || "";
+    const itemName = (params.get("item_name") || "").toLowerCase();
 
     // Verify authenticity with PayPal BEFORE doing anything.
     const verification = await verifyIpn(rawBody);
@@ -184,6 +246,10 @@ export async function POST(req: NextRequest) {
       case "web_accept":
         if (paymentStatus === "Completed") {
           await recordOrder(db, params);
+          // Scheme B: email the purchased Detailed Report to the buyer.
+          if (/detailed report/.test(itemName)) {
+            await emailDetailedReport(params);
+          }
         }
         break;
       default:
