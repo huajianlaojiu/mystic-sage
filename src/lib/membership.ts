@@ -58,9 +58,18 @@ export async function getMembership(email: string): Promise<MembershipStatus | n
 
   const reports = (orders || []).filter((o) => o.status === "Completed");
 
+  // A one-time "Detailed Report" purchase also unlocks the premium 5-card
+  // reading on the site. We only count Completed orders and match the item
+  // name written by the PayPal webhook, so partial/failed payments don't grant
+  // access. This reuses the existing `member` flag that reading/route.ts and
+  // the UI already key off of — no other files need to change.
+  const hasDetailedReport = reports.some((r) =>
+    /detailed report/i.test(r.item_name || "")
+  );
+
   return {
-    member: !!activeSub,
-    plan: activeSub?.plan_name || null,
+    member: !!activeSub || hasDetailedReport,
+    plan: activeSub?.plan_name || (hasDetailedReport ? "Detailed Report" : null),
     subscriptionSince: activeSub?.created_at || null,
     hasReports: reports.length > 0,
     reports,
