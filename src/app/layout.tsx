@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CookieBanner from "@/components/CookieBanner";
 import { getSessionUser } from "@/lib/supabase/server";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "";
@@ -49,6 +50,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 function gtag(){dataLayer.push(arguments);}
                 gtag("js", new Date());
                 gtag("config", "${GA_ID}");
+                gtag("consent", "default", { analytics_storage: "denied" });
               `}
             </Script>
           </>
@@ -58,6 +60,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Header user={user} />
         <main>{children}</main>
         <Footer />
+        <CookieBanner />
       </body>
     </html>
   );
