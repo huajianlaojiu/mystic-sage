@@ -43,6 +43,18 @@ function ShareButtons({ reading, cards }: { reading: string; cards: Card[] }) {
     setGenerating(false);
   }
 
+  async function copyImage() {
+    if (!cardUrl) return;
+    try {
+      const res = await fetch(cardUrl);
+      const blob = await res.blob();
+      await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
+      alert("Image copied! Paste it into your X post (Ctrl+V).");
+    } catch {
+      alert("Could not copy. Use Download PNG instead.");
+    }
+  }
+
   return (
     <div style={{ margin: "20px 0", textAlign: "center" }}>
       <p style={{ fontSize: 13, color: "var(--text-muted)", marginBottom: 10 }}>Share your reading</p>
@@ -73,6 +85,7 @@ function ShareButtons({ reading, cards }: { reading: string; cards: Card[] }) {
           <img src={cardUrl} alt="Your MysticSage tarot reading card" style={{ width: "100%", maxWidth: 540, borderRadius: 12, border: "1px solid var(--border)" }} />
           <div style={{ display: "flex", gap: 8, justifyContent: "center", marginTop: 10, flexWrap: "wrap" }}>
             <a href={cardUrl} download="mysticsage-tarot-reading.png" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", borderRadius: 8, fontSize: 13, fontWeight: 600, background: "rgba(255,255,255,0.06)", border: "1px solid var(--border)", color: "var(--text-primary)", textDecoration: "none" }}>Download PNG</a>
+            <button onClick={copyImage} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", borderRadius: 8, fontSize: 13, fontWeight: 600, background: "rgba(255,255,255,0.06)", border: "1px solid var(--border)", color: "var(--text-primary)", cursor: "pointer", fontFamily: "inherit" }}>Copy Image</button>
             <a href={"https://twitter.com/intent/tweet?text=" + text + "&url=" + url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", borderRadius: 8, fontSize: 13, fontWeight: 600, background: "rgba(255,255,255,0.06)", border: "1px solid var(--border)", color: "var(--text-primary)", textDecoration: "none" }}>Share on X</a>
           </div>
         </div>
