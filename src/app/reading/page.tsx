@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { gtagEvent } from "@/lib/analytics";
+import { generateShareCard } from "@/lib/shareCard";
 import { getBrowserClient } from "@/lib/supabase";
 
 type Card = { name: string; keywords: string; position: string; emoji: string };
@@ -29,6 +30,19 @@ function ShareButtons({ reading, cards }: { reading: string; cards: Card[] }) {
     "I just got a tarot reading on MysticSage: " + cardText + " - " + reading.slice(0, 100) + "..."
   );
 
+  const [cardUrl, setCardUrl] = useState("");
+  const [generating, setGenerating] = useState(false);
+
+  async function makeCard() {
+    if (generating) return;
+    setGenerating(true);
+    try {
+      const url = await generateShareCard(cards, reading);
+      setCardUrl(url);
+    } catch { /* canvas unavailable */ }
+    setGenerating(false);
+  }
+
   return (
     <div style={{ margin: "20px 0", textAlign: "center" }}>
       <p style={{ fontSize: 13, color: "var(--text-muted)", marginBottom: 10 }}>Share your reading</p>
@@ -47,7 +61,22 @@ function ShareButtons({ reading, cards }: { reading: string; cards: Card[] }) {
           onClick={() => { navigator.clipboard.writeText(SITE + "/reading"); alert("Link copied!"); }}
           style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", borderRadius: 8, fontSize: 13, fontWeight: 600, background: "rgba(255,255,255,0.06)", border: "1px solid var(--border)", color: "var(--text-primary)", cursor: "pointer", fontFamily: "inherit" }}
         >Copy Link</button>
+        <button
+          onClick={makeCard}
+          disabled={generating}
+          style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", borderRadius: 8, fontSize: 13, fontWeight: 600, background: "linear-gradient(135deg,var(--accent),var(--accent-dark))", color: "#fff", border: "none", cursor: generating ? "default" : "pointer", opacity: generating ? 0.6 : 1, fontFamily: "inherit" }}
+        >{generating ? "Drawing..." : "Create Card"}</button>
       </div>
+
+      {cardUrl && (
+        <div style={{ marginTop: 18 }}>
+          <img src={cardUrl} alt="Your MysticSage tarot reading card" style={{ width: "100%", maxWidth: 540, borderRadius: 12, border: "1px solid var(--border)" }} />
+          <div style={{ display: "flex", gap: 8, justifyContent: "center", marginTop: 10, flexWrap: "wrap" }}>
+            <a href={cardUrl} download="mysticsage-tarot-reading.png" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", borderRadius: 8, fontSize: 13, fontWeight: 600, background: "rgba(255,255,255,0.06)", border: "1px solid var(--border)", color: "var(--text-primary)", textDecoration: "none" }}>Download PNG</a>
+            <a href={"https://twitter.com/intent/tweet?text=" + text + "&url=" + url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", borderRadius: 8, fontSize: 13, fontWeight: 600, background: "rgba(255,255,255,0.06)", border: "1px solid var(--border)", color: "var(--text-primary)", textDecoration: "none" }}>Share on X</a>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
