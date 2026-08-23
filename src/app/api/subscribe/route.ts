@@ -1,5 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { getServerClient } from "@/lib/supabase/server";
+import { sendEmail, welcomeEmailHtml, isEmailConfigured } from "@/lib/email";
 
 export async function POST(req: NextRequest) {
   try {
@@ -32,6 +33,24 @@ export async function POST(req: NextRequest) {
         { success: false, error: "Could not save your subscription. Please try again later." },
         { status: 500 }
       );
+    }
+
+    // Send welcome email. Non-blocking: a send failure must not roll back the
+    // subscription. If email isn't configured yet, just log it.
+    if (isEmailConfigured()) {
+      const sendResult = await sendEmail({
+        to: normalizedEmail,
+        subject: "Welcome to MysticSage ✦ Your daily guidance starts now",
+        html: welcomeEmailHtml(normalizedEmail),
+        replyTo: process.env.EMAIL_REPLY_TO || "mountain0342@gmail.com",
+      });
+      if (!sendResult.ok) {
+        console.warn("[subscribe] Welcome email failed:", sendResult.error);
+      } else {
+        console.log("[subscribe] Welcome email sent to", normalizedEmail);
+      }
+    } else {
+      console.warn("[subscribe] RESEND_API_KEY not set — welcome email not sent to", normalizedEmail);
     }
 
     return NextResponse.json({
