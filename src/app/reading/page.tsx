@@ -307,7 +307,7 @@ export default function ReadingPage() {
                   <form action={PAYPAL_ACTION} method="post" target="_blank">
                     <input type="hidden" name="cmd" value="_xclick-subscriptions" />
                     <input type="hidden" name="business" value={PAYPAL_BUSINESS} />
-                    <input type="hidden" name="item_name" value="Unlimited Readings" />
+                    <input type="hidden" name="item_name" value="Mystic Plus - Monthly" />
                     <input type="hidden" name="currency_code" value="USD" />
                     <input type="hidden" name="a3" value="19.00" />
                     <input type="hidden" name="p3" value="1" />
@@ -319,7 +319,7 @@ export default function ReadingPage() {
                     <input type="hidden" name="cancel_return" value={SITE + "/reading"} />
                     <input type="hidden" name="notify_url" value={SITE + "/api/paypal-webhook"} />
                     <input type="hidden" name="custom" value={userEmail || ""} />
-                    <button type="submit" className="btn-primary" style={{ fontSize: 13, padding: "10px 18px" }}>Get Unlimited - $19/mo</button>
+                    <button type="submit" className="btn-primary" style={{ fontSize: 13, padding: "10px 18px" }}>Upgrade to Mystic Plus - $19/mo</button>
                   </form>
                   <form action={PAYPAL_ACTION} method="post" target="_blank">
                     <input type="hidden" name="cmd" value="_xclick" />

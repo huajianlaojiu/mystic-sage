@@ -30,6 +30,7 @@ export default async function SuccessPage({
                 <>
                   <p>📜 <strong style={{ color: "var(--text-secondary)" }}>Report:</strong> Your personalized report will be delivered to your PayPal email within 48 hours.</p>
                   <p>🔮 <strong style={{ color: "var(--text-secondary)" }}>While you wait:</strong> Enjoy a free tarot reading right now.</p>
+                  <p>🔑 <strong style={{ color: "var(--text-secondary)" }}>View it in your account:</strong> Sign in with the email you used at PayPal and your purchased report will appear under your membership.</p>
                   <p>💬 <strong style={{ color: "var(--text-secondary)" }}>Questions?</strong> Email us at mountain0342@gmail.com — we reply within 24 hours.</p>
                 </>
               ) : (
