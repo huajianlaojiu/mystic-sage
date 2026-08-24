@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { generateReading, type GenCard } from "@/lib/reading";
 import { getMembership } from "@/lib/membership";
-import { getSessionUser } from "@/lib/supabase/server";
+import { getSessionUser, getServerClient } from "@/lib/supabase/server";
 
 export async function POST(req: NextRequest) {
   try {
@@ -13,13 +13,37 @@ export async function POST(req: NextRequest) {
     // member's email and grab the premium spread. Anonymous callers always get
     // the free 3-card reading; a logged-in user whose verified email matches an
     // active subscription gets the premium 5-card spread.
-    let premium = false;
 
     const sessionUser = await getSessionUser();
+    let premium = false;
+    let email: string | null = null;
+
     if (sessionUser?.email) {
-      const status = await getMembership(sessionUser.email);
-      if (status?.member) {
-        premium = true;
+      email = sessionUser.email;
+      const status = await getMembership(email);
+      if (status?.member) premium = true;
+    }
+
+    // Free daily limit: logged-in non-premium users get 1 free reading per day.
+    // Anonymous users are not server-limited yet (front-end counts via localStorage).
+    if (!premium && email) {
+      try {
+        const db = getServerClient();
+        const startOfDay = new Date();
+        startOfDay.setHours(0, 0, 0, 0);
+        const { count } = await db
+          .from("readings")
+          .select("id", { count: "exact", head: true })
+          .eq("email", email)
+          .gte("created_at", startOfDay.toISOString());
+        if ((count || 0) >= 1) {
+          return NextResponse.json(
+            { error: "You've used your free reading for today. Come back tomorrow, or upgrade for unlimited readings." },
+            { status: 429 }
+          );
+        }
+      } catch (err: any) {
+        console.warn("[reading] Daily limit check failed:", err?.message);
       }
     }
 
@@ -28,7 +52,23 @@ export async function POST(req: NextRequest) {
       cardNames: body.cardNames,
     });
 
-    const response: { reading: string; cards: GenCard[]; premium?: boolean } = {
+
+    if (email) {
+      try {
+        const db = getServerClient();
+        await db.from("readings").insert({
+          email,
+          premium,
+          cards: result.cards,
+          question: question || null,
+          reading: result.reading,
+        });
+      } catch (err: any) {
+        console.warn("[reading] Save history failed:", err?.message);
+      }
+    }
+
+        const response: { reading: string; cards: GenCard[]; premium?: boolean } = {
       reading: result.reading,
       cards: result.cards,
     };

@@ -14,6 +14,9 @@ type MembershipStatus = {
   reports: { item_name: string; status: string; created_at: string }[];
 };
 const SITE = typeof window !== "undefined" ? window.location.origin : "https://mysticsages.com";
+function todayKey() {
+  try { return "mysticsage_daily_read_" + new Date().toISOString().slice(0, 10); } catch { return "mysticsage_daily_read"; }
+}
 
 // PayPal mode/endpoint can be switched to sandbox for testing via env vars.
 const PAYPAL_MODE = process.env.NEXT_PUBLIC_PAYPAL_MODE === "sandbox" ? "sandbox" : "live";
@@ -230,7 +233,17 @@ export default function ReadingPage() {
   }, []);
 
   async function startReading() {
+    if (loading) return;
     setLoading(true); setError("");
+    if (!userEmail) {
+      try {
+        if (localStorage.getItem(todayKey())) {
+          setError("You've used your free reading for today. Sign in for more, or come back tomorrow.");
+          setLoading(false);
+          return;
+        }
+      } catch {}
+    }
     try {
       const r = await fetch("/api/reading", {
         method: "POST",
@@ -242,6 +255,7 @@ export default function ReadingPage() {
       const d = await r.json();
       if (d.error) { setError(d.error); setLoading(false); return; }
       setResult(d);
+      if (!userEmail) { try { localStorage.setItem(todayKey(), "1"); } catch {} }
       gtagEvent("reading_completed", { premium: !!d.premium });
     } catch { setError("Could not connect. Try again."); }
     setLoading(false);
