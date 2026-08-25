@@ -43,6 +43,63 @@ export function summarize(reading: string, max = 72): string {
   return noQuote.slice(0, max).replace(/\s+\S*$/, "") + "...";
 }
 
+/**
+ * Draw a card name centered, auto-wrapping and shrinking the font so long
+ * names like "Ace of Cups (Reversed)" never overflow the 190px card width.
+ */
+function drawCardName(
+  ctx: CanvasRenderingContext2D,
+  name: string,
+  cx: number,
+  centerY: number,
+  maxWidth: number,
+  maxLines = 2
+) {
+  const words = name.split(" ");
+  const lineHeightFactor = 1.12;
+
+  const wrapAt = (size: number): string[] => {
+    ctx.font = "bold " + size + "px Georgia, serif";
+    const lines: string[] = [];
+    let line = "";
+    for (const w of words) {
+      const test = line ? line + " " + w : w;
+      if (line && ctx.measureText(test).width > maxWidth) {
+        lines.push(line);
+        line = w;
+      } else {
+        line = test;
+      }
+    }
+    if (line) lines.push(line);
+    return lines;
+  };
+
+  let size = 28;
+  let lines = wrapAt(size);
+  while (
+    (lines.length > maxLines || lines.some((l) => ctx.measureText(l).width > maxWidth)) &&
+    size > 14
+  ) {
+    size -= 2;
+    lines = wrapAt(size);
+  }
+
+  const lineHeight = size * lineHeightFactor;
+  const prevAlign = ctx.textAlign;
+  const prevBaseline = ctx.textBaseline;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = "#f5f2ff";
+  let y = centerY - ((lines.length - 1) * lineHeight) / 2;
+  for (const l of lines) {
+    ctx.fillText(l, cx, y);
+    y += lineHeight;
+  }
+  ctx.textAlign = prevAlign;
+  ctx.textBaseline = prevBaseline;
+}
+
 export async function generateShareCard(cards: ShareCardItem[], reading: string): Promise<string> {
   const canvas = document.createElement("canvas");
   canvas.width = 1200;
@@ -166,9 +223,7 @@ export async function generateShareCard(cards: ShareCardItem[], reading: string)
     ctx.font = "88px serif";
     ctx.fillText(c.emoji || "\u{1F0CF}", x + w / 2, y + 172);
 
-    ctx.fillStyle = "#f5f2ff";
-    ctx.font = "bold 30px Georgia, serif";
-    ctx.fillText(c.name, x + w / 2, y + 322);
+    drawCardName(ctx, c.name, x + w / 2, y + 320, w - 24, 2);
 
     ctx.fillStyle = accent;
     ctx.font = "15px Arial, sans-serif";

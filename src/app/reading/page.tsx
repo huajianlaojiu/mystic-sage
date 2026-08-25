@@ -304,6 +304,11 @@ export default function ReadingPage() {
     setLoading(false);
   }
 
+  // True when the error is the daily free-quota limit (not a transient network
+  // failure). Used to avoid a pointless "Try Again" loop and to steer the user
+  // toward signing in or upgrading instead.
+  const isQuota = !!error && /free reading for today/i.test(error);
+
   return (
     <>
       <section className="page-header">
@@ -313,7 +318,7 @@ export default function ReadingPage() {
       <section className="section">
         <div className="container" style={{ maxWidth: 680, margin: "0 auto" }}>
 
-          {!result && !loading && (
+          {!result && !loading && !error && (
             <>
               <div style={{ fontSize: 48, textAlign: "center" }}>🔮</div>
               <h3 style={{ fontSize: 20, fontWeight: 600, color: "var(--text-primary)", margin: "12px 0 8px", textAlign: "center" }}>What would you like guidance on?</h3>
@@ -349,8 +354,17 @@ export default function ReadingPage() {
           {error && (
             <div style={{ padding: 20, background: "rgba(255,80,80,0.08)", border: "1px solid rgba(255,80,80,0.2)", borderRadius: 12, margin: "16px auto", maxWidth: 400 }}>
               <p style={{ color: "#ff5050", fontSize: 14 }}>{error}</p>
-              <p style={{ color: "var(--text-muted)", fontSize: 13, margin: "10px 0 0" }}>Upgrade to unlock unlimited readings and your complete report.</p>
-              <button onClick={() => { setError(""); setLoading(false); }} className="btn-secondary" style={{ marginTop: 12 }}>Try Again</button>
+              {isQuota && (
+                <p style={{ color: "var(--text-muted)", fontSize: 13, margin: "10px 0 0" }}>Upgrade to unlock unlimited readings and your complete report.</p>
+              )}
+              {isQuota && !userEmail && (
+                <p style={{ fontSize: 13, marginTop: 10 }}>
+                  <a href="/auth/login" style={{ color: "var(--accent)", fontWeight: 600, textDecoration: "none" }}>Sign in for unlimited readings &rarr;</a>
+                </p>
+              )}
+              {!isQuota && (
+                <button onClick={() => { setError(""); setLoading(false); }} className="btn-secondary" style={{ marginTop: 12 }}>Try Again</button>
+              )}
               {!membership?.member && userEmail && (
                 <PayPalButtons userEmail={userEmail} question={question} />
               )}
