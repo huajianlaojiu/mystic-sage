@@ -28,40 +28,43 @@ const PAYPAL_BUSINESS = process.env.NEXT_PUBLIC_PAYPAL_BUSINESS_EMAIL || "mounta
 
 function PayPalButtons({ userEmail, question }: { userEmail: string | null; question: string }) {
   return (
-    <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginTop: 16 }}>
-      <form action={PAYPAL_ACTION} method="post" onSubmit={() => gtagEvent("begin_checkout", { value: 19, currency: "USD", item_name: "Mystic Plus" })}>
-        <input type="hidden" name="cmd" value="_xclick-subscriptions" />
-        <input type="hidden" name="business" value={PAYPAL_BUSINESS} />
-        <input type="hidden" name="item_name" value="Mystic Plus - Monthly" />
-        <input type="hidden" name="currency_code" value="USD" />
-        <input type="hidden" name="a3" value="19.00" />
-        <input type="hidden" name="p3" value="1" />
-        <input type="hidden" name="t3" value="M" />
-        <input type="hidden" name="src" value="1" />
-        <input type="hidden" name="sra" value="1" />
-        <input type="hidden" name="no_note" value="1" />
-        <input type="hidden" name="return" value={SITE + "/success?type=subscription"} />
-        <input type="hidden" name="cancel_return" value={SITE + "/reading"} />
-        <input type="hidden" name="notify_url" value={SITE + "/api/paypal-webhook"} />
-        <input type="hidden" name="custom" value={userEmail || ""} />
-        <button type="submit" className="btn-primary" style={{ fontSize: 13, padding: "10px 18px" }}>Upgrade to Mystic Plus - $19/mo</button>
-      </form>
-      <form action={PAYPAL_ACTION} method="post" onSubmit={() => gtagEvent("begin_checkout", { value: 4.99, currency: "USD", item_name: "Detailed Report" })}>
-        <input type="hidden" name="cmd" value="_xclick" />
-        <input type="hidden" name="business" value={PAYPAL_BUSINESS} />
-        <input type="hidden" name="item_name" value="Detailed Report" />
-        <input type="hidden" name="amount" value="4.99" />
-        <input type="hidden" name="currency_code" value="USD" />
-        <input type="hidden" name="return" value={SITE + "/success?type=report"} />
-        <input type="hidden" name="cancel_return" value={SITE + "/reading"} />
-        <input type="hidden" name="notify_url" value={SITE + "/api/paypal-webhook"} />
-        <input
-          type="hidden"
-          name="custom"
-          value={JSON.stringify({ e: userEmail || "", q: (question || "").slice(0, 200) })}
-        />
-        <button type="submit" className="btn-secondary" style={{ fontSize: 13, padding: "10px 18px" }}>Detailed Report - $4.99</button>
-      </form>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, marginTop: 16 }}>
+      <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
+        <form action={PAYPAL_ACTION} method="post" onSubmit={() => gtagEvent("begin_checkout", { value: 4.99, currency: "USD", item_name: "Detailed Report" })}>
+          <input type="hidden" name="cmd" value="_xclick" />
+          <input type="hidden" name="business" value={PAYPAL_BUSINESS} />
+          <input type="hidden" name="item_name" value="Detailed Report" />
+          <input type="hidden" name="amount" value="4.99" />
+          <input type="hidden" name="currency_code" value="USD" />
+          <input type="hidden" name="return" value={SITE + "/success?type=report"} />
+          <input type="hidden" name="cancel_return" value={SITE + "/reading"} />
+          <input type="hidden" name="notify_url" value={SITE + "/api/paypal-webhook"} />
+          <input
+            type="hidden"
+            name="custom"
+            value={JSON.stringify({ e: userEmail || "", q: (question || "").slice(0, 200) })}
+          />
+          <button type="submit" className="btn-secondary" style={{ fontSize: 13, padding: "10px 18px" }}>Detailed Report - $4.99</button>
+        </form>
+        <form action={PAYPAL_ACTION} method="post" onSubmit={() => gtagEvent("begin_checkout", { value: 19, currency: "USD", item_name: "Mystic Plus" })}>
+          <input type="hidden" name="cmd" value="_xclick-subscriptions" />
+          <input type="hidden" name="business" value={PAYPAL_BUSINESS} />
+          <input type="hidden" name="item_name" value="Mystic Plus - Monthly" />
+          <input type="hidden" name="currency_code" value="USD" />
+          <input type="hidden" name="a3" value="19.00" />
+          <input type="hidden" name="p3" value="1" />
+          <input type="hidden" name="t3" value="M" />
+          <input type="hidden" name="src" value="1" />
+          <input type="hidden" name="sra" value="1" />
+          <input type="hidden" name="no_note" value="1" />
+          <input type="hidden" name="return" value={SITE + "/success?type=subscription"} />
+          <input type="hidden" name="cancel_return" value={SITE + "/reading"} />
+          <input type="hidden" name="notify_url" value={SITE + "/api/paypal-webhook"} />
+          <input type="hidden" name="custom" value={userEmail || ""} />
+          <button type="submit" className="btn-primary" style={{ fontSize: 13, padding: "10px 18px" }}>Upgrade to Mystic Plus - $19/mo</button>
+        </form>
+      </div>
+      <p style={{ fontSize: 12, color: "var(--text-muted)", margin: 0, textAlign: "center" }}>$4.99 one-time · delivered to your inbox · yours to keep</p>
     </div>
   );
 }
@@ -346,6 +349,7 @@ export default function ReadingPage() {
           {error && (
             <div style={{ padding: 20, background: "rgba(255,80,80,0.08)", border: "1px solid rgba(255,80,80,0.2)", borderRadius: 12, margin: "16px auto", maxWidth: 400 }}>
               <p style={{ color: "#ff5050", fontSize: 14 }}>{error}</p>
+              <p style={{ color: "var(--text-muted)", fontSize: 13, margin: "10px 0 0" }}>Upgrade to unlock unlimited readings and your complete report.</p>
               <button onClick={() => { setError(""); setLoading(false); }} className="btn-secondary" style={{ marginTop: 12 }}>Try Again</button>
               {!membership?.member && userEmail && (
                 <PayPalButtons userEmail={userEmail} question={question} />
@@ -369,6 +373,12 @@ export default function ReadingPage() {
                   ))}
                 </div>
               </div>
+
+              {question && (
+                <p style={{ fontSize: 13, color: "var(--text-muted)", textAlign: "center", marginBottom: 16, fontStyle: "italic" }}>
+                  Your question: "{question}"
+                </p>
+              )}
 
               <div className="animate-fade-up" style={{ animationDelay: "0.5s", background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 16, padding: "24px 20px", margin: "0 auto 20px", maxWidth: 600, textAlign: "left" }}>
                 <div style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, whiteSpace: "pre-wrap" }}>{result.reading}</div>
@@ -394,10 +404,19 @@ export default function ReadingPage() {
                 <SubscribeForm />
               </div>
 
-              <div style={{ display: "flex", alignItems: "center", gap: 16, margin: "20px 0", color: "var(--text-muted)", fontSize: 12 }}>
-                <span style={{ flex: 1, height: 1, background: "var(--border)" }}></span>
-                <span>Unlock more</span>
-                <span style={{ flex: 1, height: 1, background: "var(--border)" }}></span>
+              <div style={{ maxWidth: 600, margin: "24px auto 8px", padding: "20px", background: "linear-gradient(135deg,rgba(180,100,255,0.06),rgba(88,56,250,0.03))", border: "1px solid rgba(180,100,255,0.2)", borderRadius: 16, textAlign: "center" }}>
+                <p style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)", margin: "0 0 6px" }}>Your 3-card pull is just the opening.</p>
+                <p style={{ fontSize: 13.5, color: "var(--text-muted)", lineHeight: 1.6, margin: "0 0 16px" }}>The full spread reveals the challenge you've been circling — and the path through it.</p>
+                <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", textAlign: "left" }}>
+                  <div style={{ flex: "1 1 200px", maxWidth: 250, padding: "12px 14px", background: "rgba(255,255,255,0.03)", border: "1px solid var(--border)", borderRadius: 12 }}>
+                    <p style={{ fontSize: 12.5, fontWeight: 600, color: "var(--text-secondary)", margin: "0 0 6px" }}>What you got · free</p>
+                    <p style={{ fontSize: 12.5, color: "var(--text-muted)", margin: 0, lineHeight: 1.5 }}>3 cards · a quick nudge</p>
+                  </div>
+                  <div style={{ flex: "1 1 200px", maxWidth: 250, padding: "12px 14px", background: "rgba(180,100,255,0.07)", border: "1px solid rgba(180,100,255,0.25)", borderRadius: 12 }}>
+                    <p style={{ fontSize: 12.5, fontWeight: 600, color: "var(--accent)", margin: "0 0 6px" }}>Detailed Report · $4.99</p>
+                    <p style={{ fontSize: 12.5, color: "var(--text-muted)", margin: 0, lineHeight: 1.5 }}>5-card Celtic Cross · card-by-card insight · emailed to you</p>
+                  </div>
+                </div>
               </div>
 
               {!membership?.member && userEmail && (
