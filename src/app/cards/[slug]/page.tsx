@@ -6,7 +6,7 @@ export function generateStaticParams() {
 }
 
 export default function CardPage({ params }: { params: { slug: string } }) {
-  var card = cardMeanings.find(function(c) { return c.slug === params.slug; });
+  const card = cardMeanings.find(function(c) { return c.slug === params.slug; });
   if (!card) return <section className="page-header"><h1>Card not found</h1></section>;
 
   return (

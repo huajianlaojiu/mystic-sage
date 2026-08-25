@@ -6,7 +6,7 @@ export function generateStaticParams() {
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }) {
-  var post = blogPosts.find(function(p) { return p.slug === params.slug; });
+  const post = blogPosts.find(function(p) { return p.slug === params.slug; });
   if (!post) return {};
   return {
     title: post.title + " | MysticSage",
@@ -27,7 +27,7 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
 }
 
 function ArticleJsonLd({ post }: { post: { title: string; excerpt: string; date: string; slug: string } }) {
-  var schema = {
+  const schema = {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": post.title,
@@ -42,13 +42,13 @@ function ArticleJsonLd({ post }: { post: { title: string; excerpt: string; date:
 }
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  var post = blogPosts.find(function(p) { return p.slug === params.slug; });
+  const post = blogPosts.find(function(p) { return p.slug === params.slug; });
   if (!post) return <section className="page-header"><h1>Post not found</h1></section>;
 
-  var related = getRelatedPosts(post, 3);
+  const related = getRelatedPosts(post, 3);
 
-  var shareUrl = encodeURIComponent("https://mysticsages.com/blog/" + post.slug);
-  var shareText = encodeURIComponent(post.title + "\n\n");
+  const shareUrl = encodeURIComponent("https://mysticsages.com/blog/" + post.slug);
+  const shareText = encodeURIComponent(post.title + "\n\n");
 
   return (<>
     <ArticleJsonLd post={post} />

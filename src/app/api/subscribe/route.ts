@@ -27,8 +27,8 @@ export async function POST(req: NextRequest) {
           { status: 500 }
         );
       }
-    } catch (supaErr: any) {
-      console.error("[subscribe] Supabase error:", supaErr?.message || supaErr);
+    } catch (supaErr) {
+      console.error("[subscribe] Supabase error:", supaErr instanceof Error ? supaErr.message : String(supaErr));
       return NextResponse.json(
         { success: false, error: "Could not save your subscription. Please try again later." },
         { status: 500 }
@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
       success: true,
       message: "Thank you for subscribing! Check your inbox for a welcome email.",
     });
-  } catch (err: any) {
+  } catch (err) {
     console.error("[subscribe] Error:", err);
     return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
   }

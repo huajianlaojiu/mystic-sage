@@ -32,8 +32,9 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ url: data.data.attributes.url });
-  } catch (err: any) {
+  } catch (err) {
     console.error("Checkout error:", err);
-    return NextResponse.json({ error: err.message || "Checkout failed" }, { status: 500 });
+    const msg = err instanceof Error ? err.message : String(err);
+    return NextResponse.json({ error: msg || "Checkout failed" }, { status: 500 });
   }
 }

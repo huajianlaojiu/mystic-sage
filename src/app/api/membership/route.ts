@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getMembership } from "@/lib/membership";
 import { getSessionUser } from "@/lib/supabase/server";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     // Membership is tied to the authenticated account, not a freely supplied
     // email. An unauthenticated caller cannot probe whether an arbitrary email
@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
     }
 
     return NextResponse.json(status);
-  } catch (err: any) {
+  } catch (err) {
     console.error("[membership] Error:", err);
     return NextResponse.json(
       { member: false, error: "Membership check failed" },

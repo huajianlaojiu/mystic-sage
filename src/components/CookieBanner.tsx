@@ -7,6 +7,8 @@ export default function CookieBanner() {
 
   useEffect(() => {
     const c = getConsent();
+    // Intentional: read persisted consent once on mount and sync banner visibility.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (c === null) setShow(true);
     else if (c) gtagConsent(true);
   }, []);

@@ -128,7 +128,8 @@ function ShareButtons({ reading, cards }: { reading: string; cards: Card[] }) {
 
       {cardUrl && (
         <div style={{ marginTop: 18 }}>
-          <img src={cardUrl} alt="Your MysticSage tarot reading card" style={{ width: "100%", maxWidth: 540, borderRadius: 12, border: "1px solid var(--border)" }} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={cardUrl} alt="Your MysticSage tarot reading card" style={{ width: "100%", maxWidth: 540, borderRadius: 12, border: "1px solid var(--border)" }} />
           <div style={{ display: "flex", gap: 8, justifyContent: "center", marginTop: 10, flexWrap: "wrap" }}>
             <a href={cardUrl} download="mysticsage-tarot-reading.png" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", borderRadius: 8, fontSize: 13, fontWeight: 600, background: "rgba(255,255,255,0.06)", border: "1px solid var(--border)", color: "var(--text-primary)", textDecoration: "none" }}>Download PNG</a>
             <button onClick={copyImage} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", borderRadius: 8, fontSize: 13, fontWeight: 600, background: "rgba(255,255,255,0.06)", border: "1px solid var(--border)", color: "var(--text-primary)", cursor: "pointer", fontFamily: "inherit" }}>Copy Image</button>
@@ -238,6 +239,7 @@ export default function ReadingPage() {
 
   useEffect(() => {
     let active = true;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setChecking(true);
     fetch("/api/membership")
       .then((r) => {
@@ -383,7 +385,7 @@ export default function ReadingPage() {
 
               {question && (
                 <p style={{ fontSize: 13, color: "var(--text-muted)", textAlign: "center", marginBottom: 16, fontStyle: "italic" }}>
-                  Your question: "{question}"
+                  Your question: &ldquo;{question}&rdquo;
                 </p>
               )}
 
