@@ -152,7 +152,7 @@ async function recordOrder(db: any, params: URLSearchParams) {
 }
 
 /**
- * Scheme B: when a Detailed Report is purchased, generate a premium 5-card
+ * Scheme B: when a Detailed Report is purchased, generate a premium 10-card Celtic Cross
  * reading and email it to the buyer. Best-effort — a failure here must never
  * break the webhook response or the order record.
  */

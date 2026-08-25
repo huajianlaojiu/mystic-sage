@@ -208,9 +208,9 @@ function MemberUnlock({
       </p>
       <p style={{ fontSize: 12.5, color: "var(--text-muted)", marginBottom: member ? 0 : 12 }}>
         {member
-          ? "Your plan is unlocked — pull a Premium 5-card reading anytime."
+          ? "Your plan is unlocked — pull a Premium 10-card Celtic Cross reading anytime."
           : guest
-            ? "Sign in with the email on your plan to unlock Premium 5-card readings."
+            ? "Sign in with the email on your plan to unlock Premium 10-card Celtic Cross readings."
             : "No active plan on this account yet. Sign in with your member email, or upgrade below."}
       </p>
       {!member && guest && (
@@ -386,7 +386,7 @@ export default function ReadingPage() {
 
               {result.premium && (
                 <div className="animate-fade-up" style={{ animationDelay: "0.55s", margin: "0 auto 16px", maxWidth: 600, textAlign: "center", fontSize: 13, color: "var(--accent)", fontWeight: 600 }}>
-                  ✨ Premium 5-card reading — thanks for being a member!
+                  ✨ ✨ Premium 10-card Celtic Cross reading — thanks for being a member!
                 </div>
               )}
 
@@ -414,7 +414,7 @@ export default function ReadingPage() {
                   </div>
                   <div style={{ flex: "1 1 200px", maxWidth: 250, padding: "12px 14px", background: "rgba(180,100,255,0.07)", border: "1px solid rgba(180,100,255,0.25)", borderRadius: 12 }}>
                     <p style={{ fontSize: 12.5, fontWeight: 600, color: "var(--accent)", margin: "0 0 6px" }}>Detailed Report · $4.99</p>
-                    <p style={{ fontSize: 12.5, color: "var(--text-muted)", margin: 0, lineHeight: 1.5 }}>5-card Celtic Cross · card-by-card insight · emailed to you</p>
+                    <p style={{ fontSize: 12.5, color: "var(--text-muted)", margin: 0, lineHeight: 1.5 }}>10-card Celtic Cross · card-by-card insight · emailed to you</p>
                   </div>
                 </div>
               </div>

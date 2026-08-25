@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
     // an email supplied in the request body — that would let anyone forge a
     // member's email and grab the premium spread. Anonymous callers always get
     // the free 3-card reading; a logged-in user whose verified email matches an
-    // active subscription gets the premium 5-card spread.
+    // active subscription gets the premium 10-card Celtic Cross spread.
 
     const sessionUser = await getSessionUser();
     let premium = false;

@@ -76,7 +76,7 @@ export async function getMembership(email: string): Promise<MembershipStatus | n
 
   const reports = (orders || []).filter((o) => o.status === "Completed");
 
-  // A one-time "Detailed Report" purchase also unlocks the premium 5-card
+  // A one-time "Detailed Report" purchase also unlocks the premium 10-card Celtic Cross
   // reading on the site. We only count Completed orders and match the item
   // name written by the PayPal webhook, so partial/failed payments don't grant
   // access. This reuses the existing `member` flag that reading/route.ts and

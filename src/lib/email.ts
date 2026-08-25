@@ -111,7 +111,7 @@ export function detailedReportEmailHtml(
               <td align="center" style="font-family:Georgia,serif;font-size:24px;font-weight:700;color:#f0ede8;padding-bottom:6px;">Your Detailed Tarot Report</td>
             </tr>
             <tr>
-              <td align="center" style="color:#8a8a96;font-size:13px;padding-bottom:20px;">A 5-card premium reading, prepared for you by MysticSage</td>
+              <td align="center" style="color:#8a8a96;font-size:13px;padding-bottom:20px;">A 10-card Celtic Cross reading, prepared for you by MysticSage</td>
             </tr>
             <tr>
               <td style="background:rgba(180,102,255,0.07);border:1px solid rgba(180,102,255,0.22);border-radius:12px;padding:16px 18px;margin-bottom:20px;">
