@@ -362,7 +362,7 @@ export default function ReadingPage() {
                     </p>
                   )}
                   <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
-                  <form action={PAYPAL_ACTION} method="post" target="_blank" onSubmit={() => gtagEvent("begin_checkout", { value: 19, currency: "USD", item_name: "Mystic Plus" })}>
+                  <form action={PAYPAL_ACTION} method="post" onSubmit={() => gtagEvent("begin_checkout", { value: 19, currency: "USD", item_name: "Mystic Plus" })}>
                     <input type="hidden" name="cmd" value="_xclick-subscriptions" />
                     <input type="hidden" name="business" value={PAYPAL_BUSINESS} />
                     <input type="hidden" name="item_name" value="Mystic Plus - Monthly" />
@@ -379,7 +379,7 @@ export default function ReadingPage() {
                     <input type="hidden" name="custom" value={userEmail || ""} />
                     <button type="submit" className="btn-primary" style={{ fontSize: 13, padding: "10px 18px" }}>Upgrade to Mystic Plus - $19/mo</button>
                   </form>
-                  <form action={PAYPAL_ACTION} method="post" target="_blank" onSubmit={() => gtagEvent("begin_checkout", { value: 4.99, currency: "USD", item_name: "Detailed Report" })}>
+                  <form action={PAYPAL_ACTION} method="post" onSubmit={() => gtagEvent("begin_checkout", { value: 4.99, currency: "USD", item_name: "Detailed Report" })}>
                     <input type="hidden" name="cmd" value="_xclick" />
                     <input type="hidden" name="business" value={PAYPAL_BUSINESS} />
                     <input type="hidden" name="item_name" value="Detailed Report" />
