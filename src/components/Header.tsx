@@ -35,6 +35,7 @@ export default function Header({ user }: { user?: User }) {
           {user?.email ? (
             <>
               <span className="header-email" style={{ color: "var(--text-secondary)", fontSize: 13 }}>{user.email}</span>
+              <Link href="/account" onClick={() => setOpen(false)} style={{ fontSize: 14, color: "var(--text-secondary)", padding: "8px 12px" }}>Account</Link>
               <button
                 className="btn-header"
                 onClick={() => { setOpen(false); handleLogout(); }}
