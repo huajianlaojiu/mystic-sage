@@ -9,10 +9,10 @@ import { getSessionUser } from "@/lib/supabase/server";
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "";
 
 export const metadata: Metadata = {
-  title: "MysticSage â Spiritual Guidance & Wellness",
+  title: "MysticSage — Spiritual Guidance & Wellness",
   description: "Find clarity through tarot, astrology, numerology and psychic readings. Your journey to self-discovery starts here.",
   openGraph: {
-    title: "MysticSage â Free Tarot, Astrology & Numerology Readings",
+    title: "MysticSage — Free Tarot, Astrology & Numerology Readings",
     description: "Find clarity through tarot, astrology, numerology and psychic readings. Get your free daily tarot pull at MysticSage.",
     url: "https://mysticsages.com",
     siteName: "MysticSage",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "MysticSage â Free Tarot, Astrology & Numerology Readings",
+    title: "MysticSage — Free Tarot, Astrology & Numerology Readings",
     description: "Find clarity through tarot, astrology, numerology and psychic readings. Get your free daily tarot pull at MysticSage.",
     images: ["https://mysticsages.com/images/og-default.svg"],
   },
