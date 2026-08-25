@@ -30,30 +30,48 @@ export async function getMembership(email: string): Promise<MembershipStatus | n
 
   const db = createClient(SUPABASE_URL, ANON_KEY, { auth: { persistSession: false } });
 
-  const { data: subs, error: subErr } = await db
-    .from("subscriptions")
-    .select("plan_name, status, created_at")
-    .eq("email", normalized)
-    .eq("status", "active")
-    .order("created_at", { ascending: false })
-    .limit(1);
-
-  if (subErr) {
-    console.warn("[membership] Sub query error:", subErr.message);
+  // The free-tier Supabase project can be paused/cold-starting, which makes these
+  // queries hang. Without a timeout a stalled call blocks the whole request until
+  // the serverless function times out — surfacing as a 500 to the (logged-in) user.
+  // Anonymous requests skip this path entirely, which is why they never 500'd.
+  // Cap each query at 5s and degrade gracefully to "not a member".
+  type SubRow = { plan_name: string; status: string; created_at: string };
+  let subs: SubRow[] | null = null;
+  try {
+    const res = await withTimeout<{ data: SubRow[] | null; error: { message: string } | null }>(
+      db
+        .from("subscriptions")
+        .select("plan_name, status, created_at")
+        .eq("email", normalized)
+        .eq("status", "active")
+        .order("created_at", { ascending: false })
+        .limit(1),
+      5000
+    );
+    subs = res.data ?? null;
+    if (res.error) console.warn("[membership] Sub query error:", res.error.message);
+  } catch (e: any) {
+    console.warn("[membership] Sub query failed/timeout:", e?.message);
   }
 
   const activeSub = subs && subs.length > 0 ? subs[0] : null;
 
-  const { data: orders, error: ordErr } = await db
-    .from("orders")
-    .select("item_name, status, created_at")
-    .eq("email", normalized)
-    .eq("status", "Completed")
-    .order("created_at", { ascending: false })
-    .limit(5);
-
-  if (ordErr) {
-    console.warn("[membership] Order query error:", ordErr.message);
+  let orders: MembershipReport[] | null = null;
+  try {
+    const res = await withTimeout<{ data: MembershipReport[] | null; error: { message: string } | null }>(
+      db
+        .from("orders")
+        .select("item_name, status, created_at")
+        .eq("email", normalized)
+        .eq("status", "Completed")
+        .order("created_at", { ascending: false })
+        .limit(5),
+      5000
+    );
+    orders = res.data ?? null;
+    if (res.error) console.warn("[membership] Order query error:", res.error.message);
+  } catch (e: any) {
+    console.warn("[membership] Order query failed/timeout:", e?.message);
   }
 
   const reports = (orders || []).filter((o) => o.status === "Completed");
@@ -74,4 +92,22 @@ export async function getMembership(email: string): Promise<MembershipStatus | n
     hasReports: reports.length > 0,
     reports,
   };
+}
+
+// Reject after `ms` so a stalled Supabase round-trip cannot hang the request
+// (and thus the whole serverless function) until it times out.
+function withTimeout<T>(promise: PromiseLike<T>, ms: number): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error("timeout")), ms);
+    Promise.resolve(promise).then(
+      (v) => {
+        clearTimeout(timer);
+        resolve(v);
+      },
+      (e) => {
+        clearTimeout(timer);
+        reject(e);
+      }
+    );
+  });
 }
