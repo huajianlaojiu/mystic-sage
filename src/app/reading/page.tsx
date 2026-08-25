@@ -10,8 +10,6 @@ type MembershipStatus = {
   member: boolean;
   plan: string | null;
   subscriptionSince: string | null;
-  hasReports: boolean;
-  reports: { item_name: string; status: string; created_at: string }[];
 };
 const SITE = typeof window !== "undefined" ? window.location.origin : "https://mysticsages.com";
 function todayKey() {
@@ -210,7 +208,7 @@ function MemberUnlock({
       </p>
       <p style={{ fontSize: 12.5, color: "var(--text-muted)", marginBottom: member ? 0 : 12 }}>
         {member
-          ? "Your plan is unlocked — pull a Premium 10-card Celtic Cross reading anytime."
+          ? "Your plan is active — access Premium 10-card Celtic Cross readings, subject to fair-use controls."
           : guest
             ? "Sign in with the email on your plan to unlock Premium 10-card Celtic Cross readings."
             : "No active plan on this account yet. Sign in with your member email, or upgrade below."}
@@ -219,16 +217,6 @@ function MemberUnlock({
         <p style={{ fontSize: 13, marginTop: 4 }}>
           <a href="/auth/login" style={{ color: "var(--accent)", fontWeight: 600, textDecoration: "none" }}>Sign in &rarr;</a>
         </p>
-      )}
-      {member && membership!.hasReports && membership!.reports.length > 0 && (
-        <div style={{ marginTop: 12 }}>
-          <p style={{ fontSize: 13, fontWeight: 600, color: "var(--text-secondary)", marginBottom: 6 }}>Your purchased reports</p>
-          <ul style={{ margin: 0, paddingLeft: 18, color: "var(--text-muted)", fontSize: 13 }}>
-            {membership!.reports.map((r, i) => (
-              <li key={i}>{r.item_name}</li>
-            ))}
-          </ul>
-        </div>
       )}
       {checking && (
         <p style={{ fontSize: 13, marginTop: 10, color: "var(--text-muted)" }}>Checking your plan…</p>
@@ -330,8 +318,11 @@ export default function ReadingPage() {
                 onChange={(e) => setQuestion(e.target.value)}
                 placeholder="e.g. How can I grow in my career?"
                 rows={3}
+                maxLength={500}
+                aria-describedby="question-limit"
                 style={{ width: "100%", maxWidth: 500, padding: "14px 16px", borderRadius: 12, background: "rgba(255,255,255,0.04)", border: "1px solid var(--border)", color: "var(--text-primary)", fontSize: 14, fontFamily: "inherit", resize: "none", outline: "none", marginBottom: 20 }}
               />
+              <p id="question-limit" style={{ maxWidth: 500, margin: "-14px auto 16px", textAlign: "right", color: "var(--text-muted)", fontSize: 12 }}>{question.length}/500</p>
               <br />
               <button onClick={startReading} className="btn-primary" style={{ fontSize: 16, padding: "14px 44px" }}>Pull Your Cards</button>
               <MemberUnlock membership={membership} checking={checking} guest={guest} />
@@ -357,11 +348,11 @@ export default function ReadingPage() {
             <div style={{ padding: 20, background: "rgba(255,80,80,0.08)", border: "1px solid rgba(255,80,80,0.2)", borderRadius: 12, margin: "16px auto", maxWidth: 400 }}>
               <p style={{ color: "#ff5050", fontSize: 14 }}>{error}</p>
               {isQuota && (
-                <p style={{ color: "var(--text-muted)", fontSize: 13, margin: "10px 0 0" }}>Upgrade to unlock unlimited readings and your complete report.</p>
+                <p style={{ color: "var(--text-muted)", fontSize: 13, margin: "10px 0 0" }}>Upgrade to Mystic Plus for premium 10-card readings, subject to fair-use controls.</p>
               )}
               {isQuota && !userEmail && (
                 <p style={{ fontSize: 13, marginTop: 10 }}>
-                  <a href="/auth/login" style={{ color: "var(--accent)", fontWeight: 600, textDecoration: "none" }}>Sign in for unlimited readings &rarr;</a>
+                  <a href="/auth/login" style={{ color: "var(--accent)", fontWeight: 600, textDecoration: "none" }}>Sign in to save your history &rarr;</a>
                 </p>
               )}
               {!isQuota && (
@@ -422,7 +413,7 @@ export default function ReadingPage() {
 
               <div style={{ maxWidth: 600, margin: "24px auto 8px", padding: "20px", background: "linear-gradient(135deg,rgba(180,100,255,0.06),rgba(88,56,250,0.03))", border: "1px solid rgba(180,100,255,0.2)", borderRadius: 16, textAlign: "center" }}>
                 <p style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)", margin: "0 0 6px" }}>Your 3-card pull is just the opening.</p>
-                <p style={{ fontSize: 13.5, color: "var(--text-muted)", lineHeight: 1.6, margin: "0 0 16px" }}>The full spread reveals the challenge you've been circling — and the path through it.</p>
+                <p style={{ fontSize: 13.5, color: "var(--text-muted)", lineHeight: 1.6, margin: "0 0 16px" }}>The full spread reveals the challenge you have been circling — and the path through it.</p>
                 <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", textAlign: "left" }}>
                   <div style={{ flex: "1 1 200px", maxWidth: 250, padding: "12px 14px", background: "rgba(255,255,255,0.03)", border: "1px solid var(--border)", borderRadius: 12 }}>
                     <p style={{ fontSize: 12.5, fontWeight: 600, color: "var(--text-secondary)", margin: "0 0 6px" }}>What you got · free</p>

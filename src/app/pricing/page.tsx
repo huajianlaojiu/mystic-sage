@@ -1,178 +1,31 @@
 ﻿"use client";
-import { useState } from "react";
 import Link from "next/link";
 
-const PAYPAL_EMAIL = "mountain0342@gmail.com";
+const PAYPAL_EMAIL = process.env.NEXT_PUBLIC_PAYPAL_BUSINESS_EMAIL || "mountain0342@gmail.com";
+const PAYPAL_ACTION = process.env.NEXT_PUBLIC_PAYPAL_MODE === "sandbox" ? "https://www.sandbox.paypal.com/cgi-bin/webscr" : "https://www.paypal.com/cgi-bin/webscr";
 const SITE_URL = typeof window !== "undefined" ? window.location.origin : "https://mysticsages.com";
 
-/* One-time purchase (reports) */
-function PayPalBuyForm({ itemName, amount, label, className }: { itemName: string; amount: string; label: string; className: string }) {
-  return (
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-      <input type="hidden" name="cmd" value="_xclick" />
-      <input type="hidden" name="business" value={PAYPAL_EMAIL} />
-      <input type="hidden" name="item_name" value={itemName} />
-      <input type="hidden" name="amount" value={amount} />
-      <input type="hidden" name="currency_code" value="USD" />
-      <input type="hidden" name="no_note" value="1" />
-      <input type="hidden" name="return" value={SITE_URL + "/success?type=report"} />
-      <input type="hidden" name="cancel_return" value={SITE_URL + "/pricing"} />
-      <input type="hidden" name="notify_url" value={SITE_URL + "/api/paypal-webhook"} />
-      <button type="submit" className={className}>{label}</button>
-    </form>
-  );
+function PayPalSubForm() {
+  return <form action={PAYPAL_ACTION} method="post" target="_blank">
+    <input type="hidden" name="cmd" value="_xclick-subscriptions" /><input type="hidden" name="business" value={PAYPAL_EMAIL} /><input type="hidden" name="item_name" value="Mystic Plus - Monthly" /><input type="hidden" name="currency_code" value="USD" /><input type="hidden" name="a3" value="19.00" /><input type="hidden" name="p3" value="1" /><input type="hidden" name="t3" value="M" /><input type="hidden" name="src" value="1" /><input type="hidden" name="sra" value="1" /><input type="hidden" name="no_note" value="1" /><input type="hidden" name="return" value={SITE_URL + "/success?type=subscription"} /><input type="hidden" name="cancel_return" value={SITE_URL + "/pricing"} /><input type="hidden" name="notify_url" value={SITE_URL + "/api/paypal-webhook"} />
+    <button type="submit" className="btn-pricing primary">Subscribe — $19/month</button>
+  </form>;
 }
 
-/* Recurring subscription */
-function PayPalSubForm({ itemName, amount, period, label, className }: { itemName: string; amount: string; period: string; label: string; className: string }) {
-  return (
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-      <input type="hidden" name="cmd" value="_xclick-subscriptions" />
-      <input type="hidden" name="business" value={PAYPAL_EMAIL} />
-      <input type="hidden" name="item_name" value={itemName} />
-      <input type="hidden" name="currency_code" value="USD" />
-      <input type="hidden" name="a3" value={amount} />
-      <input type="hidden" name="p3" value="1" />
-      <input type="hidden" name="t3" value={period} />
-      <input type="hidden" name="src" value="1" />
-      <input type="hidden" name="sra" value="1" />
-      <input type="hidden" name="no_note" value="1" />
-      <input type="hidden" name="return" value={SITE_URL + "/success?type=subscription"} />
-      <input type="hidden" name="cancel_return" value={SITE_URL + "/pricing"} />
-      <input type="hidden" name="notify_url" value={SITE_URL + "/api/paypal-webhook"} />
-      <button type="submit" className={className}>{label}</button>
-    </form>
-  );
+function PayPalReportForm() {
+  return <form action={PAYPAL_ACTION} method="post" target="_blank">
+    <input type="hidden" name="cmd" value="_xclick" /><input type="hidden" name="business" value={PAYPAL_EMAIL} /><input type="hidden" name="item_name" value="Detailed Report" /><input type="hidden" name="amount" value="4.99" /><input type="hidden" name="currency_code" value="USD" /><input type="hidden" name="no_note" value="1" /><input type="hidden" name="return" value={SITE_URL + "/success?type=report"} /><input type="hidden" name="cancel_return" value={SITE_URL + "/pricing"} /><input type="hidden" name="notify_url" value={SITE_URL + "/api/paypal-webhook"} />
+    <button type="submit" className="btn-pricing secondary">Buy Detailed Report — $4.99</button>
+  </form>;
 }
 
 export default function Pricing() {
-  const [annual, setAnnual] = useState(false);
-
-  return (
-    <>
-      <section className="page-header">
-        <h1>Simple, transparent pricing</h1>
-        <p>No hidden fees. No surprises. Choose the option that works best for you.</p>
-      </section>
-      <section className="section">
-        <div className="container">
-          <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:12,marginBottom:40}}>
-            <label style={{fontSize:14,color:annual?"var(--text-muted)":"var(--text-primary)",fontWeight:annual?400:600,cursor:"pointer"}} onClick={()=>setAnnual(false)}>Monthly</label>
-            <div onClick={()=>setAnnual(!annual)} style={{position:"relative",width:48,height:26,background:annual?"rgba(180,100,255,0.25)":"rgba(255,255,255,0.08)",borderRadius:13,cursor:"pointer"}}>
-              <div style={{position:"absolute",top:3,left:annual?25:3,width:20,height:20,borderRadius:"50%",background:"#fff",transition:"left 0.25s"}} />
-            </div>
-            <label style={{fontSize:14,color:annual?"var(--text-primary)":"var(--text-muted)",fontWeight:annual?600:400,cursor:"pointer"}} onClick={()=>setAnnual(true)}>Annual <span style={{color:"var(--accent)",fontWeight:600,fontSize:12}}>Save 25%</span></label>
-          </div>
-
-          <div className="pricing-grid" style={{maxWidth:900,margin:"0 auto"}}>
-            <div className="pricing-card" style={{textAlign:"center"}}>
-              <h3>Daily Pull</h3>
-              <div className="subtitle">Free forever</div>
-              <div className="price">$0<span>/mo</span></div>
-              <div className="desc">Perfect for curious minds and daily reflection.</div>
-              <ul>
-                <li>Daily free tarot card pull</li>
-                <li>Daily horoscope</li>
-                <li>Basic numerology reading</li>
-                <li>Shareable card templates</li>
-                <li>Community access</li>
-              </ul>
-              <Link href="/reading" className="btn-pricing secondary">Get Started Free</Link>
-            </div>
-
-            <div className="pricing-card featured" style={{textAlign:"center"}}>
-              <div className="badge">Most Popular</div>
-              <h3>Mystic Plus</h3>
-              <div className="subtitle">For regular seekers</div>
-              <div className="price">{annual ? "$169" : "$19"}<span>/{annual ? "yr" : "mo"}</span></div>
-              <div className="desc">Unlock deeper insights with premium content.</div>
-              <ul>
-                <li>Everything in Free, plus</li>
-                <li>Extended daily readings (3 cards)</li>
-                <li>Weekly astrology forecast</li>
-                <li>Priority psychic matching</li>
-                <li>10% off 1-on-1 sessions</li>
-                <li>Ad-free experience</li>
-              </ul>
-              <PayPalSubForm
-                itemName={annual ? "Mystic Plus - Annual" : "Mystic Plus - Monthly"}
-                amount={annual ? "169.00" : "19.00"}
-                period={annual ? "Y" : "M"}
-                label={annual ? "Subscribe Annual ($169/yr)" : "Subscribe Monthly ($19/mo)"}
-                className="btn-pricing primary"
-              />
-              <p style={{fontSize:11,color:"var(--text-muted)",marginTop:8}}>Auto-renews. Cancel anytime by emailing mountain0342@gmail.com</p>
-            </div>
-
-            <div className="pricing-card" style={{textAlign:"center"}}>
-              <h3>Sage Premium</h3>
-              <div className="subtitle">For deep transformation</div>
-              <div className="price">{annual ? "$349" : "$39"}<span>/{annual ? "yr" : "mo"}</span></div>
-              <div className="desc">The full MysticSage experience.</div>
-              <ul>
-                <li>Everything in Plus, plus</li>
-                <li>Monthly full birth chart report</li>
-                <li>1 free 15-min reading / month</li>
-                <li>Priority booking</li>
-                <li>25% off 1-on-1 sessions</li>
-                <li>Exclusive member events</li>
-              </ul>
-              <PayPalSubForm
-                itemName={annual ? "Sage Premium - Annual" : "Sage Premium - Monthly"}
-                amount={annual ? "349.00" : "39.00"}
-                period={annual ? "Y" : "M"}
-                label={annual ? "Subscribe Annual ($349/yr)" : "Subscribe Monthly ($39/mo)"}
-                className="btn-pricing secondary"
-              />
-              <p style={{fontSize:11,color:"var(--text-muted)",marginTop:8}}>Auto-renews. Cancel anytime by emailing mountain0342@gmail.com</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <div className="section-tag">Premium Reports</div>
-          <h2 className="section-title">One-time report purchases</h2>
-          <p className="section-sub">Deep-dive reports delivered to your inbox within 48 hours.</p>
-          <div className="pricing-grid" style={{maxWidth:800,margin:"0 auto"}}>
-            <div className="pricing-card" style={{textAlign:"center"}}>
-              <h3>Birth Chart Report</h3>
-              <div className="price">$29</div>
-              <div className="desc">A comprehensive 20+ page report of your complete natal chart.</div>
-              <PayPalBuyForm itemName="Birth Chart Report" amount="29.00" label="Order Now ($29)" className="btn-pricing secondary" />
-            </div>
-            <div className="pricing-card" style={{textAlign:"center"}}>
-              <h3>Annual Forecast</h3>
-              <div className="price">$49</div>
-              <div className="desc">Your complete year ahead with monthly transits.</div>
-              <PayPalBuyForm itemName="Annual Forecast Report" amount="49.00" label="Order Now ($49)" className="btn-pricing secondary" />
-            </div>
-            <div className="pricing-card" style={{textAlign:"center"}}>
-              <h3>Couples Compatibility</h3>
-              <div className="price">$59</div>
-              <div className="desc">Full synastry analysis for two people.</div>
-              <PayPalBuyForm itemName="Couples Compatibility Report" amount="59.00" label="Order Now ($59)" className="btn-pricing secondary" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section" style={{border:"none",paddingTop:0}}>
-        <div className="container" style={{maxWidth:700,margin:"0 auto",textAlign:"center"}}>
-          <div style={{padding:"32px 24px",border:"1px solid var(--border)",borderRadius:16,background:"var(--bg-card)"}}>
-            <h3 style={{fontSize:16,fontWeight:600,color:"var(--text-primary)",marginBottom:8}}>Need help choosing?</h3>
-            <p style={{fontSize:14,color:"var(--text-muted)",marginBottom:16}}>
-              Not sure which plan is right for you? Start with a free reading and upgrade anytime.
-              Questions about billing? Contact us at <a href="mailto:mountain0342@gmail.com" style={{color:"var(--accent)"}}>mountain0342@gmail.com</a>
-            </p>
-            <div style={{display:"flex",gap:8,justifyContent:"center",flexWrap:"wrap"}}>
-              <Link href="/reading" className="btn-primary" style={{display:"inline-flex",fontSize:13}}>Try Free Reading</Link>
-              <Link href="/faq" className="btn-secondary" style={{display:"inline-flex",fontSize:13}}>View FAQ</Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
+  return <><section className="page-header"><h1>Simple, transparent pricing</h1><p>Two products, two clearly defined outcomes.</p></section>
+    <section className="section"><div className="container"><div className="pricing-grid" style={{ maxWidth: 780, margin: "0 auto" }}>
+      <div className="pricing-card" style={{ textAlign: "center" }}><h3>Free Tarot</h3><div className="subtitle">Try the experience</div><div className="price">$0<span>/day</span></div><div className="desc">A three-card AI tarot reading for reflection.</div><ul><li>One free reading per day</li><li>Three-card spread</li><li>No payment required</li></ul><Link href="/reading" className="btn-pricing secondary">Start a Free Reading</Link></div>
+      <div className="pricing-card featured" style={{ textAlign: "center" }}><div className="badge">Mystic Plus</div><h3>Mystic Plus</h3><div className="subtitle">For deeper ongoing reflection</div><div className="price">$19<span>/mo</span></div><div className="desc">Premium 10-card Celtic Cross readings, subject to fair-use and abuse-prevention controls.</div><ul><li>Premium 10-card Celtic Cross readings</li><li>Active subscription required</li><li>Auto-renews monthly until cancelled</li><li>Cancel by emailing support</li></ul><PayPalSubForm /><p style={{ fontSize: 11, color: "var(--text-muted)", marginTop: 8 }}>Use the same email for PayPal and sign-in. For cancellation, email mountain0342@gmail.com.</p></div>
+    </div></div></section>
+    <section className="section"><div className="container" style={{ maxWidth: 720, margin: "0 auto" }}><div className="section-tag">One-time report</div><h2 className="section-title">Detailed Tarot Report</h2><p className="section-sub">A personalized 10-card Celtic Cross reading generated after PayPal confirms payment and sent to the purchaser&apos;s email.</p><div className="pricing-card" style={{ textAlign: "center", maxWidth: 420, margin: "28px auto 0" }}><h3>Detailed Report</h3><div className="price">$4.99</div><div className="desc">One personalized 10-card reading. This purchase does not create a Mystic Plus subscription.</div><PayPalReportForm /></div></div></section>
+    <section className="section" style={{ border: "none", paddingTop: 0 }}><div className="container" style={{ maxWidth: 700, margin: "0 auto", textAlign: "center" }}><p style={{ fontSize: 14, color: "var(--text-muted)" }}>Questions about billing, cancellation, or delivery? <a href="mailto:mountain0342@gmail.com" style={{ color: "var(--accent)" }}>Contact support</a>.</p></div></section>
+  </>;
 }
