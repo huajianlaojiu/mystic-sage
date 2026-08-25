@@ -33,6 +33,7 @@ function PayPalButtons({ userEmail, question }: { userEmail: string | null; ques
         <form action={PAYPAL_ACTION} method="post" onSubmit={() => gtagEvent("begin_checkout", { value: 4.99, currency: "USD", item_name: "Detailed Report" })}>
           <input type="hidden" name="cmd" value="_xclick" />
           <input type="hidden" name="business" value={PAYPAL_BUSINESS} />
+          <input type="hidden" name="lc" value="US" />
           <input type="hidden" name="item_name" value="Detailed Report" />
           <input type="hidden" name="amount" value="4.99" />
           <input type="hidden" name="currency_code" value="USD" />
@@ -49,6 +50,7 @@ function PayPalButtons({ userEmail, question }: { userEmail: string | null; ques
         <form action={PAYPAL_ACTION} method="post" onSubmit={() => gtagEvent("begin_checkout", { value: 19, currency: "USD", item_name: "Mystic Plus" })}>
           <input type="hidden" name="cmd" value="_xclick-subscriptions" />
           <input type="hidden" name="business" value={PAYPAL_BUSINESS} />
+          <input type="hidden" name="lc" value="US" />
           <input type="hidden" name="item_name" value="Mystic Plus - Monthly" />
           <input type="hidden" name="currency_code" value="USD" />
           <input type="hidden" name="a3" value="19.00" />
