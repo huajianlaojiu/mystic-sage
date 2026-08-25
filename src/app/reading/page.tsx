@@ -26,6 +26,46 @@ const PAYPAL_ACTION =
     : "https://www.paypal.com/cgi-bin/webscr";
 const PAYPAL_BUSINESS = process.env.NEXT_PUBLIC_PAYPAL_BUSINESS_EMAIL || "mountain0342@gmail.com";
 
+function PayPalButtons({ userEmail, question }: { userEmail: string | null; question: string }) {
+  return (
+    <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginTop: 16 }}>
+      <form action={PAYPAL_ACTION} method="post" onSubmit={() => gtagEvent("begin_checkout", { value: 19, currency: "USD", item_name: "Mystic Plus" })}>
+        <input type="hidden" name="cmd" value="_xclick-subscriptions" />
+        <input type="hidden" name="business" value={PAYPAL_BUSINESS} />
+        <input type="hidden" name="item_name" value="Mystic Plus - Monthly" />
+        <input type="hidden" name="currency_code" value="USD" />
+        <input type="hidden" name="a3" value="19.00" />
+        <input type="hidden" name="p3" value="1" />
+        <input type="hidden" name="t3" value="M" />
+        <input type="hidden" name="src" value="1" />
+        <input type="hidden" name="sra" value="1" />
+        <input type="hidden" name="no_note" value="1" />
+        <input type="hidden" name="return" value={SITE + "/success?type=subscription"} />
+        <input type="hidden" name="cancel_return" value={SITE + "/reading"} />
+        <input type="hidden" name="notify_url" value={SITE + "/api/paypal-webhook"} />
+        <input type="hidden" name="custom" value={userEmail || ""} />
+        <button type="submit" className="btn-primary" style={{ fontSize: 13, padding: "10px 18px" }}>Upgrade to Mystic Plus - $19/mo</button>
+      </form>
+      <form action={PAYPAL_ACTION} method="post" onSubmit={() => gtagEvent("begin_checkout", { value: 4.99, currency: "USD", item_name: "Detailed Report" })}>
+        <input type="hidden" name="cmd" value="_xclick" />
+        <input type="hidden" name="business" value={PAYPAL_BUSINESS} />
+        <input type="hidden" name="item_name" value="Detailed Report" />
+        <input type="hidden" name="amount" value="4.99" />
+        <input type="hidden" name="currency_code" value="USD" />
+        <input type="hidden" name="return" value={SITE + "/success?type=report"} />
+        <input type="hidden" name="cancel_return" value={SITE + "/reading"} />
+        <input type="hidden" name="notify_url" value={SITE + "/api/paypal-webhook"} />
+        <input
+          type="hidden"
+          name="custom"
+          value={JSON.stringify({ e: userEmail || "", q: (question || "").slice(0, 200) })}
+        />
+        <button type="submit" className="btn-secondary" style={{ fontSize: 13, padding: "10px 18px" }}>Detailed Report - $4.99</button>
+      </form>
+    </div>
+  );
+}
+
 function ShareButtons({ reading, cards }: { reading: string; cards: Card[] }) {
   const url = encodeURIComponent(SITE + "/reading");
   const cardText = cards.map((c) => c.name + " (" + c.position + ")").join(" | ");
@@ -285,6 +325,9 @@ export default function ReadingPage() {
               <br />
               <button onClick={startReading} className="btn-primary" style={{ fontSize: 16, padding: "14px 44px" }}>Pull Your Cards</button>
               <MemberUnlock membership={membership} checking={checking} guest={guest} />
+              {!membership?.member && userEmail && (
+                <PayPalButtons userEmail={userEmail} question={question} />
+              )}
             </>
           )}
 
@@ -304,6 +347,9 @@ export default function ReadingPage() {
             <div style={{ padding: 20, background: "rgba(255,80,80,0.08)", border: "1px solid rgba(255,80,80,0.2)", borderRadius: 12, margin: "16px auto", maxWidth: 400 }}>
               <p style={{ color: "#ff5050", fontSize: 14 }}>{error}</p>
               <button onClick={() => { setError(""); setLoading(false); }} className="btn-secondary" style={{ marginTop: 12 }}>Try Again</button>
+              {!membership?.member && userEmail && (
+                <PayPalButtons userEmail={userEmail} question={question} />
+              )}
             </div>
           )}
 
@@ -354,49 +400,8 @@ export default function ReadingPage() {
                 <span style={{ flex: 1, height: 1, background: "var(--border)" }}></span>
               </div>
 
-              {!membership?.member && (
-                <div style={{ marginBottom: 16 }}>
-                  {!userEmail && (
-                    <p style={{ fontSize: 12.5, color: "var(--text-muted)", textAlign: "center", marginBottom: 10 }}>
-                      Tip: sign in so your plan links to your account.
-                    </p>
-                  )}
-                  <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
-                  <form action={PAYPAL_ACTION} method="post" onSubmit={() => gtagEvent("begin_checkout", { value: 19, currency: "USD", item_name: "Mystic Plus" })}>
-                    <input type="hidden" name="cmd" value="_xclick-subscriptions" />
-                    <input type="hidden" name="business" value={PAYPAL_BUSINESS} />
-                    <input type="hidden" name="item_name" value="Mystic Plus - Monthly" />
-                    <input type="hidden" name="currency_code" value="USD" />
-                    <input type="hidden" name="a3" value="19.00" />
-                    <input type="hidden" name="p3" value="1" />
-                    <input type="hidden" name="t3" value="M" />
-                    <input type="hidden" name="src" value="1" />
-                    <input type="hidden" name="sra" value="1" />
-                    <input type="hidden" name="no_note" value="1" />
-                    <input type="hidden" name="return" value={SITE + "/success?type=subscription"} />
-                    <input type="hidden" name="cancel_return" value={SITE + "/reading"} />
-                    <input type="hidden" name="notify_url" value={SITE + "/api/paypal-webhook"} />
-                    <input type="hidden" name="custom" value={userEmail || ""} />
-                    <button type="submit" className="btn-primary" style={{ fontSize: 13, padding: "10px 18px" }}>Upgrade to Mystic Plus - $19/mo</button>
-                  </form>
-                  <form action={PAYPAL_ACTION} method="post" onSubmit={() => gtagEvent("begin_checkout", { value: 4.99, currency: "USD", item_name: "Detailed Report" })}>
-                    <input type="hidden" name="cmd" value="_xclick" />
-                    <input type="hidden" name="business" value={PAYPAL_BUSINESS} />
-                    <input type="hidden" name="item_name" value="Detailed Report" />
-                    <input type="hidden" name="amount" value="4.99" />
-                    <input type="hidden" name="currency_code" value="USD" />
-                    <input type="hidden" name="return" value={SITE + "/success?type=report"} />
-                    <input type="hidden" name="cancel_return" value={SITE + "/reading"} />
-                    <input type="hidden" name="notify_url" value={SITE + "/api/paypal-webhook"} />
-                    <input
-                      type="hidden"
-                      name="custom"
-                      value={JSON.stringify({ e: userEmail || "", q: (question || "").slice(0, 200) })}
-                    />
-                    <button type="submit" className="btn-secondary" style={{ fontSize: 13, padding: "10px 18px" }}>Detailed Report - $4.99</button>
-                  </form>
-                </div>
-              </div>
+              {!membership?.member && userEmail && (
+                <PayPalButtons userEmail={userEmail} question={question} />
               )}
 
               <MemberUnlock membership={membership} checking={checking} guest={guest} />
