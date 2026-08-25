@@ -3,6 +3,8 @@ import { generateReading, type GenCard } from "@/lib/reading";
 import { getMembership } from "@/lib/membership";
 import { getSessionUser, getServerClient } from "@/lib/supabase/server";
 
+export const maxDuration = 60;
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();

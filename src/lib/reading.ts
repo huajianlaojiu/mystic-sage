@@ -34,7 +34,7 @@ export async function generateReading(
 ): Promise<{ reading: string; cards: GenCard[]; premium: boolean }> {
   const cardCount = opts.premium ? 10 : 3;
   const positions = opts.premium ? POSITIONS_PREMIUM : POSITIONS_FREE;
-  const maxTokens = opts.premium ? 1400 : 800;
+  const maxTokens = opts.premium ? 1000 : 600;
 
   let cards: DrawnCard[];
   if (opts.cardNames && opts.cardNames.length === cardCount) {
