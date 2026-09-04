@@ -40,6 +40,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* Global app fonts loaded via Google Fonts link. */}
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+                <meta name="p:domain_verify" content="49681743f15fcaa2f5dd8a6cfa48f772" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
       <body>
