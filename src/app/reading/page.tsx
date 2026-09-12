@@ -347,10 +347,10 @@ export default function ReadingPage() {
               <br />
               <button onClick={startReading} className="btn-primary" style={{ fontSize: 16, padding: "14px 44px" }}>Pull Your Cards</button>
               <MemberUnlock membership={membership} checking={checking} guest={guest} />
-              {!membership?.member && userEmail && (
+              {!membership?.member && (
                 <PayPalButtons userEmail={userEmail} question={question} />
               )}
-            </>
+              </>
           )}
 
           {loading && (
@@ -379,7 +379,7 @@ export default function ReadingPage() {
               {!isQuota && (
                 <button onClick={() => { setError(""); setLoading(false); }} className="btn-secondary" style={{ marginTop: 12 }}>Try Again</button>
               )}
-              {!membership?.member && userEmail && (
+              {!membership?.member && (
                 <PayPalButtons userEmail={userEmail} question={question} />
               )}
             </div>
@@ -447,7 +447,7 @@ export default function ReadingPage() {
                 </div>
               </div>
 
-              {!membership?.member && userEmail && (
+              {!membership?.member && (
                 <PayPalButtons userEmail={userEmail} question={question} />
               )}
 
