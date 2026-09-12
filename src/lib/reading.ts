@@ -8,13 +8,13 @@ import {
 } from "@/lib/openai";
 import {
   pickRandomCards,
-  buildTarotPrompt,
   buildPremiumReportPrompt,
   ALL_CARDS,
   POSITIONS_FREE,
   POSITIONS_PREMIUM,
   type DrawnCard,
 } from "@/lib/tarot";
+import { buildFreeReadingPrompt } from "@/lib/prompts";
 
 export type GenCard = {
   name: string;
@@ -79,7 +79,7 @@ export async function generateReading(
       role: "user",
       content: opts.premium
         ? buildPremiumReportPrompt(cards, question, positions)
-        : buildTarotPrompt(cards, question),
+        : buildFreeReadingPrompt(cards, question),
     },
   ];
 

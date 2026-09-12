@@ -161,39 +161,6 @@ export function parseStoredCards(raw: unknown): DrawnCard[] {
 }
 
 /**
- * Build a "sandwich" reading prompt: empathy → insight → concrete action.
- * Reversed cards are explained instead of hidden. Ends with a reflective question.
- */
-export function buildTarotPrompt(cards: DrawnCard[], question: string): string {
-  const cardText = cards
-    .map(
-      (c, i) =>
-        `Card ${i + 1} (${c.reversed ? "Reversed" : "Upright"}): ${c.name} — ${
-          c.reversed ? c.reversedKeywords : c.keywords
-        }`
-    )
-    .join("\n");
-
-  return [
-    "You are a deeply intuitive tarot reader for a modern, English-speaking seeker.",
-    "",
-    `The user asks: "${question || "What do I need to know right now?"}"`,
-    "",
-    "These cards came up:",
-    cardText,
-    "",
-    "Write a reading in 3-4 paragraphs with this exact structure:",
-    "1) EMPATHY: Acknowledge what they are likely feeling about this question in one or two specific sentences. Sound like a wise friend, not a fortune teller.",
-    "2) INSIGHT: Name one specific pattern or blind spot the cards reveal, tied to the card names above. Quote the user's own question words back at them where natural.",
-    "3) ACTION: Give ONE small, concrete, doable step they can take within 24 hours. No vague 'trust your intuition' — make it specific.",
-    "",
-    "If a card is Reversed, address it directly and reassure them (e.g. 'The reversed Moon isn't bad news — it means the fog is lifting').",
-    "Never predict doom, never make medical/legal/financial claims. End with one short reflective question for the user (max one sentence).",
-    "Sign off as \"— MysticSage\".",
-  ].join("\n");
-}
-
-/**
  * Prompt for the paid Detailed Report. This is deliberately a different
  * *kind* of output from the free reading: a long, structured, multi-section
  * report instead of a few paragraphs.

@@ -328,13 +328,22 @@ export default function ReadingPage() {
               <textarea
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
-                placeholder="e.g. How can I grow in my career?"
+                placeholder="e.g. How can I move forward after this breakup?"
                 rows={3}
                 maxLength={500}
                 aria-describedby="question-limit"
                 style={{ width: "100%", maxWidth: 500, padding: "14px 16px", borderRadius: 12, background: "rgba(255,255,255,0.04)", border: "1px solid var(--border)", color: "var(--text-primary)", fontSize: 14, fontFamily: "inherit", resize: "none", outline: "none", marginBottom: 20 }}
               />
               <p id="question-limit" style={{ maxWidth: 500, margin: "-14px auto 16px", textAlign: "right", color: "var(--text-muted)", fontSize: 12 }}>{question.length}/500</p>
+              <div style={{ maxWidth: 500, margin: "0 auto 20px", textAlign: "left" }}>
+                <p style={{ fontSize: 12, color: "var(--text-muted)", marginBottom: 6 }}>Open questions give much better readings, for example:</p>
+                <ul style={{ margin: 0, paddingLeft: 18, fontSize: 12.5, color: "var(--text-muted)", lineHeight: 1.7 }}>
+                  <li>How can I move forward after this breakup?</li>
+                  <li>What should I focus on in my career right now?</li>
+                  <li>What am I not seeing in my relationship?</li>
+                </ul>
+                <p style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 8 }}>Yes/no questions (like &ldquo;Will he come back?&rdquo;) give vaguer readings. Ask &ldquo;how&rdquo; or &ldquo;what&rdquo; instead.</p>
+              </div>
               <br />
               <button onClick={startReading} className="btn-primary" style={{ fontSize: 16, padding: "14px 44px" }}>Pull Your Cards</button>
               <MemberUnlock membership={membership} checking={checking} guest={guest} />
