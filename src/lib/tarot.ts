@@ -1,4 +1,4 @@
-﻿export type TarotCard = {
+export type TarotCard = {
   id: number;
   name: string;
   keywords: string;
@@ -141,6 +141,26 @@ export const POSITIONS_PREMIUM = [
 ];
 
 /**
+ * Rebuild a spread from a stored `readings.cards` JSON column. Stored cards
+ * carry a display name (with a " (Reversed)" suffix) plus a reversed flag, so
+ * the original orientation is preserved for reuse in a paid report.
+ */
+export function parseStoredCards(raw: unknown): DrawnCard[] {
+  if (!Array.isArray(raw)) return [];
+  const out: DrawnCard[] = [];
+  for (const item of raw) {
+    if (!item || typeof item !== "object") continue;
+    const rec = item as { name?: unknown; reversed?: unknown };
+    if (typeof rec.name !== "string") continue;
+    const base = rec.name.replace(/\s*\(reversed\)\s*$/i, "").trim();
+    const match = ALL_CARDS.find((c) => c.name === base);
+    if (!match) continue;
+    out.push({ ...match, reversed: rec.reversed === true });
+  }
+  return out;
+}
+
+/**
  * Build a "sandwich" reading prompt: empathy → insight → concrete action.
  * Reversed cards are explained instead of hidden. Ends with a reflective question.
  */
@@ -170,5 +190,60 @@ export function buildTarotPrompt(cards: DrawnCard[], question: string): string {
     "If a card is Reversed, address it directly and reassure them (e.g. 'The reversed Moon isn't bad news — it means the fog is lifting').",
     "Never predict doom, never make medical/legal/financial claims. End with one short reflective question for the user (max one sentence).",
     "Sign off as \"— MysticSage\".",
+  ].join("\n");
+}
+
+/**
+ * Prompt for the paid Detailed Report. This is deliberately a different
+ * *kind* of output from the free reading: a long, structured, multi-section
+ * report instead of a few paragraphs.
+ */
+export function buildPremiumReportPrompt(
+  cards: DrawnCard[],
+  question: string,
+  positions?: string[]
+): string {
+  const cardText = cards
+    .map(
+      (c, i) =>
+        `${i + 1}. ${c.name}${c.reversed ? " (Reversed)" : ""}${
+          positions?.[i] ? ` [${positions[i]}]` : ""
+        } — ${
+          c.reversed ? c.reversedKeywords : c.keywords
+        }`
+    )
+    .join("\n");
+
+  return [
+    "You are an experienced tarot reader writing a premium written report for a modern English-speaking seeker.",
+    "This is a paid deliverable, so it must feel substantially deeper and more personal than a short social-media reading.",
+    "",
+    `The seeker asked: "${question || "What do I need to know right now?"}"`,
+    "",
+    `This is the seeker's own ${cards.length}-card spread, in order:`,
+    cardText,
+    "",
+    "Write the report with these EXACT sections, using the headings as plain text:",
+    "",
+    "THE BIG PICTURE",
+    "A 2-3 sentence summary naming the single central theme of this spread, addressed directly to the seeker.",
+    "",
+    "CARD BY CARD",
+    `One short paragraph per card (all ${cards.length}). Name the card and its position, explain what it means here, and connect it to the seeker's specific question. Address reversed cards explicitly.`,
+    "",
+    "THE PATTERN",
+    "A paragraph naming a repeating pattern across the spread (repeat suits, major arcana weight, reversed clusters, or a repeated theme). Explain what that pattern reveals that a single card cannot.",
+    "",
+    "TIMING",
+    "A paragraph on likely pacing: what is moving now, what needs time, and any near-term window suggested by the cards. Frame as probability and readiness, never as a fixed date.",
+    "",
+    "WHAT TO DO NEXT",
+    "Exactly 3 numbered actions, each concrete and doable within the next 7 days.",
+    "",
+    "REFLECT ON THIS",
+    "Exactly 2 reflective questions, one per line, that the seeker can journal about.",
+    "",
+    "Rules: warm and specific, never generic filler. Plain text only - do not use markdown symbols such as ** or #. If a card is hard (Tower, Death, Devil, reversed cards), reframe it as growth without promising outcomes. Never make medical, legal, or financial claims, and never state that a future event will definitely happen.",
+    "End with a single closing line: \"— MysticSage\"",
   ].join("\n");
 }

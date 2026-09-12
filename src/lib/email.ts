@@ -68,6 +68,16 @@ export async function sendEmail(msg: EmailMessage): Promise<{ ok: boolean; error
 
 type ReportCard = { name: string; position: string; emoji: string; keywords: string };
 
+/** Escape user- and model-supplied text before it goes into the email HTML. */
+function escapeHtml(input: string): string {
+  return input
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export function detailedReportEmailHtml(
   question: string,
   reading: string,
@@ -93,7 +103,18 @@ export function detailedReportEmailHtml(
     .split(/\n+/)
     .map((p: string) => p.trim())
     .filter(Boolean)
-    .map((p: string) => `<p style="color:#c9c7c2;font-size:15px;line-height:1.75;margin:0 0 14px;">${p}</p>`)
+    .map((p: string) => {
+      // Models sometimes wrap headings in markdown; strip it so the email
+      // shows clean text instead of literal ** or # characters.
+      const clean = escapeHtml(p)
+        .replace(/\*\*(.+?)\*\*/g, "$1")
+        .replace(/^#{1,6}\s*/, "")
+        .trim();
+      const isHeading = /^[A-Z][A-Z0-9 &'\-]{2,40}$/.test(clean);
+      return isHeading
+        ? `<p style="color:#b466ff;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:18px 0 8px;">${clean}</p>`
+        : `<p style="color:#c9c7c2;font-size:15px;line-height:1.75;margin:0 0 14px;">${clean}</p>`;
+    })
     .join("");
 
   return `
@@ -111,12 +132,14 @@ export function detailedReportEmailHtml(
               <td align="center" style="font-family:Georgia,serif;font-size:24px;font-weight:700;color:#f0ede8;padding-bottom:6px;">Your Detailed Tarot Report</td>
             </tr>
             <tr>
-              <td align="center" style="color:#8a8a96;font-size:13px;padding-bottom:20px;">A 10-card Celtic Cross reading, prepared for you by MysticSage</td>
+              <td align="center" style="color:#8a8a96;font-size:13px;padding-bottom:20px;">A ${cards.length}-card ${
+                cards.length >= 10 ? "Celtic Cross " : ""
+              }reading, prepared for you by MysticSage</td>
             </tr>
             <tr>
               <td style="background:rgba(180,102,255,0.07);border:1px solid rgba(180,102,255,0.22);border-radius:12px;padding:16px 18px;margin-bottom:20px;">
                 <div style="font-size:11px;font-weight:600;color:#b466ff;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Your question</div>
-                <div style="font-size:15px;color:#f0ede8;font-style:italic;">&ldquo;${q}&rdquo;</div>
+                <div style="font-size:15px;color:#f0ede8;font-style:italic;">&ldquo;${escapeHtml(q)}&rdquo;</div>
               </td>
             </tr>
             <tr>

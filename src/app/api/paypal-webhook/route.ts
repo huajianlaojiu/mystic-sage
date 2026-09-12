@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { generateReading } from "@/lib/reading";
 import { sendEmail, isEmailConfigured, detailedReportEmailHtml } from "@/lib/email";
+import { parseStoredCards } from "@/lib/tarot";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
@@ -92,9 +93,48 @@ async function emailDetailedReport(params: URLSearchParams) {
   const { email, question } = parseCustom(params.get("custom"));
   const buyerEmail = email || (params.get("payer_email") || "").trim().toLowerCase();
   if (!buyerEmail || !isEmailConfigured()) throw new Error("Detailed Report delivery is not configured");
-  const generated = await generateReading(question || "What do I need to know right now?", { premium: true });
+  const drawnCards = await loadRecentSpread(buyerEmail);
+  const generated = await generateReading(question || "What do I need to know right now?", {
+    premium: true,
+    ...(drawnCards.length > 0 ? { drawnCards } : {}),
+  });
   const result = await sendEmail({ to: buyerEmail, subject: "Your MysticSage Detailed Tarot Report", html: detailedReportEmailHtml(question, generated.reading, generated.cards), replyTo: process.env.EMAIL_REPLY_TO || "mountain0342@gmail.com" });
   if (!result.ok) throw new Error(`Detailed Report email failed: ${result.error}`);
+}
+
+/**
+ * Reuse the seeker's most recent pull (last 24h) so the paid report explains
+ * the cards they actually saw, instead of a fresh random spread. Falls back to
+ * a new spread when nothing is found.
+ */
+async function loadRecentSpread(email: string) {
+  try {
+    const db = getDb();
+    const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+    const { data, error } = await db
+      .from("readings")
+      .select("cards")
+      .eq("email", email)
+      .gte("created_at", since)
+      .order("created_at", { ascending: false })
+      .limit(1);
+    if (error) {
+      console.warn("[paypal-ipn] Could not load recent spread:", error.message);
+      return [];
+    }
+    const cards = parseStoredCards(data?.[0]?.cards);
+    // The $4.99 report is advertised as a full 10-card spread, so only reuse a
+    // stored spread when it is already a complete one (i.e. the buyer is a
+    // member). A 3-card free pull gets a full spread drawn for the report.
+    if (cards.length >= 10) {
+      console.log(`[paypal-ipn] Reusing the buyer's own ${cards.length}-card spread`);
+      return cards;
+    }
+    return [];
+  } catch (err) {
+    console.warn("[paypal-ipn] Recent spread lookup failed:", err instanceof Error ? err.message : err);
+    return [];
+  }
 }
 
 export async function POST(req: NextRequest) {

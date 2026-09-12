@@ -43,7 +43,7 @@ function PayPalButtons({ userEmail, question }: { userEmail: string | null; ques
             name="custom"
             value={JSON.stringify({ e: userEmail || "", q: (question || "").slice(0, 200) })}
           />
-          <button type="submit" className="btn-secondary" style={{ fontSize: 13, padding: "10px 18px" }}>Detailed Report - $4.99</button>
+          <button type="submit" className="btn-secondary" style={{ fontSize: 13, padding: "10px 18px" }}>Get My 10-Card Report - $4.99</button>
         </form>
         <form action={PAYPAL_ACTION} method="post" onSubmit={() => gtagEvent("begin_checkout", { value: 19, currency: "USD", item_name: "Mystic Plus" })}>
           <input type="hidden" name="cmd" value="_xclick-subscriptions" />
@@ -61,10 +61,20 @@ function PayPalButtons({ userEmail, question }: { userEmail: string | null; ques
           <input type="hidden" name="cancel_return" value={SITE + "/reading"} />
           <input type="hidden" name="notify_url" value={SITE + "/api/paypal-webhook"} />
           <input type="hidden" name="custom" value={userEmail || ""} />
-          <button type="submit" className="btn-primary" style={{ fontSize: 13, padding: "10px 18px" }}>Upgrade to Mystic Plus - $19/mo</button>
+          <button type="submit" className="btn-primary" style={{ fontSize: 13, padding: "10px 18px" }}>Go Unlimited - $19/mo</button>
         </form>
       </div>
-      <p style={{ fontSize: 12, color: "var(--text-muted)", margin: 0, textAlign: "center" }}>$4.99 one-time · delivered to your inbox · yours to keep</p>
+        <p style={{ fontSize: 12, color: "var(--text-muted)", margin: 0, textAlign: "center", maxWidth: 460, lineHeight: 1.6 }}>
+          <strong style={{ color: "var(--text-secondary)" }}>$4.99 report:</strong> full 10-card spread · every card explained · patterns, timing &amp; 3 action steps · emailed, yours to keep
+        </p>
+        <p style={{ fontSize: 12, color: "var(--text-muted)", margin: 0, textAlign: "center", maxWidth: 460, lineHeight: 1.6 }}>
+          <strong style={{ color: "var(--text-secondary)" }}>$19/mo:</strong> unlimited readings · full 10-card spread every time · history saved to your account
+        </p>
+        <p style={{ fontSize: 12, color: "var(--text-muted)", margin: 0, textAlign: "center", maxWidth: 460, lineHeight: 1.6 }}>
+          {userEmail
+            ? "Your report will be emailed to " + userEmail + "."
+            : "Sign in first to keep your report in your account, or we will email it to the address you pay with."}
+        </p>
     </div>
   );
 }
@@ -314,7 +324,7 @@ export default function ReadingPage() {
             <>
               <div style={{ fontSize: 48, textAlign: "center" }}>🔮</div>
               <h3 style={{ fontSize: 20, fontWeight: 600, color: "var(--text-primary)", margin: "12px 0 8px", textAlign: "center" }}>What would you like guidance on?</h3>
-              <p style={{ color: "var(--text-muted)", fontSize: 14, marginBottom: 20, textAlign: "center" }}>Free AI tarot reading</p>
+          <p style={{ color: "var(--text-muted)", fontSize: 14, marginBottom: 20, textAlign: "center" }}>Free · 3 cards · one question · 1 free reading per day</p>
               <textarea
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
