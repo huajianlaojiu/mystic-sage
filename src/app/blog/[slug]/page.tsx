@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { blogPosts, getRelatedPosts } from "@/content/blog";
+import { blogPosts, getRelatedPosts, postDateISO } from "@/content/blog";
 
 export function generateStaticParams() {
   return blogPosts.map(function(post) { return { slug: post.slug }; });
@@ -32,11 +32,25 @@ function ArticleJsonLd({ post }: { post: { title: string; excerpt: string; date:
     "@type": "Article",
     "headline": post.title,
     "description": post.excerpt,
-    "datePublished": post.date,
+    "datePublished": postDateISO(post.date),
+    "dateModified": postDateISO(post.date),
     "author": { "@type": "Organization", "name": "MysticSage" },
       "publisher": { "@type": "Organization", "name": "MysticSage", "logo": { "@type": "ImageObject", "url": "https://mysticsages.com/images/og-default.png" } },
       "image": "https://mysticsages.com/images/og-default.png",
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://mysticsages.com/blog/" + post.slug }
+  };
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />;
+}
+
+function BreadcrumbJsonLd({ title, slug }: { title: string; slug: string }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://mysticsages.com/" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://mysticsages.com/blog" },
+      { "@type": "ListItem", position: 3, name: title, item: "https://mysticsages.com/blog/" + slug },
+    ],
   };
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />;
 }
@@ -50,8 +64,9 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const shareUrl = encodeURIComponent("https://mysticsages.com/blog/" + post.slug);
   const shareText = encodeURIComponent(post.title + "\n\n");
 
-  return (<>
-    <ArticleJsonLd post={post} />
+return (<>
+  <ArticleJsonLd post={post} />
+  <BreadcrumbJsonLd title={post.title} slug={post.slug} />
     <section className="page-header">
       <h1>{post.title}</h1>
       <p style={{fontSize:13,color:"#666"}}>{post.date} \u00b7 {post.readTime}</p>

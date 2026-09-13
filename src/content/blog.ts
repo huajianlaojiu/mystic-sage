@@ -8,6 +8,15 @@ export interface BlogPost {
   tags: string[];
 }
 
+/**
+ * Posts store human-readable dates ("July 4, 2026") but schema.org and
+ * sitemaps expect ISO 8601, so convert once here.
+ */
+export function postDateISO(date: string): string {
+  const parsed = Date.parse(date);
+  return Number.isNaN(parsed) ? new Date().toISOString() : new Date(parsed).toISOString();
+}
+
 export const blogPosts: BlogPost[] = [
   {
     slug: "free-tarot-reading-online",
