@@ -6,8 +6,9 @@ export function generateStaticParams() {
   return cardMeanings.map(function(c) { return { slug: c.slug }; });
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const card = cardMeanings.find(function(c) { return c.slug === params.slug; });
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const card = cardMeanings.find(function(c) { return c.slug === slug; });
   if (!card) return {};
   const title = card.name + " Tarot Card Meaning - " + card.keywords;
   const description = card.description;
@@ -56,8 +57,9 @@ function CardJsonLd({ name, slug, description, keywords }: { name: string; slug:
   );
 }
 
-export default function CardPage({ params }: { params: { slug: string } }) {
-  const card = cardMeanings.find(function(c) { return c.slug === params.slug; });
+export default async function CardPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const card = cardMeanings.find(function(c) { return c.slug === slug; });
   if (!card) return <section className="page-header"><h1>Card not found</h1></section>;
 
   return (

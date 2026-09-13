@@ -1,0 +1,47 @@
+﻿Day 8 Posting Runbook - follow top to bottom (about 35-40 min)
+
+Image folder: mysticsage/public/images/x/Day 8/
+Post text: X-10accounts-day8-tweets.txt (full text per post)
+
+RULES
+- Post one, wait ~60-90 seconds, post next.
+- Account order below spreads accounts out so none spams.
+- Post text + attach matching image from the Day 8 folder.
+
+=== START ===
+1. @MysticSage - MORNING (br-morning.png)   [wait 60s]
+2. @DailyTarotDraw - MORNING (da-morning.png) [wait 60s]
+3. @ZodiacWisdom - MORNING (zw-morning.png) [wait 60s]
+4. @LoveTarotRead - MORNING (lt-morning.png) [wait 60s]
+5. @FortuneTold - MORNING (ft-morning.png) [wait 60s]
+6. @TarotGuidance - MORNING (tg-morning.png) [wait 60s]
+7. @TheCardSpeaks - MORNING (cs-morning.png) [wait 60s]
+8. @StarSignDaily - MORNING (sd-morning.png) [wait 60s]
+9. @HeartTarot - MORNING (ht-morning.png) [wait 60s]
+10. @DailyFortuneTell - MORNING (df-morning.png) [wait 60s]
+--- break 2 min ---
+11. @MysticSage - MIDDAY (br-midday.png) [wait 60s]
+12. @DailyTarotDraw - MIDDAY (da-midday.png) [wait 60s]
+13. @ZodiacWisdom - MIDDAY (zw-midday.png) [wait 60s]
+14. @LoveTarotRead - MIDDAY (lt-midday.png) [wait 60s]
+15. @FortuneTold - MIDDAY (ft-midday.png) [wait 60s]
+16. @TarotGuidance - MIDDAY (tg-midday.png) [wait 60s]
+17. @TheCardSpeaks - MIDDAY (cs-midday.png) [wait 60s]
+18. @StarSignDaily - MIDDAY (sd-midday.png) [wait 60s]
+19. @HeartTarot - MIDDAY (ht-midday.png) [wait 60s]
+20. @DailyFortuneTell - MIDDAY (df-midday.png) [wait 60s]
+--- break 2 min ---
+21. @MysticSage - EVENING (br-evening.png) [wait 60s]
+22. @DailyTarotDraw - EVENING (da-evening.png) [wait 60s]
+23. @ZodiacWisdom - EVENING (zw-evening.png) [wait 60s]
+24. @LoveTarotRead - EVENING (lt-evening.png) [wait 60s]
+25. @FortuneTold - EVENING (ft-evening.png) [wait 60s]
+26. @TarotGuidance - EVENING (tg-evening.png) [wait 60s]
+27. @TheCardSpeaks - EVENING (cs-evening.png) [wait 60s]
+28. @StarSignDaily - EVENING (sd-evening.png) [wait 60s]
+29. @HeartTarot - EVENING (ht-evening.png) [wait 60s]
+30. @DailyFortuneTell - EVENING (df-evening.png)
+=== DONE ===
+
+Tip: open X in 10 separate tabs (one per account) and go down the list.
+Tip: if 60s feels slow, 45s is still okay; never post same account twice under 30s.

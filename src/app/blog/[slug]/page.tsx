@@ -5,8 +5,9 @@ export function generateStaticParams() {
   return blogPosts.map(function(post) { return { slug: post.slug }; });
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = blogPosts.find(function(p) { return p.slug === params.slug; });
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = blogPosts.find(function(p) { return p.slug === slug; });
   if (!post) return {};
   return {
     title: post.title + " | MysticSage",
@@ -55,8 +56,9 @@ function BreadcrumbJsonLd({ title, slug }: { title: string; slug: string }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />;
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = blogPosts.find(function(p) { return p.slug === params.slug; });
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = blogPosts.find(function(p) { return p.slug === slug; });
   if (!post) return <section className="page-header"><h1>Post not found</h1></section>;
 
   const related = getRelatedPosts(post, 3);
