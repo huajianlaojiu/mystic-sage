@@ -29,6 +29,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://mysticsages.com",
   },
+  verification: {
+    google: "_LRMuk7aq5TCR7nMFhVDqtFBKvCpKyk25zujkfnGwBM",
+  },
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
