@@ -15,7 +15,7 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
       title: post.title + " | MysticSage",
       description: post.excerpt,
       url: "https://mysticsages.com/blog/" + post.slug,
-      images: [{ url: "https://mysticsages.com/images/og-default.svg", width: 1200, height: 630 }],
+      images: [{ url: "https://mysticsages.com/images/og-default.png", width: 1200, height: 630 }],
       type: "article",
     },
     twitter: {
@@ -34,8 +34,8 @@ function ArticleJsonLd({ post }: { post: { title: string; excerpt: string; date:
     "description": post.excerpt,
     "datePublished": post.date,
     "author": { "@type": "Organization", "name": "MysticSage" },
-    "publisher": { "@type": "Organization", "name": "MysticSage", "logo": { "@type": "ImageObject", "url": "https://mysticsages.com/images/og-default.svg" } },
-    "image": "https://mysticsages.com/images/og-default.svg",
+      "publisher": { "@type": "Organization", "name": "MysticSage", "logo": { "@type": "ImageObject", "url": "https://mysticsages.com/images/og-default.png" } },
+      "image": "https://mysticsages.com/images/og-default.png",
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://mysticsages.com/blog/" + post.slug }
   };
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />;

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description: "Find clarity through tarot, astrology, numerology and psychic readings. Get your free daily tarot pull at MysticSage.",
     url: "https://mysticsages.com",
     siteName: "MysticSage",
-    images: [{ url: "https://mysticsages.com/images/og-default.svg", width: 1200, height: 630 }],
+    images: [{ url: "https://mysticsages.com/images/og-default.png", width: 1200, height: 630 }],
     locale: "en_US",
     type: "website",
   },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "MysticSage — Free Tarot, Astrology & Numerology Readings",
     description: "Find clarity through tarot, astrology, numerology and psychic readings. Get your free daily tarot pull at MysticSage.",
-    images: ["https://mysticsages.com/images/og-default.svg"],
+    images: ["https://mysticsages.com/images/og-default.png"],
   },
   alternates: {
     canonical: "https://mysticsages.com",
@@ -58,7 +58,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </Script>
           </>
         )}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Organization\",\n  \"name\": \"MysticSage\",\n  \"url\": \"https://mysticsages.com\",\n  \"logo\": \"https://mysticsages.com/images/og-default.svg\",\n  \"description\": \"Free tarot readings, astrology, numerology and spiritual guidance online.\",\n  \"sameAs\": [\n    \"https://twitter.com/mysticsage\"\n  ]\n}" }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Organization\",\n  \"name\": \"MysticSage\",\n  \"url\": \"https://mysticsages.com\",\n  \"logo\": \"https://mysticsages.com/images/og-default.png\",\n  \"description\": \"Free tarot readings, astrology, numerology and spiritual guidance online.\",\n  \"sameAs\": [\n    \"https://twitter.com/mysticsage\"\n  ]\n}" }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: "{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"MysticSage\",\"url\":\"https://mysticsages.com\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://mysticsages.com/search?q={search_term_string}\"},\"query-input\":\"required name=search_term_string\"}}" }} />
         <Header user={user} />
         <main>{children}</main>

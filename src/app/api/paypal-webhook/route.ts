@@ -166,7 +166,34 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown webhook error";
     console.error("[paypal-ipn] Error:", message);
+    // Alert the operator: a failed report/subscription write means a paying
+    // customer may have received nothing, and PayPal will retry this IPN.
+    await alertOperator("PayPal webhook failed", message);
     return NextResponse.json({ error: "Webhook processing failed" }, { status: 500 });
+  }
+}
+
+/**
+ * Email the operator when something goes wrong in the payment flow. Never
+ * throws - a failed alert must not change the webhook response.
+ */
+async function alertOperator(subject: string, detail: string): Promise<void> {
+  if (!isEmailConfigured()) return;
+  const to = process.env.OWNER_ALERT_EMAIL || process.env.EMAIL_REPLY_TO || "mountain0342@gmail.com";
+  const stamp = new Date().toISOString();
+  try {
+    const result = await sendEmail({
+      to,
+      subject: `[MysticSage] ${subject}`,
+      html: `<p style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#222;">
+        <strong>${subject}</strong><br/>At: ${stamp}<br/><br/>
+        <code style="display:block;padding:12px;background:#f4f4f7;border-radius:6px;white-space:pre-wrap;">${detail}</code><br/>
+        PayPal retries failed IPN messages automatically, so this may resolve itself. Check the Vercel logs and the orders table if it repeats.
+      </p>`,
+    });
+    if (!result.ok) console.warn("[paypal-ipn] Operator alert failed:", result.error);
+  } catch (err) {
+    console.warn("[paypal-ipn] Operator alert threw:", err instanceof Error ? err.message : err);
   }
 }
 
