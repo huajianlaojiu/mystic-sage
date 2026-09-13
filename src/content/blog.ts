@@ -165,7 +165,7 @@ Make daily horoscopes a part of your morning routine. Even a few minutes of astr
     title: "Tarot Cards for Beginners: A Complete Guide to Getting Started",
     excerpt: "New to tarot? Learn the meanings of the 22 Major Arcana cards and how to start your own tarot practice today.",
     date: "July 4, 2026",
-    readTime: "2 min read",
+    readTime: "6 min read",
     tags: ["Tarot", "Beginners", "Guide"],
     content: `
 If you are new to tarot, the deck of 78 cards can seem overwhelming. But do not worry. Tarot is a practice that anyone can learn with patience and curiosity. This guide will walk you through the essentials.
@@ -193,14 +193,86 @@ Tips for Beginners
 3. Trust your intuition. The meaning of a card can shift depending on the question and context.
 4. Practice daily. Pull one card each morning and reflect on its message.
 
-Recommended Learning Path
+The Major Arcana: A Story in 22 Cards
 
-Week 1: Learn the 22 Major Arcana cards.
-Week 2: Learn the Minor Arcana suits and their themes.
-Week 3: Practice simple three-card spreads.
-Week 4: Start reading for friends or journaling daily pulls.
+The Major Arcana are not a random collection of symbols. Read in order, they describe one journey: The Fool leaves home, meets every possible teacher and obstacle, and eventually arrives at The World.
 
-Tarot is a journey, not a destination. Every reading deepens your connection to the cards and to yourself. The most important rule is: there are no wrong interpretations.
+It helps to learn them as a sequence rather than a list:
+
+The Fool begins. The Magician and High Priestess learn to act and to listen. The Empress and Emperor meet the world and its rules. The Hierophant, Lovers, and Chariot bring belief, choice, and will. Strength and the Hermit teach patience and solitude. The Wheel, Justice, and the Hanged Man introduce fate, consequence, and surrender. Death and Temperance strip things back to essentials. The Devil and the Tower break what was false. The Star, Moon, and Sun rebuild hope, then confusion, then clarity. Judgement and the World complete it.
+
+When a Major Arcana card appears, it usually means the question touches something structural rather than everyday. Three Major cards in a three-card spread is a strong signal.
+
+The Minor Arcana: The Four Suits
+
+The Minor Arcana describe daily life, and each suit covers one domain.
+
+Wands: fire. Action, ambition, creativity, and momentum. A Wand-heavy spread is about doing something, often urgently.
+
+Cups: water. Emotion, relationships, intuition, and memory. A Cup-heavy spread is about how you feel, or how someone else does.
+
+Swords: air. Thought, communication, conflict, and truth. A Sword-heavy spread often means the situation is happening mostly in your head, or that a difficult conversation is due.
+
+Pentacles: earth. Money, work, the body, and material security. A Pentacle-heavy spread is about resources and whether they are sufficient.
+
+Within each suit, the Ace is a beginning, the numbered cards follow a progression from 1 to 10, and the four court cards represent people or attitudes.
+
+The Court Cards
+
+Page, Knight, Queen, and King appear in every suit. They can represent a person in your life, a part of yourself, or a way of approaching the situation.
+
+Page: learning, messages, and beginner energy.
+
+Knight: action and intensity, often impatient.
+
+Queen: mastery turned inward — the inner quality of the suit.
+
+King: mastery turned outward — authority and how it is used.
+
+A Knight of Swords in a reading about a decision usually means someone is moving fast and hasn't thought it through. It can be you or it can be the other person. That ambiguity is not a flaw in the card; it is the question the card is asking.
+
+Reversals
+
+Many beginners worry about reversed cards before they have learned the upright ones. Two options work well:
+
+Ignore reversals entirely. Read every card upright. Many experienced readers do this and give excellent readings.
+
+Read reversals as blocked or internal. Not the opposite of the card, but the same energy turned inward, delayed, or resisted.
+
+Pick one approach and stay consistent. Switching mid-reading is what makes reversals confusing, not the cards themselves.
+
+Your First Deck
+
+Almost every tarot guide recommends the Rider-Waite-Smith deck or a close variant, and the reason is practical: it is the deck nearly every book and website is describing. Starting with the same images means the meanings you read actually match what you are looking at.
+
+Once you know that deck, branching out to other artwork becomes a pleasure rather than a source of confusion. Many modern decks rearrange or reinterpret the imagery, which is wonderful when you already know the original.
+
+Common Beginner Mistakes
+
+Trying to memorise all 78 cards before doing a reading. You will learn faster by reading badly for a month than by studying perfectly for a year.
+
+Ignoring the images. The picture is half the meaning. If a figure looks like they are turning away, that matters as much as the keyword.
+
+Reading each card in isolation. Three disconnected card meanings are not a reading. Look for repeating suits, repeating numbers, and cards that face toward or away from each other.
+
+Asking the same question repeatedly. If you pull cards until you get the answer you wanted, you are not reading, you are negotiating. Pull once, sit with the answer, and return to it in a week.
+
+Forgetting to journal. Without a record, you cannot tell whether your reading was accurate. With one, you can see your own patterns emerge after about twenty entries.
+
+A Four-Week Learning Path
+
+Week 1: Learn the 22 Major Arcana as a story, not a list.
+Week 2: Learn the four suits and what each one covers.
+Week 3: Practice simple three-card spreads using only the Major Arcana, then the full deck.
+Week 4: Start a daily one-card pull and journal what you notice.
+
+What Comes After
+
+Once you can read a three-card spread comfortably, the next step is learning how to phrase a good question and how to read the cards as a conversation rather than a series of definitions. That skill is what separates a beginner from a reader, and it is covered in our guide to reading tarot cards.
+
+The Takeaway
+
+Tarot is a journey rather than a destination. There is no exam and no correct answer key. The most important rule is the one every experienced reader eventually arrives at: there are no wrong interpretations, only interpretations that serve you and ones that do not.
 `
   }
 ,
@@ -209,7 +281,7 @@ Tarot is a journey, not a destination. Every reading deepens your connection to 
     title: "Zodiac Signs Compatibility: A Complete Guide",
     excerpt: "Wondering which zodiac signs are most compatible? Discover how fire, earth, air, and water signs connect in love and friendship.",
     date: "July 4, 2026",
-    readTime: "2 min read",
+    readTime: "5 min read",
     tags: ["Zodiac", "Compatibility", "Astrology"],
     content: `
 Zodiac compatibility is one of the most popular topics in astrology. Understanding how different signs interact can help you navigate relationships, friendships, and even professional partnerships.
@@ -226,22 +298,75 @@ Air Signs (Gemini, Libra, Aquarius): Intellectual, communicative, and social. Th
 
 Water Signs (Cancer, Scorpio, Pisces): Emotional, intuitive, and deep. They harmonize with Earth signs, who provide stability and security.
 
-Most Compatible Pairs
+The Modalities: How Each Sign Acts
 
-- Aries + Leo: A dynamic, passionate match full of adventure.
-- Taurus + Cancer: A nurturing, stable partnership built on trust.
-- Gemini + Aquarius: A stimulating, intellectual connection.
-- Cancer + Scorpio: An intense, deeply emotional bond.
-- Leo + Sagittarius: A fun, adventurous, and optimistic pair.
-- Virgo + Taurus: A practical, loyal, and grounded relationship.
-- Libra + Gemini: A social, harmonious, and balanced match.
-- Scorpio + Pisces: A deep, intuitive, and spiritual connection.
-- Sagittarius + Aries: An energetic, freedom-loving partnership.
-- Capricorn + Virgo: An ambitious, reliable, and focused pair.
-- Aquarius + Libra: An intellectual, forward-thinking duo.
-- Pisces + Cancer: A compassionate, nurturing, and creative bond.
+Elements describe temperament. Modalities describe behaviour, and they explain why two signs from the same element can still frustrate each other.
 
-Compatibility is complex and involves more than just Sun signs. For a more accurate reading, a full birth chart comparison is recommended.
+Cardinal signs (Aries, Cancer, Libra, Capricorn) start things. They are the ones who send the first message, book the trip, or change the plan.
+
+Fixed signs (Taurus, Leo, Scorpio, Aquarius) sustain things. They are loyal and immovable, and they will outlast almost anyone in a disagreement.
+
+Mutable signs (Gemini, Virgo, Sagittarius, Pisces) adapt. They change shape to fit the situation, which makes them flexible and occasionally hard to pin down.
+
+The friction usually shows up between cardinal and fixed signs. One wants to begin; the other wants to keep things as they are. Cardinal and mutable pairings move at very different speeds. Two fixed signs can be extraordinarily committed and completely stuck.
+
+The Angles: Why Some Pairs Feel Easy
+
+Astrologers describe relationships between signs using angles, measured in degrees around the zodiac wheel.
+
+Conjunction, 0 degrees. Same sign. Intense recognition and very little perspective, because you are looking at the same thing.
+
+Sextile, 60 degrees. Comfortable and easy, usually between compatible elements. Pleasant rather than transformative.
+
+Square, 90 degrees. Friction. Different modalities in incompatible elements. These pairings produce growth and frequent irritation, often in equal measure.
+
+Trine, 120 degrees. The easiest angle. Same element, natural understanding, very little effort required. The risk is that nothing ever gets challenged.
+
+Opposition, 180 degrees. Opposites that mirror each other. Attraction is strong and the argument is permanent, because each one sees what the other refuses to.
+
+This is why a "difficult" pairing can be the most interesting relationship in the room. Squares and oppositions create the tension that makes people grow. Trines create the comfort that makes people stay.
+
+Love, Friendship, and Work Are Different Questions
+
+The same two signs can be excellent friends and terrible partners, because each relationship rewards different things.
+
+For friendship, mutable and air placements usually make it easier. The relationship survives long gaps and changes well.
+
+For love, the moon signs matter more than the sun signs. Emotional needs have to match, or at least be legible to each other.
+
+For work, earth and cardinal placements tend to do well. Someone has to keep the schedule, and someone has to make the call.
+
+If you are checking compatibility for a specific area of life, name that area first. Half of all compatibility confusion comes from asking a general question about a specific situation.
+
+Why the Moon Sign Matters More Than You Think
+
+The sun sign describes how two people present themselves. The moon sign describes what they need at eleven at night when something has gone wrong.
+
+Two people with clashing sun signs but compatible moons often do better than two textbook matches who cannot comfort each other. If you know both people's moon signs, compare those before you compare anything else.
+
+The rising sign matters too, but mostly for first impressions and daily rhythm. Two people whose mornings operate on completely different schedules will notice that before they notice anything astrological.
+
+What to Do With a Difficult Pairing
+
+Do not treat a square as a verdict. Treat it as a description of where the work is.
+
+Name the difference out loud. Most compatibility problems are not actually disagreements, they are two people solving different problems at the same time.
+
+Decide which friction is productive. Some tension keeps a relationship alive. Some tension slowly erodes it. Those feel similar in week one and completely different in year three.
+
+Look at the whole chart if you have it. Sun sign compatibility is the headline of an article you have not read yet.
+
+What Compatibility Cannot Tell You
+
+It cannot tell you whether someone is kind, whether they will do the work, or whether they want the same things from life. Those questions matter more than any angle between two signs.
+
+The most accurate compatibility reading in the world will not save a relationship between two people who want different lives. It might, however, explain why the conversation keeps going in circles, and that is genuinely useful.
+
+Use This as a Lens
+
+Read compatibility as a way of understanding the shape of a relationship, not as a score to compare. The pairs with the highest compatibility are often the ones that change the least, and the pairs with the most friction are often the ones that change both people the most.
+
+Neither is automatically better. They are just different, and now you know which one you are looking at.
 `
   },
   {
@@ -249,7 +374,7 @@ Compatibility is complex and involves more than just Sun signs. For a more accur
     title: "What Is Numerology? A Beginner's Guide to Numbers",
     excerpt: "Numerology reveals the hidden meaning behind numbers in your life. Learn how to calculate your Life Path Number and what it says about you.",
     date: "July 4, 2026",
-    readTime: "2 min read",
+    readTime: "5 min read",
     tags: ["Numerology", "Life Path", "Spirituality"],
     content: `
 Numerology is the study of numbers and their spiritual significance. It suggests that numbers carry specific vibrations and meanings that can reveal insights about your personality, life purpose, and future.
@@ -279,9 +404,79 @@ Life Path Number Meanings
 - Life Path 9: The Humanitarian. Generous, wise, and idealistic.
 - Life Path 11, 22, 33: Master numbers with heightened spiritual potential.
 
-Numerology and Your Daily Life
+Where Numerology Comes From
 
-You can use numerology to choose favorable dates, understand your career path, and gain insight into your relationships. It is a powerful tool for self-discovery and personal growth.
+The modern Western system is usually traced to Pythagoras and his followers, who taught that numbers were the underlying structure of reality. A separate tradition, Chaldean numerology, is older and assigns different values to some letters. The two systems disagree on details, which is worth knowing before you compare readings from different sources and wonder why the numbers do not match.
+
+Older still are the number systems embedded in Hebrew, Arabic, and Chinese thought. What they share is not a method but an assumption: that patterns repeat, and that numbers are one way of describing those patterns.
+
+The Other Core Numbers
+
+Life Path is the headline, but a full numerology profile includes several numbers, each calculated from a different part of your name or birth date.
+
+Expression Number. Calculated from your full birth name. Describes your natural talents and how you tend to work in the world.
+
+Soul Urge Number. Calculated from the vowels in your name. Describes what you want underneath what you say you want. People often find this one more revealing than their Life Path.
+
+Personality Number. Calculated from the consonants. Describes how you come across before people know you.
+
+Birthday Number. The day of the month you were born. A smaller, more specific influence than the Life Path, describing a particular gift.
+
+Personal Year Number. Calculated from your birth day, birth month, and the current year. Changes annually and is the number most people use for timing.
+
+How to Calculate the Ones Based on Your Name
+
+Using the Pythagorean chart, each letter maps to a digit:
+
+1: A, J, S
+2: B, K, T
+3: C, L, U
+4: D, M, V
+5: E, N, W
+6: F, O, X
+7: G, P, Y
+8: H, Q, Z
+9: I, R
+
+Write your full birth name, convert each letter to its number, add the digits, and reduce. Use the name on your birth certificate rather than a married or chosen name, unless you are deliberately working with the newer name.
+
+How Numbers Are Read Together
+
+A single number in isolation tells you very little. The useful reading comes from the relationships between them.
+
+When your Life Path and Expression number agree, your natural talents line up with your direction, and work tends to feel easier than it looks from outside.
+
+When they disagree, you often have a talent that does not serve your main path. Someone with a Life Path of 7 and an Expression number of 3 may be drawn to solitary study while being genuinely gifted at communicating. Learning to use the second in service of the first usually resolves the tension.
+
+When your Soul Urge is very different from your Personality number, people tend to misread you. You look self-contained and want deep connection, or you look outgoing and need a great deal of solitude.
+
+What Numerology Is Useful For
+
+Language for patterns you have already noticed. This is the honest benefit. If a description of your Life Path makes you recognise something you could never quite explain, the number has done its job.
+
+A frame for timing. Personal Year numbers are a structured way of asking whether this is a year for starting, building, or finishing.
+
+A starting point for reflection. It is a set of questions. It is not an answer key.
+
+What It Cannot Do
+
+It cannot tell you what will happen. No number system predicts specific events, and any reading that claims to is selling certainty it does not have.
+
+It cannot replace a decision. If you are choosing between two jobs, numerology will not tell you which one to take. It may help you notice which one you already want.
+
+It cannot be verified the way a fact can. Two numerologists can look at the same birth date and reach different conclusions, because the interpretation is the work, not the arithmetic.
+
+A Reasonable Way to Use It
+
+Calculate your Life Path and your Soul Urge. Read both descriptions. Keep the parts that ring true and set the rest aside without guilt.
+
+Then, once a year, look at your Personal Year number and use it as a single question: what is this year actually for?
+
+That is enough. Numerology works best as a small, regular practice rather than a large, totalising system.
+
+The Takeaway
+
+Numbers are a mirror, and mirrors are useful. They are not maps. The most grounded numerologists will tell you the same thing: the value is in what you notice about yourself while doing the calculation, not in the calculation itself.
 `
   },
   {
