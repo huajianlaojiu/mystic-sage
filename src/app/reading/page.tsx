@@ -65,10 +65,12 @@ function PayPalButtons({ userEmail, question }: { userEmail: string | null; ques
         </form>
       </div>
         <p style={{ fontSize: 12, color: "var(--text-muted)", margin: 0, textAlign: "center", maxWidth: 460, lineHeight: 1.6 }}>
-          <strong style={{ color: "var(--text-secondary)" }}>$4.99 report:</strong> full 10-card spread · every card explained · patterns, timing &amp; 3 action steps · emailed, yours to keep
+          <strong style={{ color: "var(--text-secondary)" }}>$4.99 report:</strong>{" "}
+          full 10-card spread · every card explained · patterns, timing &amp; 3 action steps · emailed, yours to keep
         </p>
         <p style={{ fontSize: 12, color: "var(--text-muted)", margin: 0, textAlign: "center", maxWidth: 460, lineHeight: 1.6 }}>
-          <strong style={{ color: "var(--text-secondary)" }}>$19/mo:</strong> unlimited readings · full 10-card spread every time · history saved to your account
+          <strong style={{ color: "var(--text-secondary)" }}>$19/mo:</strong>{" "}
+          unlimited readings · full 10-card spread every time · history saved to your account
         </p>
         <p style={{ fontSize: 12, color: "var(--text-muted)", margin: 0, textAlign: "center", maxWidth: 460, lineHeight: 1.6 }}>
           {userEmail
