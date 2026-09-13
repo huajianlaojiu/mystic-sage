@@ -43,6 +43,10 @@ export const config = {
     // Refresh sessions on page navigations, but skip /api routes — those
     // validate the session themselves via getSessionUser() and we don't want
     // to double the (cold-start-prone) server-side Supabase calls.
-    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:html|svg|png|jpg|jpeg|gif|webp)$).*)",
+    // Static crawler files (sitemap.xml, robots.txt), assets and verification
+    // files skip the session refresh so they are served without waiting on a
+    // Supabase round-trip — a cold start there previously made Google report
+    // "Couldn't fetch" for the sitemap.
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:html|xml|txt|svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };
