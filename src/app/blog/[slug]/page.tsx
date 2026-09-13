@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { blogPosts, getRelatedPosts, postDateISO } from "@/content/blog";
 
 export function generateStaticParams() {
@@ -59,7 +60,7 @@ function BreadcrumbJsonLd({ title, slug }: { title: string; slug: string }) {
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = blogPosts.find(function(p) { return p.slug === slug; });
-  if (!post) return <section className="page-header"><h1>Post not found</h1></section>;
+  if (!post) notFound();
 
   const related = getRelatedPosts(post, 3);
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { cardMeanings } from "@/content/cards";
 
 export function generateStaticParams() {
@@ -60,7 +61,7 @@ function CardJsonLd({ name, slug, description, keywords }: { name: string; slug:
 export default async function CardPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const card = cardMeanings.find(function(c) { return c.slug === slug; });
-  if (!card) return <section className="page-header"><h1>Card not found</h1></section>;
+  if (!card) notFound();
 
   return (
     <>
