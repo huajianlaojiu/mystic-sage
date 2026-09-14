@@ -29,29 +29,37 @@
 
 ## 待用户处理（只有你能做的）
 
-- [ ] **修 www 的 SSL 证书**（真问题，见下）
 - [ ] 修正 Pinterest 简介里的错域名：`mysticsages.co` -> `mysticsages.com`（.co 不存在）
 - [ ] Pinterest 恢复期维护：每天 10 分钟保存/关注/评论，落地页修好后每天 3 张恢复发布
 - [ ] X：Day 13 之后的日常发布（素材已备到 Day 21）
 - [ ] 首笔真实 live 收款验证（Payoneer 卡下卡后走一次 $4.99）
 
-### ⚠️ www.mysticsages.com 证书对不上（2026-09-13 实测）
+### ✅ www SSL 证书（2026-09-14 已修复）
+
+**根因**：`www.mysticsages.com` **根本没有添加到 Vercel 项目里**，
+所以 Vercel 只能拿主域的证书去应答 www，浏览器报
+`ERR_TLS_CERT_ALTNAME_INVALID`。
+
+注意当时 www 确实会返回 308/307 跳转——但**跳转发生在 TLS 握手之后**，
+握手失败时浏览器连跳转都走不到，只会先弹安全警告。
+
+**修复**：Vercel → 项目 `mysticsage` → Settings → Domains → Add Domain →
+填 `www.mysticsages.com` → **不要勾** "Include apex and www variants"
+（否则主域会被设成重定向到自己，形成无限循环）→
+Redirect to Another Domain → `mysticsages.com`。
+
+**验证结果**：
 
 ```
-mysticsages.com      证书 SAN = DNS:mysticsages.com        authorized: true
-www.mysticsages.com  同一张证书，SAN 不含 www              ERR_TLS_CERT_ALTNAME_INVALID
+证书 SAN = DNS:www.mysticsages.com          authorized: true
+https://www.mysticsages.com → 308 → https://mysticsages.com → 200
+ssl_verify_result = 0（通过）
+www 与 apex 的 DNS 记录均与 Vercel 官方要求完全一致
 ```
 
-Vercel 确实会给 www 发 307 跳转到主域，但**跳转发生在 TLS 握手之后**。
-握手失败 → 浏览器先弹「你的连接不是私密连接」，跳转永远走不到。
-任何人输入 `www.mysticsages.com` 都会看到安全警告。
-
-**修复（在 Vercel 后台，2 分钟）：**
-1. 打开 Vercel → 项目 `mysticsage` → Settings → Domains
-2. 看 `www.mysticsages.com` 是否在列表里
-3. 如果不在：Add Domain → 填 `www.mysticsages.com` → 选 **Redirect to mysticsages.com**
-4. 如果在：看它的 Certificate 状态，必要时点 **Refresh** 或删掉重新添加，触发证书重签
-5. 修好后用 `curl -I https://www.mysticsages.com/` 验证：应返回 307 且**无证书错误**
+后台两行域名仍显示 "DNS Change Recommended"，属建议性提示：
+实测 apex 为 `A 76.76.21.21`、www 为 `CNAME cname.vercel-dns.com`，
+正是 Vercel 文档要求的值，证书与访问均正常，无需处理。
 
 ## 待开发（可排期）
 
