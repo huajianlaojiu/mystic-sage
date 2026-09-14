@@ -22,7 +22,7 @@ Images: mysticsage/public/images/x/Day 17/
 [EVENING] cs-evening.png :: Night card: The Tower. What falls was never yours.
 
 === @ZodiacWisdom ===
-[MORNING] zw-morning.png :: Gemini: undefined. Libra: follow through. Aquarius: take the risk.
+[MORNING] zw-morning.png :: Gemini: say the true thing. Libra: follow through. Aquarius: take the risk.
 [MIDDAY] zw-midday.png :: Fire, earth, air or water - Air signs are being asked to say the true thing this week.
 [EVENING] zw-evening.png :: Tonight: slow down. Even the loudest sign needs a quiet hour.
 
@@ -48,6 +48,5 @@ Images: mysticsage/public/images/x/Day 17/
 
 === @FortuneTold ===
 [MORNING] ft-morning.png :: The universe wants you to know: you are closer than it feels.
-[MIDDAY] ft-midday.png :: Today's nudge: undefined. Courage is doing the small thing first.
+[MIDDAY] ft-midday.png :: Today's nudge: say the honest thing. Courage is doing the small thing first.
 [EVENING] ft-evening.png :: Tonight's sign: a chapter is closing. Let it. The next one is already opening.
-

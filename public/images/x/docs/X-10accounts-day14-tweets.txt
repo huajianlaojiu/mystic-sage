@@ -7,7 +7,7 @@ Images: mysticsage/public/images/x/Day 14/
 [EVENING] br-evening.png :: Night reset: name one thing to release. Tomorrow is a clean page.
 === @DailyTarotDraw ===
 [MORNING] da-morning.png :: Card of the Day: The Sun. joy, clarity - let it guide your choices.
-[MIDDAY] da-midday.png :: Pick your card for tonight: 1) Judgement 2) The World 3) The World. Reply with a number.
+[MIDDAY] da-midday.png :: Pick your card for tonight: 1) Judgement 2) The World 3) The High Priestess. Reply with a number.
 [EVENING] da-evening.png :: Tonight's pull: Judgement. It is asking you to pay attention to what you keep ignoring.
 === @TarotGuidance ===
 [MORNING] tg-morning.png :: Tip: pull your card with your non-dominant hand. It connects you to intuition, not habit.
@@ -40,4 +40,4 @@ Images: mysticsage/public/images/x/Day 14/
 === @FortuneTold ===
 [MORNING] ft-morning.png :: The universe says: this chapter closes.
 [MIDDAY] ft-midday.png :: Today's push: new door ahead. Courage is a quiet repeat of the small step.
-[EVENING] ft-evening.png :: Tonight's sign: undefined. Endings here are beginnings there.
+[EVENING] ft-evening.png :: Tonight's sign: an ending. Let it close so the next thing can begin.

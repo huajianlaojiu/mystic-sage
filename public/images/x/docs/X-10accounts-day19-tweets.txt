@@ -22,7 +22,7 @@ Images: mysticsage/public/images/x/Day 19/
 [EVENING] cs-evening.png :: Night card: The World. A cycle closes so the next can begin.
 
 === @ZodiacWisdom ===
-[MORNING] zw-morning.png :: Leo: undefined. Aries: follow through. Sagittarius: take the risk.
+[MORNING] zw-morning.png :: Leo: let yourself be seen. Aries: follow through. Sagittarius: take the risk.
 [MIDDAY] zw-midday.png :: Fire, earth, air or water - Fire signs are being asked to act on the idea this week.
 [EVENING] zw-evening.png :: Tonight: slow down. Even the loudest sign needs a quiet hour.
 
@@ -48,6 +48,5 @@ Images: mysticsage/public/images/x/Day 19/
 
 === @FortuneTold ===
 [MORNING] ft-morning.png :: The universe wants you to know: you are closer than it feels.
-[MIDDAY] ft-midday.png :: Today's nudge: undefined. Courage is doing the small thing first.
+[MIDDAY] ft-midday.png :: Today's nudge: show up as you are. Courage is doing the small thing first.
 [EVENING] ft-evening.png :: Tonight's sign: a chapter is closing. Let it. The next one is already opening.
-

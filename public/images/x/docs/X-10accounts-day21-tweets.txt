@@ -8,7 +8,7 @@ Images: mysticsage/public/images/x/Day 21/
 
 === @DailyTarotDraw ===
 [MORNING] da-morning.png :: Card of the Day: The Star. Hope and healing.
-[MIDDAY] da-midday.png :: Pick a card: 1) The Star 2) The Hermit 3) The Star. Reply with a number.
+[MIDDAY] da-midday.png :: Pick a card: 1) The Star 2) The Hermit 3) The World. Reply with a number.
 [EVENING] da-evening.png :: Tonight's pull: The Star. What is it asking you to see?
 
 === @TarotGuidance ===
@@ -22,7 +22,7 @@ Images: mysticsage/public/images/x/Day 21/
 [EVENING] cs-evening.png :: Night card: The Star. Healing is quiet but real.
 
 === @ZodiacWisdom ===
-[MORNING] zw-morning.png :: Libra: undefined. Gemini: follow through. Aquarius: take the risk.
+[MORNING] zw-morning.png :: Libra: choose instead of weighing. Gemini: follow through. Aquarius: take the risk.
 [MIDDAY] zw-midday.png :: Fire, earth, air or water - Air signs are being asked to clear the air this week.
 [EVENING] zw-evening.png :: Tonight: slow down. Even the loudest sign needs a quiet hour.
 
@@ -48,6 +48,5 @@ Images: mysticsage/public/images/x/Day 21/
 
 === @FortuneTold ===
 [MORNING] ft-morning.png :: The universe wants you to know: you are closer than it feels.
-[MIDDAY] ft-midday.png :: Today's nudge: undefined. Courage is doing the small thing first.
+[MIDDAY] ft-midday.png :: Today's nudge: let it be simpler. Courage is doing the small thing first.
 [EVENING] ft-evening.png :: Tonight's sign: a chapter is closing. Let it. The next one is already opening.
-

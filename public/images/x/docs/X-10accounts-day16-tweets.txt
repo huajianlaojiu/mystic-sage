@@ -22,7 +22,7 @@ Images: mysticsage/public/images/x/Day 16/
 [EVENING] cs-evening.png :: Night card: The Moon. Trust what you feel over what you see.
 
 === @ZodiacWisdom ===
-[MORNING] zw-morning.png :: Taurus: undefined. Virgo: follow through. Capricorn: take the risk.
+[MORNING] zw-morning.png :: Taurus: build the habit. Virgo: follow through. Capricorn: take the risk.
 [MIDDAY] zw-midday.png :: Fire, earth, air or water - Earth signs are being asked to build something lasting this week.
 [EVENING] zw-evening.png :: Tonight: slow down. Even the loudest sign needs a quiet hour.
 
@@ -48,6 +48,5 @@ Images: mysticsage/public/images/x/Day 16/
 
 === @FortuneTold ===
 [MORNING] ft-morning.png :: The universe wants you to know: you are closer than it feels.
-[MIDDAY] ft-midday.png :: Today's nudge: undefined. Courage is doing the small thing first.
+[MIDDAY] ft-midday.png :: Today's nudge: keep the promise you made to yourself. Courage is doing the small thing first.
 [EVENING] ft-evening.png :: Tonight's sign: a chapter is closing. Let it. The next one is already opening.
-
