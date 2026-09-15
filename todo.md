@@ -29,16 +29,49 @@
 
 ## 待用户处理（只有你能做的）
 
-- [ ] **开启 Supabase 邮箱验证（最高优先级，1 分钟）**
-      Supabase Dashboard → Authentication → Providers → Email → 打开 **Confirm email**。
+- [x] **开启 Supabase 邮箱验证（2026-09-15 完成）**
+      通过 Management API 把 `mailer_autoconfirm` 改为 `false`，并修复了 SMTP 配置。
+      实测：注册返回 200、`confirmation_sent_at` 有值、`email_confirmed_at` 为 null、
+      **不发放会话** —— 攻击链已断。
+- [ ] **确认验证邮件真的收到了**（最后一步，只有你能做）
+      你的邮箱 `huajianjiu12345@163.com` 应收到 3 封主题为
+      "Confirm your email address" 的邮件（北京时间 14:32 / 14:36 / 14:38）。
 
-      不做的后果：**任何人用别人的邮箱注册，就能白嫖那个人的 $19 会员。**
-      攻击链是：受害者用 PayPal 邮箱付款但没建站内账号 → 攻击者拿这个邮箱注册 →
-      权益是按邮箱字符串查的 → 攻击者拿到 premium。
+      **重点看发件人地址**：
+      - `noreply@mysticsages.com` → 走的是 Resend，配置正确 ✅
+      - `...@mail.app.supabase.io` → 掉回了 Supabase 自带服务，需要再查
 
-      代码侧防护已就位（未验证邮箱不发权益），但**只有打开这个开关它才生效**：
-      开关关着时每次注册都会被 Supabase 自动确认，`email_confirmed_at` 永远有值，
-      代码里的检查就形同虚设。**代码已经准备好了，缺的就是你点这一下。**
+      顺手可点一次登录页的 "Forgot password?" 确认密码重置邮件也能到
+      （那条路径此前一直是坏的，本次一并修复）。
+- [ ] **删除 codex-temp 令牌**：https://supabase.com/dashboard/account/tokens
+      权限很大（能改整个项目配置），已用完，请删掉。
+
+### ⚠️ 修复过程中踩到的坑（记录下来避免重蹈）
+
+**1. Management API 的 PATCH 是整体覆盖，不是局部更新。**
+只传一个字段（例如只有 `smtp_pass`），**其余 SMTP 字段会被重置为 null**。
+要保留的字段必须一次性全部传进去。我中途正是这样把 SMTP 配置清空的，
+导致那段时间注册走回了 Supabase 自带邮件服务（每小时仅 2-4 封）。
+
+**2. 两个字段有坑：**
+
+```
+smtp_max_frequency  与其它字段一起传 -> HTTP 400
+                    单独传 -> 200，但会清空其它字段
+                    结论：干脆不传，默认就是 60
+smtp_port           必须传字符串 "587"；传数字 587 会 400
+smtp_sender_name    首次传 401，重试后 200（疑似瞬时问题）
+```
+
+**3. Management API 读回的 `smtp_pass` 是哈希值，不是明文（64 位十六进制）。**
+我一开始拿这个值去测 Resend SMTP，得到 535 "credentials invalid"，
+差点误判成"密码存错了"。**教训：API 读回的值不能用来验证发信，
+只能端到端实测。**
+
+**4. 「忘记密码」此前一直是坏的。**
+`resetPasswordForEmail()` 走 Supabase 发信，而 SMTP 密码是错值，
+用户点 "Forgot password?" 会看到"Check your email"，但邮件永远不来。
+本次一并修好。
 - [x] 修正 Pinterest 简介里的错域名（2026-09-14 完成，已改为 mysticsages.com）
 - [ ] **Pinterest 每日维护（进行中）**：每天 10 分钟关注 6-10 个 + 保存 20-30 张
       （截至 9/15：关注 18，已保存 18 张；粉丝仍为 0，属正常，需 2-4 周）
