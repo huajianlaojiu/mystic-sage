@@ -33,20 +33,40 @@
       通过 Management API 把 `mailer_autoconfirm` 改为 `false`，并修复了 SMTP 配置。
       实测：注册返回 200、`confirmation_sent_at` 有值、`email_confirmed_at` 为 null、
       **不发放会话** —— 攻击链已断。
-- [ ] **确认验证邮件真的收到了**（最后一步，只有你能做）
-      你的邮箱 `huajianjiu12345@163.com` 应收到 3 封主题为
-      "Confirm your email address" 的邮件（北京时间 14:32 / 14:36 / 14:38）。
+- [x] **认证邮件改由网站自己发送（2026-09-15 完成，提交 `33d98c3`）**
+      Supabase 发的确认邮件一封都到不了，而同一条 Resend 通道发的测试邮件
+      一分钟内就到了同一个 163 邮箱。所以改为：
 
-      **重点看发件人地址**：
-      - `noreply@mysticsages.com` → 走的是 Resend，配置正确 ✅
-      - `...@mail.app.supabase.io` → 掉回了 Supabase 自带服务，需要再查
+      - 新增 `/api/auth/register`：用 `auth.admin.generateLink` 创建用户并拿到确认链接，
+        再由网站的 Resend 集成发出（`generateLink` 本身不发信）
+      - 新增 `/api/auth/reset`：密码重置同样改走这条路
+      - 注册页改成调用新接口，并补上「检查收件箱」状态页（此前假设注册后立刻拿到会话）
+      - 密码最少 8 位，与服务端规则一致
 
-      顺手可点一次登录页的 "Forgot password?" 确认密码重置邮件也能到
-      （那条路径此前一直是坏的，本次一并修复）。
+      **实测**：新邮箱注册返回 200，用户已创建且 `email_confirmed_at = null`，
+      Resend 接受发信；测试用户已清理。
+
+- [ ] **用你自己的邮箱最终确认一次**
+      现有这几个邮箱都已在库里（`huajianjiu0000` / `000` / `110` / `12345` @163.com），
+      注册会提示"已存在"。要测的话用一个**没用过的邮箱**在
+      https://mysticsages.com/auth/register 注册，
+      或先让我把某个旧测试账号删掉再重新注册。
 - [ ] **删除 codex-temp 令牌**：https://supabase.com/dashboard/account/tokens
       权限很大（能改整个项目配置），已用完，请删掉。
 
 ### ⚠️ 修复过程中踩到的坑（记录下来避免重蹈）
+
+**0. 最重要的一条教训：Supabase 对「已存在的邮箱」会返回伪造的成功响应。**
+`huajianjiu12345@163.com` 早在 8 月 25 日就注册并确认过了，
+但我拿它反复测注册，每次都拿到 HTTP 200 + `confirmation_sent_at` ——
+**实际上 Supabase 根本没发任何邮件**，只是返回了一个用于防枚举的假响应，
+连返回的 user id 每次都不一样。
+
+我因此一度得出"Supabase 没有使用 SMTP 配置"的错误结论（依据是"把 SMTP 主机
+改成不存在的域名，注册仍然成功"——其实是因为那个邮箱已存在，压根没走发信流程）。
+
+**正确做法**：验证发信必须用**全新的邮箱**，或者直接查数据库确认用户是否真的被创建。
+本次修复就是靠 SQL 查 `auth.users` 才发现的。
 
 **1. Management API 的 PATCH 是整体覆盖，不是局部更新。**
 只传一个字段（例如只有 `smtp_pass`），**其余 SMTP 字段会被重置为 null**。
