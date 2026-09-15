@@ -24,27 +24,27 @@ Images: mysticsage/public/images/x/Day 23/
 === @ZodiacWisdom ===
 [MORNING] zw-morning.png :: Aries: move first. Leo: follow through. Sagittarius: take the risk.
 [MIDDAY] zw-midday.png :: Fire, earth, air or water - Fire signs are being asked to act on the idea this week.
-[EVENING] zw-evening.png :: Tonight: slow down. Even the loudest sign needs a quiet hour.
+[EVENING] zw-evening.png :: Tonight: put the phone down first. The answer usually arrives right after.
 
 === @StarSignDaily ===
 [MORNING] sd-morning.png :: Leo: momentum builds. Sagittarius: say yes. Aries: trust the timing.
-[MIDDAY] sd-midday.png :: Which sign are you: sun, moon or rising? Comment and find your people.
+[MIDDAY] sd-midday.png :: Tell us your moon sign. It explains more than your sun sign does.
 [EVENING] sd-evening.png :: Tomorrow's energy: Leo leads with instinct. Sagittarius leads with courage.
 
 === @LoveTarotRead ===
 [MORNING] lt-morning.png :: Love note: Do not shrink to be chosen.
-[MIDDAY] lt-midday.png :: The Lovers card is about alignment, not just romance. Do your choices match your values?
+[MIDDAY] lt-midday.png :: The Lovers is not only about a person. It is about a decision you keep circling.
 [EVENING] lt-evening.png :: Tonight ask yourself honestly: am I staying for love, or for familiarity?
 
 === @HeartTarot ===
 [MORNING] ht-morning.png :: You are allowed to grieve something you chose to leave.
-[MIDDAY] ht-midday.png :: Repeat after me: I am allowed to outgrow people and still love them.
-[EVENING] ht-evening.png :: Evening check-in: what is one kind thing you did for yourself today?
+[MIDDAY] ht-midday.png :: Repeat after me: rest is something I am allowed to take, not earn.
+[EVENING] ht-evening.png :: Evening check-in: what did you say no to today, and did it feel right?
 
 === @DailyFortuneTell ===
 [MORNING] df-morning.png :: Lucky today: amber, number 3. Watch where they show up.
 [MIDDAY] df-midday.png :: Fortune: an old door is closing so a better one can open.
-[EVENING] df-evening.png :: Evening fortune: what you release now makes room for what arrives this week.
+[EVENING] df-evening.png :: Evening fortune: the answer you did not like is probably the accurate one.
 
 === @FortuneTold ===
 [MORNING] ft-morning.png :: The universe wants you to know: the delay is protecting you.

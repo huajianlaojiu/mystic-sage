@@ -24,27 +24,27 @@ Images: mysticsage/public/images/x/Day 25/
 === @ZodiacWisdom ===
 [MORNING] zw-morning.png :: Gemini: speak up. Libra: follow through. Aquarius: take the risk.
 [MIDDAY] zw-midday.png :: Fire, earth, air or water - Air signs are being asked to say the true thing this week.
-[EVENING] zw-evening.png :: Tonight: slow down. Even the loudest sign needs a quiet hour.
+[EVENING] zw-evening.png :: Tonight: let the day finish before you judge it.
 
 === @StarSignDaily ===
 [MORNING] sd-morning.png :: Aquarius: clarity arrives. Gemini: say yes. Libra: trust the timing.
-[MIDDAY] sd-midday.png :: Which sign are you: sun, moon or rising? Comment and find your people.
+[MIDDAY] sd-midday.png :: Drop your big three in the comments - sun, moon, rising.
 [EVENING] sd-evening.png :: Tomorrow's energy: Aquarius leads with instinct. Gemini leads with courage.
 
 === @LoveTarotRead ===
 [MORNING] lt-morning.png :: Love note: Your standards are not unrealistic.
-[MIDDAY] lt-midday.png :: The Lovers card is about alignment, not just romance. Do your choices match your values?
+[MIDDAY] lt-midday.png :: The Empress is a reminder that being cared for is not the same as being managed.
 [EVENING] lt-evening.png :: Tonight ask yourself honestly: would I accept this from a friend?
 
 === @HeartTarot ===
 [MORNING] ht-morning.png :: The version of you that survived is not the version you have to stay.
-[MIDDAY] ht-midday.png :: Repeat after me: I am allowed to outgrow people and still love them.
-[EVENING] ht-evening.png :: Evening check-in: what is one kind thing you did for yourself today?
+[MIDDAY] ht-midday.png :: Repeat after me: I can be a work in progress and still be enough.
+[EVENING] ht-evening.png :: Evening check-in: what is one thing you can leave unfinished tonight?
 
 === @DailyFortuneTell ===
 [MORNING] df-morning.png :: Lucky today: rose gold, number 8. Watch where they show up.
 [MIDDAY] df-midday.png :: Fortune: the answer arrives when you stop forcing it.
-[EVENING] df-evening.png :: Evening fortune: what you release now makes room for what arrives this week.
+[EVENING] df-evening.png :: Evening fortune: the delay has been doing work you cannot see yet.
 
 === @FortuneTold ===
 [MORNING] ft-morning.png :: The universe wants you to know: nothing you survived was wasted.

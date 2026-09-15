@@ -24,27 +24,27 @@ Images: mysticsage/public/images/x/Day 28/
 === @ZodiacWisdom ===
 [MORNING] zw-morning.png :: Capricorn: hold the line. Taurus: follow through. Virgo: take the risk.
 [MIDDAY] zw-midday.png :: Fire, earth, air or water - Earth signs are being asked to finish what you started this week.
-[EVENING] zw-evening.png :: Tonight: slow down. Even the loudest sign needs a quiet hour.
+[EVENING] zw-evening.png :: Tonight: be as kind to yourself as you are to strangers.
 
 === @StarSignDaily ===
 [MORNING] sd-morning.png :: Virgo: detail pays. Capricorn: say yes. Taurus: trust the timing.
-[MIDDAY] sd-midday.png :: Which sign are you: sun, moon or rising? Comment and find your people.
+[MIDDAY] sd-midday.png :: Comment your sign and one thing that is very true about you.
 [EVENING] sd-evening.png :: Tomorrow's energy: Virgo leads with instinct. Capricorn leads with courage.
 
 === @LoveTarotRead ===
 [MORNING] lt-morning.png :: Love note: Peace is not boring. It is new.
-[MIDDAY] lt-midday.png :: The Lovers card is about alignment, not just romance. Do your choices match your values?
+[MIDDAY] lt-midday.png :: Ten of Cups is the quiet version of success. Not fireworks - consistency.
 [EVENING] lt-evening.png :: Tonight ask yourself honestly: am I waiting for a version of them that does not exist?
 
 === @HeartTarot ===
 [MORNING] ht-morning.png :: You are not behind. You are rebuilding.
-[MIDDAY] ht-midday.png :: Repeat after me: I am allowed to outgrow people and still love them.
-[EVENING] ht-evening.png :: Evening check-in: what is one kind thing you did for yourself today?
+[MIDDAY] ht-midday.png :: Repeat after me: healing slowly is still healing.
+[EVENING] ht-evening.png :: Evening check-in: what are you carrying that is not yours to carry?
 
 === @DailyFortuneTell ===
 [MORNING] df-morning.png :: Lucky today: charcoal, number 2. Watch where they show up.
 [MIDDAY] df-midday.png :: Fortune: you are one honest conversation away from relief.
-[EVENING] df-evening.png :: Evening fortune: what you release now makes room for what arrives this week.
+[EVENING] df-evening.png :: Evening fortune: you are one honest conversation away from relief.
 
 === @FortuneTold ===
 [MORNING] ft-morning.png :: The universe wants you to know: you are allowed to want what you want.
