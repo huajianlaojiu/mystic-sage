@@ -30,14 +30,22 @@ export default function LoginPage() {
     }
     setLoading(true);
     try {
-      const m = await import("@/lib/supabase");
-      const { error } = await m.getBrowserClient().auth.resetPasswordForEmail(email, {
-        redirectTo: window.location.origin + "/auth/callback?next=/auth/reset-password",
+      // Sent by our own API route: Supabase Auth's outbound mail never reached
+      // users, so the reset link goes out over the app's Resend channel.
+      const res = await fetch("/api/auth/reset", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
       });
-      if (error) setMsg(error.message);
-      else { setResetSent(true); setMsg("Check your email for the password reset link."); }
+      const data = await res.json().catch(() => ({}));
+      if (res.ok) {
+        setResetSent(true);
+        setMsg(data.message || "Check your email for the password reset link.");
+      } else {
+        setMsg(data.error || "Could not send the reset link. Please try again.");
+      }
     } catch {
-      setMsg("Configure Supabase in .env.local first");
+      setMsg("Something went wrong. Please try again.");
     } finally { setLoading(false); }
   }
 

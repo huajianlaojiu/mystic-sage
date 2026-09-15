@@ -168,10 +168,75 @@ export function detailedReportEmailHtml(
           </table>
         </td>
       </tr>
+      </table>
+    </body>
+  </html>
+    `.trim();
+  }
+
+/**
+ * Confirmation and recovery emails are sent by this app rather than by
+ * Supabase Auth. Supabase's own mailer was configured but never actually used
+ * its SMTP settings, so its messages never reached users; sending through the
+ * same Resend path as the welcome email is the one that is proven to deliver.
+ */
+function authEmailShell(heading: string, body: string, ctaLabel: string, link: string, footer: string): string {
+  return `
+<!doctype html>
+<html>
+  <body style="margin:0;padding:0;background:#0a0a0f;font-family:Inter,Arial,sans-serif;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0a0a0f;padding:32px 16px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;background:#12121c;border:1px solid #2a2a3a;border-radius:16px;padding:32px;">
+            <tr>
+              <td align="center" style="font-size:32px;padding-bottom:8px;">✦</td>
+            </tr>
+            <tr>
+              <td align="center" style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:#f0ede8;padding-bottom:16px;">${heading}</td>
+            </tr>
+            <tr>
+              <td style="color:#a8a6a0;font-size:15px;line-height:1.7;padding-bottom:16px;">${body}</td>
+            </tr>
+            <tr>
+              <td align="center" style="padding-bottom:16px;">
+                <a href="${link}" style="display:inline-block;background:linear-gradient(135deg,#b466ff,#8a4fcf);color:#ffffff;padding:12px 28px;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;">${ctaLabel}</a>
+              </td>
+            </tr>
+            <tr>
+              <td style="color:#777;font-size:12px;line-height:1.6;padding-top:8px;border-top:1px solid #2a2a3a;">
+                ${footer}<br/>
+                If the button does not work, copy this address into your browser:<br/>
+                <span style="color:#8a8a99;word-break:break-all;">${link}</span>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
     </table>
   </body>
 </html>
   `.trim();
+}
+
+export function confirmationEmailHtml(link: string): string {
+  return authEmailShell(
+    "Confirm your email address",
+    "You are one click away from finishing your MysticSage account. Once confirmed, you can pull a free reading every day and keep your reading history.",
+    "Confirm email address",
+    link,
+    "You received this email because someone signed up at mysticsages.com with this address. If that was not you, you can ignore it and nothing will happen."
+  );
+}
+
+export function recoveryEmailHtml(link: string): string {
+  return authEmailShell(
+    "Reset your password",
+    "We received a request to reset the password on your MysticSage account. The link below lets you choose a new one. It expires in an hour.",
+    "Choose a new password",
+    link,
+    "If you did not request a password reset, you can safely ignore this email. Your password will not change."
+  );
 }
 
 export function welcomeEmailHtml(name?: string): string {
