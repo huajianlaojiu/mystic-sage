@@ -29,6 +29,16 @@
 
 ## 待用户处理（只有你能做的）
 
+- [ ] **开启 Supabase 邮箱验证（最高优先级，1 分钟）**
+      Supabase Dashboard → Authentication → Providers → Email → 打开 **Confirm email**。
+
+      不做的后果：**任何人用别人的邮箱注册，就能白嫖那个人的 $19 会员。**
+      攻击链是：受害者用 PayPal 邮箱付款但没建站内账号 → 攻击者拿这个邮箱注册 →
+      权益是按邮箱字符串查的 → 攻击者拿到 premium。
+
+      代码侧防护已就位（未验证邮箱不发权益），但**只有打开这个开关它才生效**：
+      开关关着时每次注册都会被 Supabase 自动确认，`email_confirmed_at` 永远有值，
+      代码里的检查就形同虚设。**代码已经准备好了，缺的就是你点这一下。**
 - [x] 修正 Pinterest 简介里的错域名（2026-09-14 完成，已改为 mysticsages.com）
 - [ ] **Pinterest 每日维护（进行中）**：每天 10 分钟关注 6-10 个 + 保存 20-30 张
       （截至 9/15：关注 18，已保存 18 张；粉丝仍为 0，属正常，需 2-4 周）
@@ -65,6 +75,24 @@ www 与 apex 的 DNS 记录均与 Vercel 官方要求完全一致
 
 ## 待开发（可排期）
 
+- [x] **审计报告问题修复（2026-09-15 完成，提交 `8042573`）**
+      - 定价页两个表单补 `custom` 字段（此前只能用 PayPal 邮箱兜底，
+        两个邮箱不一致时会员开不到登录账号上）
+      - 定价页报告表单补「你的问题」输入框（此前页面写着 "written for your question"
+        却不传问题，只能生成默认问题）
+      - 定价页移除 `target="_blank"`，与 /reading 页保持一致
+      - webhook 接受 `subscr_failed` / `recurring_payment_suspended` /
+        `recurring_payment_skipped` 并标记 `past_due`；扣款未 Completed 不再写成 active
+        （此前信用卡过期后会员永久有效，一分钱收不到）
+      - 取消订阅改为跳转 PayPal 自己的管理页（经典订阅 ID 无法用 REST API 取消；
+        同时满足 FTC/欧盟"在线退订"合规要求）
+      - 会员加 50 次/天 fair-use 配额（此前会员可无限刷，能被打穿毛利）
+      - `/api/subscribe` 加限流（3 次/天/指纹），在写库和发信之前拦截
+      - 权益发放要求邮箱已验证（配合上面的 Supabase 开关生效）
+      - 删除 Lemon Squeezy 死代码（含一个无 secret 时 fail-open 的 webhook）及其依赖
+      - 重写 `.env.example`，按代码实际读取的变量补齐（此前缺 service_role、
+        PayPal 凭据、RATE_LIMIT_SALT、MODEL_* 等）
+      - `/signup`、`/sign-up`、`/register` 重定向到 `/auth/register`
 - [x] **X Day 22-28 素材已生成（2026-09-15）**：210 条文案 + 210 张配图，
       独立质检 0 问题（无占位符、无重复选项、无重复行、图片齐全）
 - [x] 新增素材生成脚本 `scripts/generate-x-pack.mjs`，含内置质检；
