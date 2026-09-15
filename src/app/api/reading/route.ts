@@ -8,6 +8,10 @@ export const maxDuration = 60;
 const MAX_QUESTION_CHARS = 500;
 const MAX_CARD_NAMES = 10;
 const MAX_CARD_NAME_CHARS = 80;
+// Generous enough that no human reaches it, low enough that a script cannot
+// turn a $19 subscription into an unbounded AI bill. Described on the pricing
+// page as a fair-use limit so the copy and the code agree.
+const PREMIUM_DAILY_LIMIT = 50;
 
 function parseRequestBody(body: unknown) {
   if (!body || typeof body !== "object" || Array.isArray(body)) throw new Error("Invalid request body");
@@ -33,15 +37,29 @@ export async function POST(req: NextRequest) {
     const sessionUser = await getSessionUser();
     const email = sessionUser?.email?.trim().toLowerCase() || null;
     const membership = email ? await getMembership(email) : null;
-    const premium = Boolean(membership?.member);
+    // The plan is keyed on the email address, so only a confirmed address may
+    // claim it. Without this check someone could register with a paying
+    // customer's address and inherit their subscription.
+    const premium = Boolean(membership?.member && sessionUser?.emailConfirmed);
 
-    if (!premium && email) {
+    // Both tiers are counted from the readings table: one a day for free
+    // accounts, a fair-use ceiling for members.
+    if (email) {
+      const limit = premium ? PREMIUM_DAILY_LIMIT : 1;
       const db = getServerClient();
       const startOfDay = new Date();
       startOfDay.setHours(0, 0, 0, 0);
-      const { count, error } = await db.from("readings").select("id", { count: "exact", head: true }).eq("email", email).gte("created_at", startOfDay.toISOString());
+      let query = db.from("readings").select("id", { count: "exact", head: true }).eq("email", email).gte("created_at", startOfDay.toISOString());
+      if (premium) query = query.eq("premium", true);
+      const { count, error } = await query;
       if (error) throw new Error(`Daily limit database error: ${error.message}`);
-      if ((count || 0) >= 1) return NextResponse.json({ error: "You've used your free reading for today. Come back tomorrow, or upgrade to Mystic Plus." }, { status: 429 });
+      if ((count || 0) >= limit) {
+        return NextResponse.json({
+          error: premium
+            ? `You have reached today's fair-use limit of ${PREMIUM_DAILY_LIMIT} readings. It resets tomorrow.`
+            : "You've used your free reading for today. Come back tomorrow, or upgrade to Mystic Plus.",
+        }, { status: 429 });
+      }
     }
 
     if (!premium && !email) {

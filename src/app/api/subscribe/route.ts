@@ -1,6 +1,7 @@
 ﻿import { NextRequest, NextResponse } from "next/server";
 import { getServerClient } from "@/lib/supabase/server";
 import { sendEmail, welcomeEmailHtml, isEmailConfigured } from "@/lib/email";
+import { consumeSubscribeQuota } from "@/lib/rateLimit";
 
 export async function POST(req: NextRequest) {
   try {
@@ -11,6 +12,16 @@ export async function POST(req: NextRequest) {
     }
 
     const normalizedEmail = email.trim().toLowerCase();
+
+    // Rate limit before touching the database or the mail provider. This
+    // endpoint both writes a row and sends an email, so leaving it open invites
+    // table flooding, list bombing, and burning through the monthly send quota.
+    if (!(await consumeSubscribeQuota(req))) {
+      return NextResponse.json(
+        { success: false, error: "Too many subscribe attempts from this connection today. Please try again tomorrow." },
+        { status: 429 }
+      );
+    }
 
     // Store in Supabase. Surface write failures instead of silently reporting success.
     try {

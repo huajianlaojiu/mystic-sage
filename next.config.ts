@@ -12,7 +12,14 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ["openai"],
-  async redirects() { return [{ source: "/login", destination: "/auth/login", permanent: true }]; },
+  async redirects() {
+    return [
+      { source: "/login", destination: "/auth/login", permanent: true },
+      { source: "/signup", destination: "/auth/register", permanent: true },
+      { source: "/sign-up", destination: "/auth/register", permanent: true },
+      { source: "/register", destination: "/auth/register", permanent: true },
+    ];
+  },
   async headers() { return [{ source: "/:path*", headers: securityHeaders }]; },
 };
 

@@ -25,11 +25,23 @@ export async function getSessionClient() {
   });
 }
 
-export async function getSessionUser(): Promise<{ email: string | null } | null> {
+export async function getSessionUser(): Promise<{ email: string | null; emailConfirmed: boolean } | null> {
   try {
     const supabase = await getSessionClient();
     const res = await withTimeout(supabase.auth.getUser(), 5000);
-    return !res.error && res.data.user ? { email: res.data.user.email ?? null } : null;
+    if (res.error || !res.data.user) return null;
+    const user = res.data.user;
+    return {
+      email: user.email ?? null,
+      // Premium is keyed on the email address, so an address that was never
+      // confirmed must not be able to claim someone else's plan. Supabase sets
+      // this timestamp when the address is confirmed.
+      //
+      // Note: while "Confirm email" is switched off in the Supabase dashboard
+      // every signup is auto-confirmed, so this check always passes. It only
+      // becomes a real gate once that setting is turned on.
+      emailConfirmed: Boolean(user.email_confirmed_at || user.confirmed_at),
+    };
   } catch {
     return null;
   }

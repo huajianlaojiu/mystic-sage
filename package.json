@@ -2,7 +2,7 @@
   "name": "mysticsage",
   "version": "0.1.0",
   "private": true,
-  "description": "MysticSage ? English-language spiritual guidance platform for tarot, astrology & numerology readings",
+  "description": "MysticSage - English-language spiritual guidance platform for tarot, astrology & numerology readings",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,7 +10,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@lemonsqueezy/lemonsqueezy.js": "^4.0.0",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.108.2",
     "next": "16.2.9",

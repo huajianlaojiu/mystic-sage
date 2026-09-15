@@ -25,6 +25,7 @@ export default function AccountPage() {
   const [membership, setMembership] = useState<MembershipStatus | null>(null);
   const [cancelling, setCancelling] = useState(false);
   const [cancelMsg, setCancelMsg] = useState("");
+  const [manageUrl, setManageUrl] = useState("");
   const [readings, setReadings] = useState<ReadingEntry[]>([]);
   const [readingsMsg, setReadingsMsg] = useState("");
 
@@ -55,13 +56,13 @@ export default function AccountPage() {
   }, []);
 
   async function handleCancel() {
-    setCancelling(true); setCancelMsg("");
+    setCancelling(true); setCancelMsg(""); setManageUrl("");
     try {
       const r = await fetch("/api/subscription/cancel", { method: "POST" });
       const d = await r.json();
       if (r.status === 401) { setCancelMsg("Please sign in first."); }
-      else if (r.status === 501) { setCancelMsg("Automatic cancellation is not enabled yet. Email mountain0342@gmail.com to cancel, or use PayPal directly."); }
-      else if (r.ok) { setCancelMsg("Subscription cancelled. Access continues until the end of the billing period."); setMembership({ ...membership!, member: false } as MembershipStatus); }
+      else if (r.status === 404) { setCancelMsg("No active subscription found for this account."); }
+      else if (r.ok && d.manageUrl) { setManageUrl(d.manageUrl); setCancelMsg(d.message || "Finish the cancellation in PayPal."); }
       else { setCancelMsg(d.error || "Cancellation failed. Please try again."); }
     } catch {
       setCancelMsg("Something went wrong. Please try again.");
@@ -144,11 +145,16 @@ export default function AccountPage() {
             </p>
             {membership?.member ? (
               <>
-                <button onClick={handleCancel} disabled={cancelling} className="btn-secondary" style={{ fontSize: 13, padding: "10px 20px", opacity: cancelling ? 0.6 : 1 }}>
-                  {cancelling ? "Cancelling..." : "Cancel subscription"}
-                </button>
-                {cancelMsg && <p style={{ fontSize: 13, marginTop: 10, color: "var(--text-secondary)" }}>{cancelMsg}</p>}
-              </>
+                  <button onClick={handleCancel} disabled={cancelling} className="btn-secondary" style={{ fontSize: 13, padding: "10px 20px", opacity: cancelling ? 0.6 : 1 }}>
+                    {cancelling ? "Checking..." : "Cancel subscription"}
+                  </button>
+                  {cancelMsg && <p style={{ fontSize: 13, marginTop: 10, color: "var(--text-secondary)" }}>{cancelMsg}</p>}
+                  {manageUrl && (
+                    <p style={{ marginTop: 10 }}>
+                      <a href={manageUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ fontSize: 13, padding: "10px 20px", display: "inline-flex" }}>Open PayPal to cancel</a>
+                    </p>
+                  )}
+                </>
             ) : (
               <p style={{ fontSize: 13, color: "var(--text-muted)" }}>You have no active subscription to cancel.</p>
             )}

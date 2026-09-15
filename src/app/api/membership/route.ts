@@ -15,6 +15,18 @@ export async function GET() {
       );
     }
 
+    // A membership is keyed on the email address, so an address that was never
+    // confirmed could belong to someone else. Do not report a plan for it.
+    if (!sessionUser.emailConfirmed) {
+      return NextResponse.json({
+        member: false,
+        plan: null,
+        subscriptionSince: null,
+        emailUnverified: true,
+        error: "Confirm your email address to use a membership.",
+      });
+    }
+
     const status = await getMembership(sessionUser.email);
     if (!status) {
       return NextResponse.json(

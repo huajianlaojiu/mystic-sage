@@ -50,6 +50,11 @@ function isSupportedEvent(txnType: string, params: URLSearchParams) {
   if (currency !== "USD") return false;
   if (txnType === "web_accept") return itemName === DETAILED_REPORT && hasExpectedAmount(params, 4.99, true);
   if (["subscr_signup", "subscr_payment"].includes(txnType)) return itemName === MYSTIC_PLUS && hasExpectedAmount(params, 19, txnType === "subscr_payment");
+  // A failed or skipped renewal must be recorded, otherwise the member keeps
+  // premium forever while PayPal collects nothing. These events do not always
+  // carry the product name or an amount, so only the subscription id is used —
+  // the handler matches on an id that already exists in our own table.
+  if (["subscr_failed", "recurring_payment_suspended", "recurring_payment_skipped"].includes(txnType)) return true;
   return ["subscr_cancel", "subscr_eot"].includes(txnType);
 }
 
@@ -65,16 +70,16 @@ async function verifyIpn(rawBody: string): Promise<"verified" | "invalid" | "err
   }
 }
 
-async function upsertSubscription(db: SupabaseClient, params: URLSearchParams) {
+async function upsertSubscription(db: SupabaseClient, params: URLSearchParams, status: string) {
   const id = params.get("subscr_id") || "";
   const { email } = parseCustom(params.get("custom"));
   const buyerEmail = email || (params.get("payer_email") || "").trim().toLowerCase();
   if (!id || !buyerEmail) throw new Error("Subscription event is missing a subscription ID or buyer email");
-  const { error } = await db.from("subscriptions").upsert({ paypal_subscr_id: id, email: buyerEmail, plan_name: MYSTIC_PLUS, amount: 19, currency: "USD", status: "active", updated_at: new Date().toISOString() }, { onConflict: "paypal_subscr_id" });
+  const { error } = await db.from("subscriptions").upsert({ paypal_subscr_id: id, email: buyerEmail, plan_name: MYSTIC_PLUS, amount: 19, currency: "USD", status, updated_at: new Date().toISOString() }, { onConflict: "paypal_subscr_id" });
   if (error) throw new Error(`Subscription write failed: ${error.message}`);
 }
 
-async function updateSubscriptionStatus(db: SupabaseClient, id: string, status: "cancelled" | "expired") {
+async function updateSubscriptionStatus(db: SupabaseClient, id: string, status: "cancelled" | "expired" | "past_due") {
   if (!id) throw new Error("Subscription event is missing a subscription ID");
   const { error } = await db.from("subscriptions").update({ status, updated_at: new Date().toISOString() }).eq("paypal_subscr_id", id);
   if (error) throw new Error(`Subscription status update failed: ${error.message}`);
@@ -152,8 +157,14 @@ export async function POST(req: NextRequest) {
 
     const db = getDb();
     if (txnType === "subscr_signup" || txnType === "subscr_payment") {
-      await upsertSubscription(db, params);
-      if (txnType === "subscr_payment" && params.get("payment_status") === "Completed") await recordOrder(db, params, MYSTIC_PLUS, 19);
+      // Only a completed payment keeps the plan active. A pending or failed
+      // renewal is written as past_due so premium access drops off until the
+      // next successful charge.
+      const paid = txnType === "subscr_signup" || params.get("payment_status") === "Completed";
+      await upsertSubscription(db, params, paid ? "active" : "past_due");
+      if (paid && txnType === "subscr_payment") await recordOrder(db, params, MYSTIC_PLUS, 19);
+    } else if (["subscr_failed", "recurring_payment_suspended", "recurring_payment_skipped"].includes(txnType)) {
+      await updateSubscriptionStatus(db, params.get("subscr_id") || "", "past_due");
     } else if (txnType === "subscr_cancel") {
       await updateSubscriptionStatus(db, params.get("subscr_id") || "", "cancelled");
     } else if (txnType === "subscr_eot") {
