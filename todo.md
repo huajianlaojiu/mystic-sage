@@ -46,11 +46,20 @@
       **实测**：新邮箱注册返回 200，用户已创建且 `email_confirmed_at = null`，
       Resend 接受发信；测试用户已清理。
 
-- [ ] **用你自己的邮箱最终确认一次**
-      现有这几个邮箱都已在库里（`huajianjiu0000` / `000` / `110` / `12345` @163.com），
-      注册会提示"已存在"。要测的话用一个**没用过的邮箱**在
-      https://mysticsages.com/auth/register 注册，
-      或先让我把某个旧测试账号删掉再重新注册。
+- [x] **完整流程实测通过（2026-09-15）**
+      用 `huajianjiu110@163.com`（先删掉旧账号）跑完整链路：
+
+      ```
+      注册              → HTTP 200，用户已创建（email_confirmed_at = null）
+      确认邮件          → 送达收件箱，发件人 noreply@mysticsages.com（经 Resend）
+      点击确认按钮       → 跳到 /auth/callback → /reading 页面
+      数据库最终状态     → email_confirmed_at = 2026-09-15 11:03:41
+                          last_sign_in_at   = 2026-09-15 11:03:41
+      ```
+
+      从注册到激活历经 187 秒。**注册、发信、验证、登录四条链路全部打通。**
+
+      > 提示：邮件截图里的确认链接含一次性 token，公开分享前应打码。
 - [ ] **删除 codex-temp 令牌**：https://supabase.com/dashboard/account/tokens
       权限很大（能改整个项目配置），已用完，请删掉。
 
