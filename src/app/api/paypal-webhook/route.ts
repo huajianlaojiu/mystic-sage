@@ -44,12 +44,30 @@ function hasExpectedAmount(params: URLSearchParams, expected: number, required: 
   return Number.isFinite(amount) && Math.abs(amount - expected) < 0.001;
 }
 
+/**
+ * Amount check for `subscr_signup`.
+ *
+ * Nothing has been charged at signup, so `mc_gross` is frequently 0.00 there —
+ * running it through the general check would reject perfectly legitimate
+ * signups. Only the recurring-period fields describe the agreed price, and if
+ * PayPal sends none of them the event is still accepted: a signup no longer
+ * grants access, so a tampered one only creates a `pending` row that the
+ * amount-checked `subscr_payment` later promotes or leaves alone.
+ */
+function hasExpectedRecurringAmount(params: URLSearchParams, expected: number) {
+  const raw = params.get("mc_amount3") || params.get("amount3") || params.get("a3");
+  if (!raw) return true;
+  const amount = Number(raw);
+  return Number.isFinite(amount) && Math.abs(amount - expected) < 0.001;
+}
+
 function isSupportedEvent(txnType: string, params: URLSearchParams) {
   const itemName = (params.get("item_name") || "").trim();
   const currency = (params.get("mc_currency") || params.get("currency_code") || "USD").toUpperCase();
   if (currency !== "USD") return false;
   if (txnType === "web_accept") return itemName === DETAILED_REPORT && hasExpectedAmount(params, 4.99, true);
-  if (["subscr_signup", "subscr_payment"].includes(txnType)) return itemName === MYSTIC_PLUS && hasExpectedAmount(params, 19, txnType === "subscr_payment");
+  if (txnType === "subscr_signup") return itemName === MYSTIC_PLUS && hasExpectedRecurringAmount(params, 19);
+  if (txnType === "subscr_payment") return itemName === MYSTIC_PLUS && hasExpectedAmount(params, 19, true);
   // A failed or skipped renewal must be recorded, otherwise the member keeps
   // premium forever while PayPal collects nothing. These events do not always
   // carry the product name or an amount, so only the subscription id is used —
@@ -76,6 +94,43 @@ async function upsertSubscription(db: SupabaseClient, params: URLSearchParams, s
   const buyerEmail = email || (params.get("payer_email") || "").trim().toLowerCase();
   if (!id || !buyerEmail) throw new Error("Subscription event is missing a subscription ID or buyer email");
   const { error } = await db.from("subscriptions").upsert({ paypal_subscr_id: id, email: buyerEmail, plan_name: MYSTIC_PLUS, amount: 19, currency: "USD", status, updated_at: new Date().toISOString() }, { onConflict: "paypal_subscr_id" });
+  if (error) throw new Error(`Subscription write failed: ${error.message}`);
+}
+
+/**
+ * Record that a subscription exists without granting access yet.
+ *
+ * A `subscr_signup` only proves the agreement was created — it arrives before
+ * any money moves, and because the button is a plain WPS form the amount in it
+ * is client-controlled. Access is therefore granted on the first
+ * `subscr_payment` whose amount PayPal itself reports as 19.00, not here.
+ *
+ * If the payment already landed (PayPal does not guarantee ordering), the
+ * existing row is left alone so a late signup cannot downgrade an active plan.
+ */
+async function upsertPendingSubscription(db: SupabaseClient, params: URLSearchParams) {
+  const id = params.get("subscr_id") || "";
+  const { email } = parseCustom(params.get("custom"));
+  const buyerEmail = email || (params.get("payer_email") || "").trim().toLowerCase();
+  if (!id || !buyerEmail) throw new Error("Subscription event is missing a subscription ID or buyer email");
+
+  const { data: existing, error: readError } = await db
+    .from("subscriptions")
+    .select("status")
+    .eq("paypal_subscr_id", id)
+    .limit(1);
+  if (readError) throw new Error(`Subscription lookup failed: ${readError.message}`);
+  if (existing && existing.length > 0) return;
+
+  const { error } = await db.from("subscriptions").insert({
+    paypal_subscr_id: id,
+    email: buyerEmail,
+    plan_name: MYSTIC_PLUS,
+    amount: 19,
+    currency: "USD",
+    status: "pending",
+    updated_at: new Date().toISOString(),
+  });
   if (error) throw new Error(`Subscription write failed: ${error.message}`);
 }
 
@@ -156,13 +211,16 @@ export async function POST(req: NextRequest) {
     if (!isSupportedEvent(txnType, params)) return NextResponse.json({ error: "Unsupported product, currency, or payment amount" }, { status: 400 });
 
     const db = getDb();
-    if (txnType === "subscr_signup" || txnType === "subscr_payment") {
-      // Only a completed payment keeps the plan active. A pending or failed
-      // renewal is written as past_due so premium access drops off until the
-      // next successful charge.
-      const paid = txnType === "subscr_signup" || params.get("payment_status") === "Completed";
+    if (txnType === "subscr_signup") {
+      // Records the subscription only. Signing up is not paying, and the amount
+      // on a WPS button is editable in the browser before submission.
+      await upsertPendingSubscription(db, params);
+    } else if (txnType === "subscr_payment") {
+      // isSupportedEvent already rejected anything whose reported amount is not
+      // 19.00, so a Completed payment here is a real full-price charge.
+      const paid = params.get("payment_status") === "Completed";
       await upsertSubscription(db, params, paid ? "active" : "past_due");
-      if (paid && txnType === "subscr_payment") await recordOrder(db, params, MYSTIC_PLUS, 19);
+      if (paid) await recordOrder(db, params, MYSTIC_PLUS, 19);
     } else if (["subscr_failed", "recurring_payment_suspended", "recurring_payment_skipped"].includes(txnType)) {
       await updateSubscriptionStatus(db, params.get("subscr_id") || "", "past_due");
     } else if (txnType === "subscr_cancel") {

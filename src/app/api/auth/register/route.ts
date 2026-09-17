@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerClient } from "@/lib/supabase/server";
 import { sendEmail, isEmailConfigured, confirmationEmailHtml } from "@/lib/email";
+import { consumeAuthQuota } from "@/lib/rateLimit";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://mysticsages.com";
 const MIN_PASSWORD = 8;
@@ -30,6 +31,15 @@ export async function POST(req: NextRequest) {
     }
     if (!isEmailConfigured()) {
       return NextResponse.json({ error: "Email is not configured on the server." }, { status: 503 });
+    }
+
+    // Before the admin API call and the outbound email, so a script cannot use
+    // this endpoint to pollute auth.users or burn the monthly send quota.
+    if (!(await consumeAuthQuota(req))) {
+      return NextResponse.json(
+        { error: "Too many signup attempts from this connection today. Please try again tomorrow." },
+        { status: 429 }
+      );
     }
 
     const db = getServerClient();

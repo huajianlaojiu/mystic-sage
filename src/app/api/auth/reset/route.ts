@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerClient } from "@/lib/supabase/server";
 import { sendEmail, isEmailConfigured, recoveryEmailHtml } from "@/lib/email";
+import { consumeAuthQuota } from "@/lib/rateLimit";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://mysticsages.com";
 
@@ -26,6 +27,13 @@ export async function POST(req: NextRequest) {
 
     if (!isEmailConfigured()) {
       return NextResponse.json({ error: "Email is not configured on the server." }, { status: 503 });
+    }
+
+    if (!(await consumeAuthQuota(req))) {
+      return NextResponse.json(
+        { error: "Too many reset requests from this connection today. Please try again tomorrow." },
+        { status: 429 }
+      );
     }
 
     const db = getServerClient();

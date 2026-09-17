@@ -6,6 +6,9 @@ const DAILY_ANONYMOUS_LIMIT = 1;
 // Enough for a person who mistypes their address twice, far too few to use the
 // endpoint for list bombing or to burn through the Resend monthly quota.
 const DAILY_SUBSCRIBE_LIMIT = 3;
+// Signup and password reset each trigger an outbound email and an admin API
+// call. Five a day is far more than a person needs and far less than a script.
+const DAILY_AUTH_LIMIT = 5;
 
 function getClientIdentifier(req: NextRequest) {
   const forwarded = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
@@ -41,4 +44,8 @@ export async function consumeAnonymousReadingQuota(req: NextRequest) {
 
 export async function consumeSubscribeQuota(req: NextRequest) {
   return consumeQuota(req, "subscribe:v1", DAILY_SUBSCRIBE_LIMIT);
+}
+
+export async function consumeAuthQuota(req: NextRequest) {
+  return consumeQuota(req, "auth:v1", DAILY_AUTH_LIMIT);
 }

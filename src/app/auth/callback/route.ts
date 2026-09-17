@@ -4,7 +4,10 @@ import { getSessionClient } from "@/lib/supabase/server";
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const code = url.searchParams.get("code");
-  const next = url.searchParams.get("next") ?? "/reading";
+  // Only allow same-site paths. Without this, "//evil.com" is resolved as an
+  // absolute URL and the callback becomes an open redirect.
+  const requested = url.searchParams.get("next") ?? "/reading";
+  const next = requested.startsWith("/") && !requested.startsWith("//") ? requested : "/reading";
 
   if (code) {
     const supabase = await getSessionClient();
