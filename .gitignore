@@ -10,4 +10,5 @@ next-env.d.ts
 public/images/samples/
 public/images/pins/png/
 public/images/pins[2-9]/*.png
+public/images/pins10/*.png
 public/images/x/**/*.png
