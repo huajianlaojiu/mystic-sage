@@ -11,4 +11,5 @@ public/images/samples/
 public/images/pins/png/
 public/images/pins[2-9]/*.png
 public/images/pins10/*.png
+public/images/pins-reference/*.png
 public/images/x/**/*.png
