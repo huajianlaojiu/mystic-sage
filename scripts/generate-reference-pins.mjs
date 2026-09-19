@@ -337,3 +337,32 @@ for (const pin of PINS) {
 }
 
 console.log(`\n${made} reference pins written to public/images/pins-reference/`);
+
+// One overview image, so a whole batch can be judged at a glance instead of
+// opening eleven files. The layout follows the order of PINS.
+const COLS = 4;
+const TW = 300;
+const TH = 450;
+const GAP = 20;
+const PAD = 40;
+const gridRows = Math.ceil(PINS.length / COLS);
+const sheetW = PAD * 2 + COLS * TW + (COLS - 1) * GAP;
+const sheetH = PAD * 2 + gridRows * TH + (gridRows - 1) * GAP;
+
+const composites = [];
+for (let i = 0; i < PINS.length; i++) {
+  const buf = await sharp(path.join(outDir, PINS[i].slug + ".png")).resize(TW, TH).toBuffer();
+  composites.push({
+    input: buf,
+    left: PAD + (i % COLS) * (TW + GAP),
+    top: PAD + Math.floor(i / COLS) * (TH + GAP),
+  });
+}
+
+const sheetPath = path.join(outDir, "contact-sheet.png");
+await sharp({ create: { width: sheetW, height: sheetH, channels: 3, background: BG } })
+  .composite(composites)
+  .png({ compressionLevel: 9 })
+  .toFile(sheetPath);
+
+console.log(`overview sheet: ${sheetW}x${sheetH} -> contact-sheet.png`);
