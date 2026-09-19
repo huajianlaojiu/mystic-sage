@@ -29,11 +29,42 @@ Files: `public/images/pins10/`
 | 19 | `p19-new-moon-ritual.png` | Spirituality & Manifestation | New Moon Ritual | A seven-step new moon ritual for setting intentions, drawing a tarot card, and taking one grounded action. | Seven-step new moon intention ritual chart with journaling prompts. |
 | 20 | `p20-full-moon-release.png` | Spirituality & Manifestation | Full Moon Release | A seven-step full moon release ritual with reflection prompts and a tarot card pull for closure. | Seven-step full moon release ritual chart with reflection prompts. |
 
+## Destination Links
+
+每一张都指向和主题最接近的那篇文章，而不是首页。
+从 Pinterest 点进来的人看到的是自己在找的内容，读完文章页底部的
+"Get Your Free Reading" 按钮再进解读页，比直接丢到首页的跳出率低得多。
+
+The nine unique article links below all returned HTTP 200 when checked on 2026-09-19.
+
+| File | Destination |
+|---|---|
+| `p01-yes-no-maybe.png` | https://mysticsages.com/blog/free-tarot-reading-online |
+| `p02-78-card-map.png` | https://mysticsages.com/blog/tarot-cards-for-beginners |
+| `p03-major-arcana-0-10.png` | https://mysticsages.com/blog/tarot-cards-for-beginners |
+| `p04-major-arcana-11-21.png` | https://mysticsages.com/blog/tarot-cards-for-beginners |
+| `p05-court-card-map.png` | https://mysticsages.com/blog/tarot-cards-for-beginners |
+| `p06-three-card-spreads.png` | https://mysticsages.com/blog/how-to-read-tarot-cards-for-beginners |
+| `p07-celtic-cross.png` | https://mysticsages.com/blog/how-to-read-tarot-cards-for-beginners |
+| `p08-reversed-card-themes.png` | https://mysticsages.com/blog/how-to-read-tarot-cards-for-beginners |
+| `p09-tarot-journal-prompts.png` | https://mysticsages.com/blog/tarot-cards-for-beginners |
+| `p10-30-day-tarot-challenge.png` | https://mysticsages.com/blog/tarot-cards-for-beginners |
+| `p11-big-three-cheatsheet.png` | https://mysticsages.com/blog/free-birth-chart-reading-online |
+| `p12-zodiac-dates-elements.png` | https://mysticsages.com/blog/zodiac-sign-elements |
+| `p13-birth-chart-houses-1-6.png` | https://mysticsages.com/blog/free-birth-chart-reading-online |
+| `p14-birth-chart-houses-7-12.png` | https://mysticsages.com/blog/free-birth-chart-reading-online |
+| `p15-angel-numbers-111-999.png` | https://mysticsages.com/blog/angel-numbers-111-222-333 |
+| `p16-moon-phase-meanings.png` | https://mysticsages.com/blog/law-of-attraction-manifestation |
+| `p17-crystal-intentions.png` | https://mysticsages.com/blog/crystal-healing-for-beginners |
+| `p18-intuition-vs-anxiety.png` | https://mysticsages.com/blog/signs-of-spiritual-awakening |
+| `p19-new-moon-ritual.png` | https://mysticsages.com/blog/law-of-attraction-manifestation |
+| `p20-full-moon-release.png` | https://mysticsages.com/blog/law-of-attraction-manifestation |
+
 ## Posting Notes
 
 - Publish 3-5 pins per day, spaced across the day.
 - Use the file title as the Pinterest title when possible.
-- Keep the destination URL as `https://mysticsages.com/reading` unless a more specific article is available.
+- Use the destination link from the table above.
 - Do not change the text in the image; the exact wording is part of the design.
 
 ## Design Rules Used
